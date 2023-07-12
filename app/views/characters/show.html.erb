@@ -1,0 +1,26 @@
+<%= render HeadingComponent.new(title: character.name) %>
+
+<table class="mb-4">
+  <thead>
+    <tr>
+      <th class="p-2">Level</th>
+      <th class="p-2">XP</th>
+      <th class="p-2">HP</th>
+      <th class="p-2">Attack</th>
+      <th class="p-2">Defense</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="p-2"><%= character.level %></td>
+      <td class="p-2"><%= character.xp %></td>
+      <td class="p-2"><%= character.current_hp %> / <%= character.max_hp %></td>
+      <td class="p-2"><%= character.attack %></td>
+      <td class="p-2"><%= character.defense %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to "Train", "#", class: "btn btn-blue" %>
+<%= link_to "Explore", "#", class: "btn btn-blue" %>
+<%= link_to "Battle", "#", class: "btn btn-blue" %>

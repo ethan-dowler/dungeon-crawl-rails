@@ -1,1 +1,26 @@
 <%= render HeadingComponent.new(title: "Characters") %>
+
+<table>
+  <thead>
+    <tr>
+      <th class="p-2">Level</th>
+      <th class="p-2">Name</th>
+      <th class="p-2">Max HP</th>
+      <th class="p-2">Attack</th>
+      <th class="p-2">Defense</th>
+      <th class="p-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% characters.each do |character| %>
+      <tr>
+        <td class="p-2"><%= character.level %></td>
+        <td class="p-2"><%= character.name %></td>
+        <td class="p-2"><%= character.max_hp %></td>
+        <td class="p-2"><%= character.attack %></td>
+        <td class="p-2"><%= character.defense %></td>
+        <td class="p-2"><%= link_to "Select", character_path(character), class: "link" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
