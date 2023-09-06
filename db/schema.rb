@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_08_113943) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_034807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,12 +18,44 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_113943) do
     t.string "name", null: false
     t.integer "level", default: 0, null: false
     t.integer "xp", default: 0, null: false
-    t.integer "max_hp", default: 0, null: false
     t.integer "current_hp", default: 0, null: false
-    t.integer "attack", default: 0, null: false
-    t.integer "defense", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "base_hp", default: 0, null: false
+    t.integer "base_attack", default: 0, null: false
+    t.integer "base_defense", default: 0, null: false
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_characters_on_location_id"
   end
 
+  create_table "dungeons", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+  end
+
+  create_table "modifiers", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.string "stat"
+    t.integer "value", default: 1, null: false
+    t.index ["character_id"], name: "index_modifiers_on_character_id"
+    t.index ["stat"], name: "index_modifiers_on_stat"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "dungeon_id", null: false
+    t.boolean "entrance", default: false, null: false
+    t.bigint "north_room_id"
+    t.bigint "east_room_id"
+    t.bigint "south_room_id"
+    t.bigint "west_room_id"
+    t.index ["dungeon_id"], name: "index_rooms_on_dungeon_id"
+    t.index ["east_room_id"], name: "index_rooms_on_east_room_id"
+    t.index ["north_room_id"], name: "index_rooms_on_north_room_id"
+    t.index ["south_room_id"], name: "index_rooms_on_south_room_id"
+    t.index ["west_room_id"], name: "index_rooms_on_west_room_id"
+  end
+
+  add_foreign_key "characters", "rooms", column: "location_id"
+  add_foreign_key "rooms", "rooms", column: "east_room_id"
+  add_foreign_key "rooms", "rooms", column: "north_room_id"
+  add_foreign_key "rooms", "rooms", column: "south_room_id"
+  add_foreign_key "rooms", "rooms", column: "west_room_id"
 end

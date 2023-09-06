@@ -1,28 +1,54 @@
+# Maps
+level_one = Dungeon.find_or_create_by!(name: "Level One")
+level_one.update!(description: "The very first dungeon")
+if level_one.rooms.none?
+  middle_room = level_one.rooms.create!
+  north_room = level_one.rooms.create!
+  east_room = level_one.rooms.create!
+  south_room = level_one.rooms.create!(entrance: true)
+  west_room = level_one.rooms.create!
+
+  middle_room.update!(
+    north_room:,
+    east_room:,
+    south_room:,
+    west_room:
+  )
+  north_room.update!(south_room: middle_room)
+  east_room.update!(west_room: middle_room)
+  south_room.update!(north_room: middle_room)
+  west_room.update!(east_room: middle_room)
+end
+
+# Characters
 [
   {
-    name: "Sir Knight",
+    name: "Knight",
     level: 1,
-    max_hp: 10,
-    current_hp: 10,
-    attack: 3,
-    defense: 2,
+    base_hp: 100,
+    current_hp: 100,
+    base_attack: 15,
+    base_defense: 12,
   },
   {
     name: "Peasant",
     level: 1,
-    max_hp: 6,
-    current_hp: 6,
-    attack: 1,
-    defense: 0,
+    base_hp: 60,
+    current_hp: 60,
+    base_attack: 6,
+    base_defense: 2,
   },
   {
     name: "Barbarian",
     level: 1,
-    max_hp: 12,
-    current_hp: 12,
-    attack: 4,
-    defense: 1,
+    base_hp: 120,
+    current_hp: 120,
+    base_attack: 22,
+    base_defense: 8,
   }
 ].each do |params|
-  Character.find_or_initialize_by(name: params[:name]).update!(**params)
+  char = Character.find_by(name: params[:name])
+  next if char.present?
+
+  Character.create!(**params)
 end
