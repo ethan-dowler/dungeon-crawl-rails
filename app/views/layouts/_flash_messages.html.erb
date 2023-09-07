@@ -1,0 +1,16 @@
+<% 
+  alert = flash.alert
+  notice = flash.notice
+%>
+
+<% if alert.present? %>
+  <div class="flash flash-alert">
+    <%= alert.html_safe %>
+  </div>
+<% end %>
+
+<% if notice.present? %>
+  <div class="flash flash-notice">
+    <%= notice.html_safe %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_034807) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_07_025034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_034807) do
     t.integer "base_defense", default: 0, null: false
     t.bigint "location_id"
     t.index ["location_id"], name: "index_characters_on_location_id"
+  end
+
+  create_table "dungeon_runs", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "dungeon_id", null: false
+    t.bigint "current_room_id", null: false
+    t.datetime "completed_at"
+    t.string "completed_reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_dungeon_runs_on_character_id"
+    t.index ["current_room_id"], name: "index_dungeon_runs_on_current_room_id"
+    t.index ["dungeon_id"], name: "index_dungeon_runs_on_dungeon_id"
   end
 
   create_table "dungeons", force: :cascade do |t|
@@ -46,6 +59,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_034807) do
     t.bigint "east_room_id"
     t.bigint "south_room_id"
     t.bigint "west_room_id"
+    t.bigint "above_room_id"
+    t.bigint "below_room_id"
+    t.index ["above_room_id"], name: "index_rooms_on_above_room_id"
+    t.index ["below_room_id"], name: "index_rooms_on_below_room_id"
     t.index ["dungeon_id"], name: "index_rooms_on_dungeon_id"
     t.index ["east_room_id"], name: "index_rooms_on_east_room_id"
     t.index ["north_room_id"], name: "index_rooms_on_north_room_id"
@@ -54,6 +71,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_034807) do
   end
 
   add_foreign_key "characters", "rooms", column: "location_id"
+  add_foreign_key "dungeon_runs", "rooms", column: "current_room_id"
+  add_foreign_key "rooms", "rooms", column: "above_room_id"
+  add_foreign_key "rooms", "rooms", column: "below_room_id"
   add_foreign_key "rooms", "rooms", column: "east_room_id"
   add_foreign_key "rooms", "rooms", column: "north_room_id"
   add_foreign_key "rooms", "rooms", column: "south_room_id"

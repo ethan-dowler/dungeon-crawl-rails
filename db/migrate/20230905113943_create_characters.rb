@@ -11,9 +11,6 @@ class CreateCharacters < ActiveRecord::Migration[7.0]
       t.integer :base_hp, null: false, default: 0
       t.integer :base_attack, null: false, default: 0
       t.integer :base_defense, null: false, default: 0
-
-      # in-game info
-      t.references :location, foreign_key: { to_table: :rooms }
     end
   end
 end

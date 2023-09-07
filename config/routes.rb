@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   root "home#index"
 
   resources :characters, only: %i[index show]
+
+  resources :dungeon_runs, only: %i[create show]
 end

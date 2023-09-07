@@ -1,13 +1,18 @@
 class Character < ApplicationRecord
-  belongs_to :location, optional: true, class_name: "Room"
-
   has_many :modifiers
+  has_many :dungeon_runs
 
-  def attack
-    (base_attack * attack_modifier).round
-  end
+  def max_hp = (base_hp * hp_modifier).round
+  def attack = (base_attack * attack_modifier).round
+  def defense = (base_defense * defense_modifier).round
+        
+  def hp_modifier = modifier_for(:hp)
+  def attack_modifier = modifier_for(:attack)
+  def defense_modifier = modifier_for(:defense)
 
-  def attack_modifier
-    1.0 + (modifiers.attack.sum(&:value).to_f / 100.0)
+private
+
+  def modifier_for(stat)
+    1.0 + (modifiers.send(stat).sum(&:value).to_f / 100.0)
   end
 end

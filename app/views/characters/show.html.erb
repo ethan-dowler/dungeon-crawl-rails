@@ -14,13 +14,19 @@
     <tr>
       <td class="p-2"><%= character.level %></td>
       <td class="p-2"><%= character.xp %></td>
-      <td class="p-2"><%= character.current_hp %> / <%= character.max_hp %></td>
+      <td class="p-2"><%= character.max_hp %></td>
       <td class="p-2"><%= character.attack %></td>
       <td class="p-2"><%= character.defense %></td>
     </tr>
   </tbody>
 </table>
 
-<%= link_to "Train", "#", class: "btn btn-blue" %>
-<%= link_to "Explore", "#", class: "btn btn-blue" %>
-<%= link_to "Battle", "#", class: "btn btn-blue" %>
+<hr class="mb-6" />
+
+
+<% if character.dungeon_runs.active.any? %>
+  <%= link_to "Resume Dungeon", dungeon_run_path(character.dungeon_runs.active.first), class: "btn btn-blue" %>
+<% else %>
+  <%= render partial: "characters/available_dungeons", locals: { character: } %>
+<% end %>
+
