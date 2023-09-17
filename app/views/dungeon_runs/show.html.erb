@@ -1,1 +1,70 @@
-You're in the <strong><%= dungeon_run.dungeon.name %></strong> dungeon
+<div class="mb-2">
+  You're in the <strong><%= dungeon_run.dungeon.name %></strong> dungeon
+</div>
+
+<%= turbo_frame_tag :dungeon_panel do %>
+  <div class="mb-2">
+    <div>
+      <b>Location:</b>
+      <%= dungeon_run.current_room.name %>
+    </div>
+  </div>
+
+  <div>
+    <% if dungeon_run.current_room.north_room.present? %>
+      <div>
+        <b>North:</b>
+        <%=
+          link_to(
+            dungeon_run.current_room.north_room.name,
+            go_dungeon_run_path(dungeon_run, direction: :north),
+            class: "link",
+            method: :post
+          )
+        %>
+      </div>
+    <% end %>
+
+    <% if dungeon_run.current_room.east_room.present? %>
+      <div>
+        <b>East:</b>
+        <%=
+          link_to(
+            dungeon_run.current_room.east_room.name,
+            go_dungeon_run_path(dungeon_run, direction: :east),
+            class: "link",
+            method: :post
+          )
+        %>
+      </div>
+    <% end %>
+
+    <% if dungeon_run.current_room.south_room.present? %>
+      <div>
+        <b>South:</b>
+        <%=
+          link_to(
+            dungeon_run.current_room.south_room.name,
+            go_dungeon_run_path(dungeon_run, direction: :south),
+            class: "link",
+            method: :post
+          )
+        %>
+      </div>
+    <% end %>
+
+    <% if dungeon_run.current_room.west_room.present? %>
+      <div>
+        <b>West:</b>
+        <%=
+          link_to(
+            dungeon_run.current_room.west_room.name,
+            go_dungeon_run_path(dungeon_run, direction: :west),
+            class: "link",
+            method: :post
+          )
+        %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

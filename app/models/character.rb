@@ -1,18 +1,11 @@
 class Character < ApplicationRecord
-  has_many :modifiers
+  include Modifiable
+
+  has_many :modifiers, as: :source
   has_many :dungeon_runs
 
-  def max_hp = (base_hp * hp_modifier).round
-  def attack = (base_attack * attack_modifier).round
-  def defense = (base_defense * defense_modifier).round
-        
-  def hp_modifier = modifier_for(:hp)
-  def attack_modifier = modifier_for(:attack)
-  def defense_modifier = modifier_for(:defense)
-
-private
-
-  def modifier_for(stat)
-    1.0 + (modifiers.send(stat).sum(&:value).to_f / 100.0)
-  end
+  # total value
+  def max_hp = ((base_hp + hp_flat_modifier) * hp_percent_modifier).round
+  def attack = ((base_attack + attack_flat_modifier) * attack_percent_modifier).round
+  def defense = ((base_defense + defense_flat_modifier) * defense_percent_modifier).round
 end

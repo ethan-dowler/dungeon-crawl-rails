@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_07_025034) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,8 +22,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_025034) do
     t.integer "base_hp", default: 0, null: false
     t.integer "base_attack", default: 0, null: false
     t.integer "base_defense", default: 0, null: false
-    t.bigint "location_id"
-    t.index ["location_id"], name: "index_characters_on_location_id"
   end
 
   create_table "dungeon_runs", force: :cascade do |t|
@@ -45,15 +43,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_025034) do
   end
 
   create_table "modifiers", force: :cascade do |t|
-    t.bigint "character_id", null: false
-    t.string "stat"
+    t.string "source_type", null: false
+    t.bigint "source_id", null: false
+    t.string "modifier_type", null: false
+    t.string "stat", null: false
     t.integer "value", default: 1, null: false
-    t.index ["character_id"], name: "index_modifiers_on_character_id"
-    t.index ["stat"], name: "index_modifiers_on_stat"
+    t.index ["source_id", "source_type", "modifier_type", "stat"], name: "index_modifiers_combo"
+    t.index ["source_type", "source_id"], name: "index_modifiers_on_source"
   end
 
   create_table "rooms", force: :cascade do |t|
     t.bigint "dungeon_id", null: false
+    t.string "name", null: false
     t.boolean "entrance", default: false, null: false
     t.bigint "north_room_id"
     t.bigint "east_room_id"
@@ -70,7 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_025034) do
     t.index ["west_room_id"], name: "index_rooms_on_west_room_id"
   end
 
-  add_foreign_key "characters", "rooms", column: "location_id"
   add_foreign_key "dungeon_runs", "rooms", column: "current_room_id"
   add_foreign_key "rooms", "rooms", column: "above_room_id"
   add_foreign_key "rooms", "rooms", column: "below_room_id"

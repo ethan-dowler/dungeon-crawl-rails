@@ -2,18 +2,13 @@
 level_one = Dungeon.find_or_create_by!(name: "Level One")
 level_one.update!(description: "The very first dungeon")
 if level_one.rooms.none?
-  middle_room = level_one.rooms.create!
-  north_room = level_one.rooms.create!
-  east_room = level_one.rooms.create!
-  south_room = level_one.rooms.create!(entrance: true)
-  west_room = level_one.rooms.create!
+  middle_room = level_one.rooms.create!(name: "Middle Room")
+  north_room = level_one.rooms.create!(name: "North Room")
+  east_room = level_one.rooms.create!(name: "East Room")
+  south_room = level_one.rooms.create!(name: "South Room", entrance: true)
+  west_room = level_one.rooms.create!(name: "West Room")
 
-  middle_room.update!(
-    north_room:,
-    east_room:,
-    south_room:,
-    west_room:
-  )
+  middle_room.update!(north_room:, east_room:, south_room:, west_room:)
   north_room.update!(south_room: middle_room)
   east_room.update!(west_room: middle_room)
   south_room.update!(north_room: middle_room)
@@ -50,5 +45,6 @@ end
   char = Character.find_by(name: params[:name])
   next if char.present?
 
-  Character.create!(**params)
+  character = Character.create!(**params)
+  character.modifiers.create!(modifier_type: :percent, stat: :hp, value: 10)
 end

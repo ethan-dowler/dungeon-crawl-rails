@@ -11,10 +11,15 @@ class DungeonRunsController < ApplicationController
         dungeon_id: params[:dungeon_id]
       )
 
-    redirect_to(
-      dungeon_run_path(dungeon_run),
-      notice: "You entered the <b>#{dungeon_run.dungeon.name}</b> dungeon!"
-    )
+    redirect_to dungeon_run_path(dungeon_run)
+  end
+  
+  def go
+    new_room = dungeon_run.current_room.send(:"#{params[:direction]}_room")
+    raise "Invalid direction: #{params[:direction]}" if new_room.nil?
+
+    dungeon_run.update!(current_room: new_room)
+    redirect_to dungeon_run_path(dungeon_run)
   end
 
 private

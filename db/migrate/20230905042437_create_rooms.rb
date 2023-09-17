@@ -2,6 +2,7 @@ class CreateRooms < ActiveRecord::Migration[7.0]
   def change
     create_table :rooms do |t|
       t.references :dungeon, null: false
+      t.string :name, null: false
       # can the player start in this room?
       t.boolean :entrance, null: false, default: false
       # cardinal directions
