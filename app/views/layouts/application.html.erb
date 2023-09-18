@@ -2,11 +2,15 @@
 <html>
   <head>
     <title>Browserpg</title>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%# Tailwind font %>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
