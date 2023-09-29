@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :dungeon_runs, only: %i[create show] do
     member do
       get :go
+      post :end
     end
   end
 end

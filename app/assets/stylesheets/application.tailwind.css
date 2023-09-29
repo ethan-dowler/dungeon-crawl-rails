@@ -2,10 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Menu */
+/* Global */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+/* main content area */
+.Body {
+  @apply py-6 px-4;
+}
+.Main {
+  @apply mx-auto max-w-2xl; /* 672px */
+}
 
 /* Buttons */
 .Button {
+  @apply inline-block;
   @apply font-bold py-2 px-4 rounded;
   @apply bg-blue-500 text-white;
 }
@@ -14,10 +28,10 @@
 }
 
 /* Links */
-.link {
+.Link {
   @apply text-blue-500;
 }
-.link:hover {
+.Link:hover {
   @apply text-blue-700;
 }
 

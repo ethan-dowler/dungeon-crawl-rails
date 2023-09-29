@@ -28,10 +28,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
     t.bigint "character_id", null: false
     t.bigint "dungeon_id", null: false
     t.bigint "current_room_id", null: false
+    t.datetime "started_at", null: false
     t.datetime "completed_at"
     t.string "completed_reason"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_dungeon_runs_on_character_id"
     t.index ["current_room_id"], name: "index_dungeon_runs_on_current_room_id"
     t.index ["dungeon_id"], name: "index_dungeon_runs_on_dungeon_id"
@@ -40,6 +39,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
   create_table "dungeons", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
+  end
+
+  create_table "floors", force: :cascade do |t|
+    t.bigint "dungeon_id", null: false
+    t.string "name", null: false
+    t.integer "level", null: false
+    t.index ["dungeon_id"], name: "index_floors_on_dungeon_id"
   end
 
   create_table "modifiers", force: :cascade do |t|
@@ -53,27 +59,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.bigint "dungeon_id", null: false
+    t.bigint "floor_id", null: false
     t.string "name", null: false
     t.boolean "entrance", default: false, null: false
+    t.boolean "exit", default: false, null: false
     t.bigint "north_room_id"
     t.bigint "east_room_id"
     t.bigint "south_room_id"
     t.bigint "west_room_id"
-    t.bigint "above_room_id"
-    t.bigint "below_room_id"
-    t.index ["above_room_id"], name: "index_rooms_on_above_room_id"
-    t.index ["below_room_id"], name: "index_rooms_on_below_room_id"
-    t.index ["dungeon_id"], name: "index_rooms_on_dungeon_id"
     t.index ["east_room_id"], name: "index_rooms_on_east_room_id"
+    t.index ["floor_id"], name: "index_rooms_on_floor_id"
     t.index ["north_room_id"], name: "index_rooms_on_north_room_id"
     t.index ["south_room_id"], name: "index_rooms_on_south_room_id"
     t.index ["west_room_id"], name: "index_rooms_on_west_room_id"
   end
 
   add_foreign_key "dungeon_runs", "rooms", column: "current_room_id"
-  add_foreign_key "rooms", "rooms", column: "above_room_id"
-  add_foreign_key "rooms", "rooms", column: "below_room_id"
   add_foreign_key "rooms", "rooms", column: "east_room_id"
   add_foreign_key "rooms", "rooms", column: "north_room_id"
   add_foreign_key "rooms", "rooms", column: "south_room_id"

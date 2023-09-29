@@ -22,6 +22,14 @@ class DungeonRunsController < ApplicationController
     redirect_to dungeon_run_path(dungeon_run)
   end
 
+  def end
+    dungeon_run.end_run
+    redirect_to(
+      character_path(dungeon_run.character),
+      notice: "You completed the #{dungeon_run.dungeon.name} dungeon!"
+    )
+  end
+
 private
 
   def ensure_required_params

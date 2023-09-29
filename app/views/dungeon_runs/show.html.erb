@@ -10,61 +10,35 @@
     </div>
   </div>
 
-  <div>
-    <% if dungeon_run.current_room.north_room.present? %>
-      <div>
-        <b>North:</b>
-        <%=
-          link_to(
-            dungeon_run.current_room.north_room.name,
-            go_dungeon_run_path(dungeon_run, direction: :north),
-            class: "link",
-            method: :post
-          )
-        %>
-      </div>
-    <% end %>
 
-    <% if dungeon_run.current_room.east_room.present? %>
-      <div>
-        <b>East:</b>
-        <%=
-          link_to(
-            dungeon_run.current_room.east_room.name,
-            go_dungeon_run_path(dungeon_run, direction: :east),
-            class: "link",
-            method: :post
-          )
-        %>
-      </div>
-    <% end %>
-
-    <% if dungeon_run.current_room.south_room.present? %>
-      <div>
-        <b>South:</b>
-        <%=
-          link_to(
-            dungeon_run.current_room.south_room.name,
-            go_dungeon_run_path(dungeon_run, direction: :south),
-            class: "link",
-            method: :post
-          )
-        %>
-      </div>
-    <% end %>
-
-    <% if dungeon_run.current_room.west_room.present? %>
-      <div>
-        <b>West:</b>
-        <%=
-          link_to(
-            dungeon_run.current_room.west_room.name,
-            go_dungeon_run_path(dungeon_run, direction: :west),
-            class: "link",
-            method: :post
-          )
-        %>
-      </div>
+  <div class="mb-4">
+    <% %w[north east south west].each do |direction| %>
+      <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
+        <div class="mb-2">
+          <b><%= direction.titleize %>:</b>
+          <%=
+            link_to(
+              dungeon_run.current_room.send(:"#{direction}_room").name,
+              go_dungeon_run_path(dungeon_run, direction:),
+              class: "Link"
+            )
+          %>
+        </div>
+      <% end %>
     <% end %>
   </div>
+
+  <% if dungeon_run.current_room.exit? %>
+    <div>
+      <i>There's an exit...</i>
+      <%=
+        button_to(
+          "Leave Dungeon",
+          end_dungeon_run_path(dungeon_run),
+          class: "Button",
+          form: { data: { "turbo-frame": "_top" } }
+        )
+      %>
+    </div>
+  <% end %>
 <% end %>

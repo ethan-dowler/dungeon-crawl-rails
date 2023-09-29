@@ -1,26 +1,39 @@
 <%= render HeadingComponent.new(title: "Characters") %>
 
-<table>
-  <thead>
-    <tr>
-      <th class="p-2">Level</th>
-      <th class="p-2">Name</th>
-      <th class="p-2">Max HP</th>
-      <th class="p-2">Attack</th>
-      <th class="p-2">Defense</th>
-      <th class="p-2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% characters.each do |character| %>
-      <tr>
-        <td class="p-2"><%= character.level %></td>
-        <td class="p-2"><%= character.name %></td>
-        <td class="p-2"><%= character.max_hp %></td>
-        <td class="p-2"><%= character.attack %></td>
-        <td class="p-2"><%= character.defense %></td>
-        <td class="p-2"><%= link_to "Select", character_path(character), class: "link" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="flex flex-col text-center">
+  <% characters.each do |character| %>
+    <div class="mb-4 p-4 rounded w-auto shadow-md border-2 border-slate-50">
+      <div class="text-xl font-bold mb-2 ">
+        <%= character.name %> - Lvl. <%= character.level %>
+      </div>
+
+      <div class="flex mb-4 justify-center">
+        <div class="mr-2">
+          <div>
+            <b>Max HP</b>
+          </div>
+          <div>
+            <b>Attack</b>
+          </div>
+          <div>
+            <b>Defense</b>
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <%= character.max_hp %>
+          </div>
+          <div>
+            <%= character.attack %>
+          </div>
+          <div>
+            <%= character.defense %>
+          </div>
+        </div>
+      </div>
+
+      <%= link_to "Select", character_path(character), class: "Button w-full" %>
+    </div>
+  <% end %>
+</div>
