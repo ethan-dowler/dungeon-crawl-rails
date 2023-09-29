@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_29_220709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
     t.integer "base_hp", default: 0, null: false
     t.integer "base_attack", default: 0, null: false
     t.integer "base_defense", default: 0, null: false
+  end
+
+  create_table "conditions", force: :cascade do |t|
+    t.string "source_type", null: false
+    t.bigint "source_id", null: false
+    t.string "target_type", null: false
+    t.bigint "target_id", null: false
+    t.string "condition_type", null: false
+    t.index ["condition_type"], name: "index_conditions_on_condition_type"
+    t.index ["source_type", "source_id"], name: "index_conditions_on_source"
+    t.index ["target_type", "target_id"], name: "index_conditions_on_target"
   end
 
   create_table "dungeon_runs", force: :cascade do |t|
@@ -48,14 +59,57 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
     t.index ["dungeon_id"], name: "index_floors_on_dungeon_id"
   end
 
+  create_table "inventory_items", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "item_id", null: false
+    t.boolean "equipped", default: false, null: false
+    t.index ["character_id"], name: "index_inventory_items_on_character_id"
+    t.index ["item_id"], name: "index_inventory_items_on_item_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.string "equipment_slot"
+    t.index ["equipment_slot"], name: "index_items_on_equipment_slot"
+    t.index ["name"], name: "index_items_on_name"
+  end
+
   create_table "modifiers", force: :cascade do |t|
     t.string "source_type", null: false
     t.bigint "source_id", null: false
+    t.string "target_type", null: false
+    t.bigint "target_id", null: false
     t.string "modifier_type", null: false
     t.string "stat", null: false
-    t.integer "value", default: 1, null: false
-    t.index ["source_id", "source_type", "modifier_type", "stat"], name: "index_modifiers_combo"
+    t.integer "value", null: false
+    t.index ["modifier_type"], name: "index_modifiers_on_modifier_type"
     t.index ["source_type", "source_id"], name: "index_modifiers_on_source"
+    t.index ["stat"], name: "index_modifiers_on_stat"
+    t.index ["target_type", "target_id"], name: "index_modifiers_on_target"
+  end
+
+  create_table "monster_templates", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "base_hp", default: 0, null: false
+    t.integer "base_attack", default: 0, null: false
+    t.integer "base_defense", default: 0, null: false
+  end
+
+  create_table "monsters", force: :cascade do |t|
+    t.bigint "monster_template_id", null: false
+    t.integer "level", default: 0, null: false
+    t.integer "current_hp", default: 0, null: false
+    t.bigint "current_room_id", null: false
+    t.index ["current_room_id"], name: "index_monsters_on_current_room_id"
+    t.index ["monster_template_id"], name: "index_monsters_on_monster_template_id"
+  end
+
+  create_table "room_items", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "item_id", null: false
+    t.index ["item_id"], name: "index_room_items_on_item_id"
+    t.index ["room_id"], name: "index_room_items_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -75,6 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_031736) do
   end
 
   add_foreign_key "dungeon_runs", "rooms", column: "current_room_id"
+  add_foreign_key "monsters", "rooms", column: "current_room_id"
   add_foreign_key "rooms", "rooms", column: "east_room_id"
   add_foreign_key "rooms", "rooms", column: "north_room_id"
   add_foreign_key "rooms", "rooms", column: "south_room_id"

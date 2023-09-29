@@ -1,0 +1,2 @@
+class MonsterTemplate < ApplicationRecord
+end

@@ -1,5 +1,6 @@
 class Modifier < ApplicationRecord
   belongs_to :source, polymorphic: true
+  belongs_to :target, polymorphic: true
 
   # specific modifier types
   scope :flat, -> { where(modifier_type: :flat) }

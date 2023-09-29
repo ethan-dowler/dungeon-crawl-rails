@@ -17,34 +17,26 @@ east_room.update!(west_room: middle_room)
 south_room.update!(north_room: middle_room)
 west_room.update!(east_room: middle_room)
 
+monster_template_rat =
+  MonsterTemplate.create!(
+    name: "Savage Rat",
+    base_hp: 20,
+    base_attack: 10,
+    base_defense: 6,
+  )
+monster_rat =
+  Monster.create!(
+    monster_template: monster_template_rat,
+    level: 3,
+    current_room: middle_room
+  )
 
 # Characters
-character_params =
-  [
-    {
-      name: "Knight",
-      level: 1,
-      base_hp: 100,
-      current_hp: 100,
-      base_attack: 15,
-      base_defense: 12,
-    },
-    {
-      name: "Peasant",
-      level: 1,
-      base_hp: 60,
-      current_hp: 60,
-      base_attack: 6,
-      base_defense: 2,
-    },
-    {
-      name: "Barbarian",
-      level: 1,
-      base_hp: 120,
-      current_hp: 120,
-      base_attack: 22,
-      base_defense: 8,
-    }
-  ]
-
-character_params.each { Character.create!(**_1) }
+warrior =
+  Character.create!(
+    name: "Warrior",
+    level: 5,
+    base_hp: 100,
+    base_attack: 15,
+    base_defense: 12,
+  )
