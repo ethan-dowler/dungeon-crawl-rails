@@ -19,7 +19,7 @@ class DungeonRun < ApplicationRecord
   def ensure_current_room
     return if current_room.present?
 
-    self.current_room = dungeon.rooms.entrance.first
+    self.current_room = dungeon.entrance
   end
 
   def ensure_started_at

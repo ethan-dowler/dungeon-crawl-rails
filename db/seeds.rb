@@ -1,21 +1,13 @@
-# Maps
-return if Dungeon.exists?
+if DungeonTemplate.exists?
+  raise "Cannot run seeds more than once. Use db:seed:replant to start over."
+end
 
-dungeon_one = Dungeon.create!(name: "Dungeon One", description: "The very first dungeon")
-
-floor_one = dungeon_one.floors.create!(name: "Floor 1", level: 1)
-
-middle_room = floor_one.rooms.create!(name: "Middle Room")
-north_room = floor_one.rooms.create!(name: "North Room", exit: true)
-east_room = floor_one.rooms.create!(name: "East Room")
-south_room = floor_one.rooms.create!(name: "South Room", entrance: true)
-west_room = floor_one.rooms.create!(name: "West Room")
-
-middle_room.update!(north_room:, east_room:, south_room:, west_room:)
-north_room.update!(south_room: middle_room)
-east_room.update!(west_room: middle_room)
-south_room.update!(north_room: middle_room)
-west_room.update!(east_room: middle_room)
+dungeon_template =
+  DungeonTemplate.create!(
+    name: "Dungeon One",
+    description: "The very first dungeon"
+  )
+dungeon_one = dungeon_template.generate_new_dungeon
 
 monster_template_rat =
   MonsterTemplate.create!(
@@ -24,12 +16,15 @@ monster_template_rat =
     base_attack: 10,
     base_defense: 6,
   )
-monster_rat =
-  Monster.create!(
-    monster_template: monster_template_rat,
-    level: 3,
-    current_room: middle_room
-  )
+dungeon_one.rooms.no_outlet.each do |room|
+  # put a giant rat in every room except entrances and exits
+  monster_rat =
+    Monster.create!(
+      monster_template: monster_template_rat,
+      level: 3,
+      current_room: room
+    )
+end
 
 # Characters
 warrior =

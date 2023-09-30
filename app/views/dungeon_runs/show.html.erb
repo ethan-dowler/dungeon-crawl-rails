@@ -14,7 +14,7 @@
   <div class="mb-4">
     <% %w[north east south west].each do |direction| %>
       <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
-        <div class="mb-2">
+        <div class="mb-1">
           <b><%= direction.titleize %>:</b>
           <%=
             link_to(
@@ -27,6 +27,21 @@
       <% end %>
     <% end %>
   </div>
+
+  <% if dungeon_run.current_room.monsters.any? %>
+    <div class="mb-4">
+      <div class="text-xl font-bold mb-1">
+        Look out!
+      </div>
+
+      <% dungeon_run.current_room.monsters.each do |monster| %>
+        <div class="mb-1">
+          <%= monster.name %>
+          <%= button_to "Attack", attack_monster_path(monster), class: "Button" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
   <% if dungeon_run.current_room.exit? %>
     <div>

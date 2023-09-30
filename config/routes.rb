@@ -9,4 +9,10 @@ Rails.application.routes.draw do
       post :end
     end
   end
+
+  resources :monsters, only: [] do
+    member do
+      post :attack
+    end
+  end
 end

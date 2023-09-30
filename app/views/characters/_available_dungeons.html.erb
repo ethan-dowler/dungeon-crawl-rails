@@ -1,6 +1,6 @@
 <%= render HeadingComponent.new(title: "Dungeons") %>
 
-<% Dungeon.available_to(character).each do |dungeon| %>
+<% DungeonTemplate.available_to(character).each do |dungeon_template| %>
   <table class="mb-4">
     <thead>
       <tr>
@@ -10,12 +10,15 @@
     </thead>
     <tbody>
       <tr>
-        <td class="p-2"><%= dungeon.name %></td>
+        <td class="p-2"><%= dungeon_template.name %></td>
         <td class="p-2">
         <%=
           button_to(
             "Enter",
-            dungeon_runs_path(character_id: character.id, dungeon_id: dungeon.id),
+            dungeon_runs_path(
+              character_id: character.id,
+              dungeon_template_id: dungeon_templatedungeon_template.id
+            ),
             class: "Button"
           )
         %>

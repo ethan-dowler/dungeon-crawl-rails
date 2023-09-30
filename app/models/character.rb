@@ -10,7 +10,6 @@ class Character < ApplicationRecord
 
   after_update :check_level_up
 
-  # TODO: check for modifiers on equipment, conditions, etc.
   def max_hp = total(:hp)
   def attack = total(:attack)
   def defense = total(:defense)
@@ -22,10 +21,7 @@ private
   def check_level_up
     return unless xp > xp_to_next_level
 
-    extra_xp = xp - xp_to_next_level
-    update!(
-      xp: extra_xp,
-      level: level + 1
-    )
+    update!(level: level + 1)
+    check_level_up
   end
 end

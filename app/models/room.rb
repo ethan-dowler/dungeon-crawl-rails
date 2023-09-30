@@ -7,5 +7,9 @@ class Room < ApplicationRecord
   belongs_to :above_room, class_name: "Room", optional: true
   belongs_to :below_room, class_name: "Room", optional: true
 
-  scope :entrance, -> { where(entrance: true) }
+  has_many :monsters, foreign_key: :current_room
+
+  scope :entrances, -> { where(entrance: true) }
+  scope :exits, -> { where(exit: true) }
+  scope :no_outlet, -> { where(entrance: false, exit: false) }
 end

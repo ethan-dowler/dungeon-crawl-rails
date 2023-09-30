@@ -15,6 +15,7 @@
 }
 .Main {
   @apply mx-auto max-w-2xl; /* 672px */
+  @apply py-2 px-4 rounded w-auto shadow-md border-gray-100 border-2;
 }
 
 /* Buttons */
