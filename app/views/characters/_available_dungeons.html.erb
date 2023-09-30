@@ -1,6 +1,6 @@
 <%= render HeadingComponent.new(title: "Dungeons") %>
 
-<% DungeonTemplate.available_to(character).each do |dungeon_template| %>
+<% DungeonTemplate.all.each do |dungeon_template| %>
   <table class="mb-4">
     <thead>
       <tr>
@@ -17,7 +17,7 @@
             "Enter",
             dungeon_runs_path(
               character_id: character.id,
-              dungeon_template_id: dungeon_templatedungeon_template.id
+              dungeon_template_id: dungeon_template.id
             ),
             class: "Button"
           )

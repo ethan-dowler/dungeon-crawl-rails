@@ -1,12 +1,11 @@
 class DungeonTemplate < ApplicationRecord
   has_many :dungeons
-  
 
   # TODO: procedurally generate floors and rooms?
   #       that sounds hard... just add some radomization!
   def generate_new_dungeon
     DungeonTemplate.transaction do
-      dungeon = Dungeon.create!(dungeon_template:)
+      dungeon = Dungeon.create!(dungeon_template: self)
       
       # first floor - create rooms
       floor_one = dungeon.floors.create!(name: "Floor 1", level: 1)

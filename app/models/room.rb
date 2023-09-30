@@ -11,5 +11,4 @@ class Room < ApplicationRecord
 
   scope :entrances, -> { where(entrance: true) }
   scope :exits, -> { where(exit: true) }
-  scope :no_outlet, -> { where(entrance: false, exit: false) }
 end

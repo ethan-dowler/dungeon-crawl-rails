@@ -9,7 +9,8 @@ class BasicAttack
   end
 
   def execute
-    # TODO: attacker inflicts damage on defender
+    defender.update!(current_hp: defender.current_hp - damage)
+    damage.to_i
   end
 
   private
@@ -21,7 +22,7 @@ class BasicAttack
   end
 
   def level_damage
-    (2.0 x attacker.level.to_f) / 5.0
+    (2.0 * attacker.level.to_f) / 5.0
   end
   
   def attacker_v_defender_multiplier

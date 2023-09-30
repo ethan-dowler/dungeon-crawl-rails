@@ -3,14 +3,15 @@
 </div>
 
 <%= turbo_frame_tag :dungeon_panel do %>
+  <%# current room %>
   <div class="mb-2">
     <div>
-      <b>Location:</b>
+      <b>Current Room:</b>
       <%= dungeon_run.current_room.name %>
     </div>
   </div>
 
-
+  <%# doors %>
   <div class="mb-4">
     <% %w[north east south west].each do |direction| %>
       <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
@@ -28,18 +29,54 @@
     <% end %>
   </div>
 
+  <%# character stats %>
+  <div class="mb-4">
+    <div class="text-xl font-bold mb-1">
+      <%= dungeon_run.character.name %> Lvl. <%= dungeon_run.character.level %>
+    </div>
+
+    <div class="">
+      HP: <%= dungeon_run.character.current_hp %> / <%= dungeon_run.character.max_hp %>
+    </div>
+  </div>
+
   <% if dungeon_run.current_room.monsters.any? %>
     <div class="mb-4">
-      <div class="text-xl font-bold mb-1">
+      <div class="text-l font-bold mb-1">
         Look out!
       </div>
 
       <% dungeon_run.current_room.monsters.each do |monster| %>
-        <div class="mb-1">
-          <%= monster.name %>
-          <%= button_to "Attack", attack_monster_path(monster), class: "Button" %>
+        <div class="mb-4 flex flex-col justify-center">
+          <div class="mb-2">
+            <%= monster.name %> Lvl. <%= monster.level %>
+          </div>
+
+          <div class="mb-2">
+            HP: <%= monster.current_hp %> / <%= monster.max_hp %>
+          </div>
+          
+          <% if monster.defeated? %>
+            <%=
+              button_to(
+                "Loot",
+                loot_dungeon_run_monster_path(dungeon_run, monster),
+                class: "Button"
+              )
+            %>
+          <% else %>
+            <%=
+              button_to(
+                "Attack",
+                attack_dungeon_run_monster_path(dungeon_run, monster),
+                class: "Button"
+              )
+            %>
+          <% end %>
         </div>
       <% end %>
+
+      <%= render "layouts/flash_messages" %>
     </div>
   <% end %>
 

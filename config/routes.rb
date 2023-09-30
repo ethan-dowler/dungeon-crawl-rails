@@ -8,11 +8,13 @@ Rails.application.routes.draw do
       get :go
       post :end
     end
-  end
 
-  resources :monsters, only: [] do
-    member do
-      post :attack
+    resources :monsters, only: [] do
+      member do
+        post :attack
+        post :loot
+      end
     end
   end
+
 end

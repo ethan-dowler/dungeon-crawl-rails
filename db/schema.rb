@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_29_220709) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_041743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,9 +47,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_220709) do
     t.index ["dungeon_id"], name: "index_dungeon_runs_on_dungeon_id"
   end
 
-  create_table "dungeons", force: :cascade do |t|
+  create_table "dungeon_templates", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
+  end
+
+  create_table "dungeons", force: :cascade do |t|
+    t.bigint "dungeon_template_id", null: false
+    t.index ["dungeon_template_id"], name: "index_dungeons_on_dungeon_template_id"
   end
 
   create_table "floors", force: :cascade do |t|

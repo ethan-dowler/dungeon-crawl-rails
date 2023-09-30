@@ -4,6 +4,8 @@ class Dungeon < ApplicationRecord
   has_many :floors
   has_many :rooms, through: :floors
 
+  delegate :name, to: :dungeon_template
+
   def entrance
     return nil if first_floor.nil?
 

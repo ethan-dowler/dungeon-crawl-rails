@@ -16,7 +16,7 @@ monster_template_rat =
     base_attack: 10,
     base_defense: 6,
   )
-dungeon_one.rooms.no_outlet.each do |room|
+dungeon_one.rooms.where(entrance: false).each do |room|
   # put a giant rat in every room except entrances and exits
   monster_rat =
     Monster.create!(

@@ -36,16 +36,16 @@ private
 
   def ensure_required_params
     if params[:character_id].blank?
-      redirect_back alert: "Please choose a character for this run."
-    elsif params[:dungeon_template].blank?
-      redirect_back alert: "Please choose a dungeon template for this run."
+      redirect_back alert: "Please choose a character for this run.", fallback_location: root_path
+    elsif params[:dungeon_template_id].blank?
+      redirect_back alert: "Please choose a dungeon template for this run.", fallback_location: root_path
     end
   end
 
   def ensure_no_run_in_progress
     return if DungeonRun.where(character_id: params[:character_id]).active.none?
 
-    redirect_back alert: "Dungeon run already in progress."
+    redirect_back alert: "Dungeon run already in progress.", fallback_location: root_path
   end
 
   def dungeon_run
