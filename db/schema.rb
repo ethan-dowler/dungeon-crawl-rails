@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_30_041743) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_045826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_041743) do
     t.boolean "equipped", default: false, null: false
     t.index ["character_id"], name: "index_inventory_items_on_character_id"
     t.index ["item_id"], name: "index_inventory_items_on_item_id"
+  end
+
+  create_table "item_drops", force: :cascade do |t|
+    t.bigint "monster_template_id", null: false
+    t.bigint "item_id", null: false
+    t.integer "odds", null: false
+    t.index ["item_id"], name: "index_item_drops_on_item_id"
+    t.index ["monster_template_id"], name: "index_item_drops_on_monster_template_id"
   end
 
   create_table "items", force: :cascade do |t|

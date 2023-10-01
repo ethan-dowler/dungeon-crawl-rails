@@ -8,7 +8,7 @@ class EquipInventoryItem
   
   def execute
     Character.transaction do
-      mark_as_equipped
+      inventory_item.equip
       add_modifiers
     end
   end
@@ -22,9 +22,5 @@ class EquipInventoryItem
         target: character
       )
     end
-  end
-
-  def mark_as_equipped
-    inventory_item.update!(equipped: true)
   end
 end

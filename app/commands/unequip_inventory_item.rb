@@ -8,8 +8,8 @@ class UnequipInventoryItem
   
   def execute
     Character.transaction do
+      inventory_item.unequip
       remove_modifiers
-      mark_as_unequipped
     end
   end
 
@@ -17,9 +17,5 @@ private
 
   def remove_modifiers
     character.modifiers.where(source: inventory_item).destroy_all
-  end
-
-  def mark_as_unequipped
-    inventory_item.update!(equipped: false)
   end
 end

@@ -4,6 +4,8 @@ class Monster < ApplicationRecord
   include HasHp
 
   belongs_to :monster_template
+  has_many :item_drops, through: :monster_template
+
   belongs_to :current_room, class_name: "Room"
   has_one :dungeon, through: :current_room
 
@@ -12,6 +14,4 @@ class Monster < ApplicationRecord
   def max_hp = total(:hp)
   def attack = total(:attack)
   def defense = total(:defense)
-  
-  def defeated? = current_hp <= 0
 end

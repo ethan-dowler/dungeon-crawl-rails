@@ -9,6 +9,12 @@ dungeon_template =
   )
 dungeon_one = dungeon_template.generate_new_dungeon
 
+coin =
+  Item.create!(
+    name: "Coin",
+    description: "A simple golden disc of unkown value and origin."
+  )
+
 monster_template_rat =
   MonsterTemplate.create!(
     name: "Savage Rat",
@@ -16,6 +22,8 @@ monster_template_rat =
     base_attack: 10,
     base_defense: 6,
   )
+monster_template.item_drops.create!(item: coin)
+
 dungeon_one.rooms.where(entrance: false).each do |room|
   # put a giant rat in every room except entrances and exits
   monster_rat =

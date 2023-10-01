@@ -9,6 +9,8 @@ class BasicAttack
   end
 
   def execute
+    return if attacker.defeated?
+
     defender.update!(current_hp: defender.current_hp - damage)
     damage.to_i
   end

@@ -5,10 +5,10 @@ class Character < ApplicationRecord
 
   has_many :dungeon_runs
 
-  has_many :equipment_items
-  has_many :items, through: :equipment_items
+  has_many :inventory_items
+  has_many :items, through: :inventory_items
 
-  after_update :check_level_up
+  after_update :check_level_up, if: :xp_previously_changed?
 
   def max_hp = total(:hp)
   def attack = total(:attack)

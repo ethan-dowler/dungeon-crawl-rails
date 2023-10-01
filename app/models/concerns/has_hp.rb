@@ -10,6 +10,8 @@ module HasHp
 
   def max_hp = base_hp
 
+  def defeated? = current_hp.zero?
+
 private
 
   def set_current_hp

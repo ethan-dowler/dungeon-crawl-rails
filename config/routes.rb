@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     resources :monsters, only: [] do
       member do
         post :attack
-        post :loot
       end
     end
   end
