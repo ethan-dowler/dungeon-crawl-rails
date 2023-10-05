@@ -5,7 +5,7 @@ class UnequipInventoryItem
     @character = character
     @inventory_item = inventory_item
   end
-  
+
   def execute
     Character.transaction do
       inventory_item.unequip
@@ -13,7 +13,7 @@ class UnequipInventoryItem
     end
   end
 
-private
+  private
 
   def remove_modifiers
     character.modifiers.where(source: inventory_item).destroy_all

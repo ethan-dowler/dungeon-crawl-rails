@@ -5,7 +5,7 @@ class EquipInventoryItem
     @character = character
     @inventory_item = inventory_item
   end
-  
+
   def execute
     Character.transaction do
       inventory_item.equip

@@ -1,7 +1,7 @@
 class Dungeon < ApplicationRecord
   belongs_to :dungeon_template
 
-  has_many :floors
+  has_many :floors, dependent: :destroy
   has_many :rooms, through: :floors
 
   delegate :name, to: :dungeon_template

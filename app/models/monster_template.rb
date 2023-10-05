@@ -1,4 +1,4 @@
 class MonsterTemplate < ApplicationRecord
-  has_many :item_drops
-  has_many :monsters
+  has_many :item_drops, dependent: :destroy
+  has_many :monsters, dependent: :destroy
 end

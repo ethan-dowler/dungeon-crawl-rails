@@ -8,7 +8,7 @@ class ResolveCombat
 
   def execute
     return unless monster.defeated?
-    
+
     Monster.transaction do
       GainXp.new(character:, monster:).call
       GainLoot.new(character:, monster:).call

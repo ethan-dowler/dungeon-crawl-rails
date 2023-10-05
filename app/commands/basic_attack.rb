@@ -18,18 +18,16 @@ class BasicAttack
   private
 
   def damage
-    (BASIC_ATTACK_BASE_POWER *
+    ((BASIC_ATTACK_BASE_POWER *
       (level_damage + 2.0) *
-      attacker_v_defender_multiplier) / 50.0 + 2.0
+      attacker_v_defender_multiplier) / 50.0) + 2.0
   end
 
   def level_damage
     (2.0 * attacker.level.to_f) / 5.0
   end
-  
+
   def attacker_v_defender_multiplier
-    attacker.attack.to_f / defender.defense.to_f
+    attacker.attack.to_f / defender.defense
   end
 end
-
-

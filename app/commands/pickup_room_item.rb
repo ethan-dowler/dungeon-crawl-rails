@@ -5,7 +5,7 @@ class PickupRoomItem
     @character = character
     @room_item = room_item
   end
-  
+
   def execute
     Character.transaction do
       add_to_inventory
@@ -13,7 +13,7 @@ class PickupRoomItem
     end
   end
 
-private
+  private
 
   def add_to_inventory
     # TODO

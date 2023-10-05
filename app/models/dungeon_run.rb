@@ -1,7 +1,7 @@
 class DungeonRun < ApplicationRecord
   belongs_to :character
   belongs_to :dungeon
-  belongs_to :current_room, class_name: "Room"
+  belongs_to :current_room, class_name: 'Room'
 
   scope :active, -> { where(completed_at: nil) }
 
@@ -29,8 +29,8 @@ class DungeonRun < ApplicationRecord
   end
 
   module CompletedReason
-    COMPLETED = "COMPLETED".freeze
-    RETIRED = "RETIRED".freeze
-    DIED = "DIED".freeze
+    COMPLETED = 'COMPLETED'.freeze
+    RETIRED = 'RETIRED'.freeze
+    DIED = 'DIED'.freeze
   end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "home#index"
+  root 'home#index'
 
   resources :characters, only: %i[index show]
 
@@ -15,5 +15,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
 end
