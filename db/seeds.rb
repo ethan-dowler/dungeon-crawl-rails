@@ -20,7 +20,7 @@ monster_template_rat =
     base_attack: 10,
     base_defense: 6
   )
-monster_template_rat.item_drops.create!(item: coin)
+monster_template_rat.item_drops.create!(item: coin, odds: 1)
 
 dungeon_one.rooms.where(entrance: false).find_each do |room|
   # put a giant rat in every room except entrances and exits

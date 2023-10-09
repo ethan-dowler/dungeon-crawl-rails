@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_045826) do
   create_table "item_drops", force: :cascade do |t|
     t.bigint "monster_template_id", null: false
     t.bigint "item_id", null: false
-    t.integer "odds", null: false
+    t.integer "odds", default: 1, null: false
     t.index ["item_id"], name: "index_item_drops_on_item_id"
     t.index ["monster_template_id"], name: "index_item_drops_on_monster_template_id"
   end
