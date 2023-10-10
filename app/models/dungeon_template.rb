@@ -4,7 +4,7 @@ class DungeonTemplate < ApplicationRecord
   # TODO: procedurally generate floors and rooms?
   #       that sounds hard... just add some radomization!
   def generate_new_dungeon # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    DungeonTemplate.transaction do
+    DungeonTemplate.transaction do # rubocop:disable Metrics/BlockLength
       dungeon = Dungeon.create!(dungeon_template: self)
 
       # first floor - create rooms

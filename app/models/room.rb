@@ -26,7 +26,7 @@ class Room < ApplicationRecord
     dungeon.entrance_room_id == id
   end
 
-private
+  private
 
   # TODO: allow for chance of multiple monsters
   # or no monsters at all

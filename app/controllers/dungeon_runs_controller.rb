@@ -5,6 +5,8 @@ class DungeonRunsController < ApplicationController
 
   helper_method :character, :dungeon, :dungeon_run
 
+  def show; end
+
   def create
     dungeon_template = DungeonTemplate.find(params[:dungeon_template_id])
     new_dungeon = dungeon_template.generate_new_dungeon

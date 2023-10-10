@@ -19,9 +19,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_160923) do
     t.integer "level", default: 0, null: false
     t.integer "xp", default: 0, null: false
     t.integer "current_hp", default: 0, null: false
-    t.integer "base_hp", default: 0, null: false
-    t.integer "base_attack", default: 0, null: false
-    t.integer "base_defense", default: 0, null: false
+    t.integer "base_hp", default: 10, null: false
+    t.integer "base_attack", default: 10, null: false
+    t.integer "base_defense", default: 10, null: false
+    t.integer "base_speed", default: 10, null: false
   end
 
   create_table "conditions", force: :cascade do |t|
@@ -117,9 +118,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_160923) do
   create_table "monster_templates", force: :cascade do |t|
     t.string "name", null: false
     t.integer "base_experience_yield", null: false
-    t.integer "base_hp", default: 0, null: false
-    t.integer "base_attack", default: 0, null: false
-    t.integer "base_defense", default: 0, null: false
+    t.integer "base_hp", default: 10, null: false
+    t.integer "base_attack", default: 10, null: false
+    t.integer "base_defense", default: 10, null: false
+    t.integer "base_speed", default: 10, null: false
   end
 
   create_table "monsters", force: :cascade do |t|

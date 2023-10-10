@@ -1,10 +1,9 @@
 raise 'Cannot run seeds more than once. Use db:seed:replant to start over.' if DungeonTemplate.exists?
 
-dungeon_template =
-  DungeonTemplate.create!(
-    name: 'Dungeon One',
-    description: 'The very first dungeon'
-  )
+DungeonTemplate.create!(
+  name: 'Dungeon One',
+  description: 'The very first dungeon'
+)
 
 coin =
   Item.create!(
@@ -18,6 +17,7 @@ monster_template_rat =
     base_hp: 20,
     base_attack: 10,
     base_defense: 6,
+    base_speed: 8,
     base_experience_yield: 50
   )
 monster_template_rat.item_drops.create!(item: coin, odds: 1)
@@ -29,5 +29,6 @@ Character.create!(
   xp: 64,
   base_hp: 100,
   base_attack: 15,
-  base_defense: 12
+  base_defense: 12,
+  base_speed: 10
 )

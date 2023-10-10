@@ -21,7 +21,6 @@ class BasicAttack
     # level 5 attacker with 15 attack
     # defender has 5 defense
     # ((40 * (2 + 2) * 2.5) / 50) + 2 = 10
-    binding.pry
     (((BASIC_ATTACK_BASE_POWER * (level_damage + 2.0) * attacker_v_defender_multiplier) / 50.0) + 2.0).round
   end
 
@@ -30,6 +29,6 @@ class BasicAttack
   end
 
   def attacker_v_defender_multiplier
-    attacker.attack.to_f / defender.defense.to_f
+    attacker.attack.to_f / defender.defense
   end
 end

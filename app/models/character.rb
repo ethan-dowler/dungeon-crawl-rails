@@ -21,9 +21,7 @@ class Character < ApplicationRecord
   def xp_to_next_level = level**3
 
   def poke_attack
-    # at level 5, base attack is 100 with 0 IV and 0 EV and neutral nature
-    # (15)
-    ((0.01 * (2 * (base_attack + flat_modifier_for(:attack))) * level).floor + 5) * percent_modifier_for(:attack)
+    poke_total(:attack)
   end
 
   def refresh
