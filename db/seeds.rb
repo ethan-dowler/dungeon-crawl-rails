@@ -14,10 +14,10 @@ coin =
 monster_template_rat =
   MonsterTemplate.create!(
     name: 'Savage Rat',
-    base_hp: 20,
-    base_attack: 10,
-    base_defense: 6,
-    base_speed: 8,
+    base_hp: 30,
+    base_attack: 55,
+    base_defense: 35,
+    base_speed: 75,
     base_experience_yield: 50
   )
 monster_template_rat.item_drops.create!(item: coin, odds: 1)
@@ -26,9 +26,8 @@ monster_template_rat.item_drops.create!(item: coin, odds: 1)
 Character.create!(
   name: 'Warrior',
   level: 5,
-  xp: 64,
-  base_hp: 100,
-  base_attack: 15,
-  base_defense: 12,
-  base_speed: 10
+  base_hp: 39,
+  base_attack: 60,
+  base_defense: 45,
+  base_speed: 65
 )

@@ -9,7 +9,11 @@ class DungeonTemplate < ApplicationRecord
 
       # first floor - create rooms
       floor_one = dungeon.floors.create!(name: 'Floor 1', level: 1)
-      floor_one.floor_encounters.create(monster_template: MonsterTemplate.first)
+      floor_one.floor_encounters.create(
+        monster_template: MonsterTemplate.first,
+        level_range_start: 2,
+        level_range_end: 3
+      )
       f1_middle_room = floor_one.rooms.create!(name: 'Middle Room')
       f1_north_room = floor_one.rooms.create!(name: 'North Room')
       f1_east_room = floor_one.rooms.create!(name: 'East Room')
@@ -30,7 +34,11 @@ class DungeonTemplate < ApplicationRecord
 
       # second floor - create rooms
       floor_two = dungeon.floors.create!(name: 'Floor 2', level: 2)
-      floor_two.floor_encounters.create(monster_template: MonsterTemplate.first)
+      floor_two.floor_encounters.create(
+        monster_template: MonsterTemplate.first,
+        level_range_start: 4,
+        level_range_end: 5
+      )
       f2_middle_room = floor_two.rooms.create!(name: 'Middle Room')
       f2_north_room = floor_two.rooms.create!(name: 'North Room')
       f2_east_room = floor_two.rooms.create!(name: 'East Room')

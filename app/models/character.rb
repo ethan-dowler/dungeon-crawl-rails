@@ -12,13 +12,17 @@ class Character < ApplicationRecord
   has_many :inventory_items, dependent: :destroy
   has_many :items, through: :inventory_items, dependent: :destroy
 
+  before_create :set_xp
   after_update :check_level_up, if: :xp_previously_changed?
+
+  validates :level, comparison: { greater_than: 0 }
 
   def max_hp = total(:hp)
   def attack = total(:attack)
   def defense = total(:defense)
 
   def xp_to_next_level = level**3
+  # TODO: calculate XP between current level and next instead of total XP
 
   def poke_attack
     poke_total(:attack)
@@ -30,6 +34,10 @@ class Character < ApplicationRecord
   end
 
   private
+
+  def set_xp
+    self.xp = (level - 1) ** 3
+  end
 
   def check_level_up
     return unless xp > xp_to_next_level

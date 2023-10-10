@@ -10,5 +10,5 @@ class Modifier < ApplicationRecord
   scope :hp, -> { where(stat: :hp) }
   scope :attack, -> { where(stat: :attack) }
   scope :defense, -> { where(stat: :defense) }
-  scope :speed, -> { where(stat: :defense) }
+  scope :speed, -> { where(stat: :speed) }
 end

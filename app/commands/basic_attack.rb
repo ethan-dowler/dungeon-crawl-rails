@@ -18,10 +18,9 @@ class BasicAttack
   private
 
   def damage
-    # level 5 attacker with 15 attack
-    # defender has 5 defense
-    # ((40 * (2 + 2) * 2.5) / 50) + 2 = 10
-    (((BASIC_ATTACK_BASE_POWER * (level_damage + 2.0) * attacker_v_defender_multiplier) / 50.0) + 2.0).round
+    @damage ||= (
+      ((BASIC_ATTACK_BASE_POWER * (level_damage + 2.0) * attacker_v_defender_multiplier) / 50.0) + 2.0
+    ).round
   end
 
   def level_damage
