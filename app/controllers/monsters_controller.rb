@@ -5,7 +5,7 @@ class MonstersController < ApplicationController
       BasicAttack.new(attacker: character, defender: monster).execute
       BasicAttack.new(attacker: monster, defender: character).execute
 
-      ResolveCombat.new(character:, monster:)
+      ResolveCombat.new(character:, monster:).execute
     end
 
     redirect_to dungeon_run_path(dungeon_run)

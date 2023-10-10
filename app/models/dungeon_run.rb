@@ -7,19 +7,14 @@ class DungeonRun < ApplicationRecord
 
   before_validation :ensure_current_room, :ensure_started_at, only: :create
 
-  def end_run
-    update!(
-      completed_at: DateTime.current,
-      completed_reason: CompletedReason::COMPLETED
-    )
-  end
+  def active? = completed_at.nil?
 
   private
 
   def ensure_current_room
     return if current_room.present?
 
-    self.current_room = dungeon.entrance
+    self.current_room = dungeon.entrance_room
   end
 
   def ensure_started_at
@@ -29,7 +24,7 @@ class DungeonRun < ApplicationRecord
   end
 
   module CompletedReason
-    COMPLETED = 'COMPLETED'.freeze
+    ELECTIVE = 'ELECTIVE'.freeze
     RETIRED = 'RETIRED'.freeze
     DIED = 'DIED'.freeze
   end

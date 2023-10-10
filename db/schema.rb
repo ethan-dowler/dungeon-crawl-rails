@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_01_045826) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_10_160923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,7 +54,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_045826) do
 
   create_table "dungeons", force: :cascade do |t|
     t.bigint "dungeon_template_id", null: false
+    t.bigint "entrance_room_id"
     t.index ["dungeon_template_id"], name: "index_dungeons_on_dungeon_template_id"
+    t.index ["entrance_room_id"], name: "index_dungeons_on_entrance_room_id"
+  end
+
+  create_table "floor_encounters", force: :cascade do |t|
+    t.bigint "floor_id", null: false
+    t.bigint "monster_template_id", null: false
+    t.integer "odds", default: 1, null: false
+    t.integer "level_range_start", default: 1, null: false
+    t.integer "level_range_end", default: 1, null: false
+    t.index ["floor_id"], name: "index_floor_encounters_on_floor_id"
+    t.index ["monster_template_id"], name: "index_floor_encounters_on_monster_template_id"
   end
 
   create_table "floors", force: :cascade do |t|
@@ -104,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_045826) do
 
   create_table "monster_templates", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "base_experience_yield", null: false
     t.integer "base_hp", default: 0, null: false
     t.integer "base_attack", default: 0, null: false
     t.integer "base_defense", default: 0, null: false
@@ -128,12 +141,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_045826) do
   create_table "rooms", force: :cascade do |t|
     t.bigint "floor_id", null: false
     t.string "name", null: false
-    t.boolean "entrance", default: false, null: false
-    t.boolean "exit", default: false, null: false
     t.bigint "north_room_id"
     t.bigint "east_room_id"
     t.bigint "south_room_id"
     t.bigint "west_room_id"
+    t.bigint "above_room_id"
+    t.bigint "below_room_id"
+    t.index ["above_room_id"], name: "index_rooms_on_above_room_id"
+    t.index ["below_room_id"], name: "index_rooms_on_below_room_id"
     t.index ["east_room_id"], name: "index_rooms_on_east_room_id"
     t.index ["floor_id"], name: "index_rooms_on_floor_id"
     t.index ["north_room_id"], name: "index_rooms_on_north_room_id"
@@ -142,7 +157,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_045826) do
   end
 
   add_foreign_key "dungeon_runs", "rooms", column: "current_room_id"
+  add_foreign_key "dungeons", "rooms", column: "entrance_room_id"
   add_foreign_key "monsters", "rooms", column: "current_room_id"
+  add_foreign_key "rooms", "rooms", column: "above_room_id"
+  add_foreign_key "rooms", "rooms", column: "below_room_id"
   add_foreign_key "rooms", "rooms", column: "east_room_id"
   add_foreign_key "rooms", "rooms", column: "north_room_id"
   add_foreign_key "rooms", "rooms", column: "south_room_id"

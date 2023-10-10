@@ -15,9 +15,7 @@ class GainLoot
         drop.odds.times { pool << drop.item_id }
       end
 
-    character.inventory_items.create!(
-      item_id: reward_pool.sample
-    )
+    character.inventory_items.create!(item_id: reward_pool.sample)
   end
 
   private

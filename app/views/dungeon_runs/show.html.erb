@@ -1,8 +1,25 @@
-<div class="mb-2">
-  You're in the <strong><%= dungeon_run.dungeon.name %></strong> dungeon
-</div>
-
 <%= turbo_frame_tag :dungeon_panel do %>
+  <%# Dungeon name and exit button %>
+  <div class="flex justify-between mb-2">
+    <div>
+      <strong><%= dungeon_run.dungeon.name %></strong>
+    </div>
+
+    <%= button_to(
+      end_dungeon_run_path(dungeon_run),
+      class: "Button Button--red Button--icon",
+      data: { "turbo-confirm": "Are you sure you want to end this run?" }
+    ) do %>
+      <%= render "icons/exit" %>
+    <% end %>
+  </div>
+
+  <%# current floor %>
+  <div class="mb-2">
+    <b>Current Floor:</b>
+    <%= dungeon_run.current_room.floor.level %>
+  </div>
+
   <%# current room %>
   <div class="mb-2">
     <b>Current Room:</b>
@@ -61,15 +78,33 @@
     </div>
   <% end %>
 
-  <% if dungeon_run.current_room.exit? %>
+  <% if dungeon_run.current_room.above_room.present? %>
     <div>
-      <i>There's an exit...</i>
+      <div>
+        <i>There's a staircase leading UP...</i>
+      </div>
       <%=
-        button_to(
-          "Leave Dungeon",
-          end_dungeon_run_path(dungeon_run),
+        link_to(
+          "Go Up Stairs",
+          go_dungeon_run_path(dungeon_run, direction: :above),
           class: "Button",
-          form: { data: { "turbo-frame": "_top" } }
+          data: { "turbo-frame": "_top" }
+        )
+      %>
+    </div>
+  <% end %>
+
+  <% if dungeon_run.current_room.below_room.present? %>
+    <div>
+      <div>
+        <i>There's a staircase leading DOWN...</i>
+      </div>
+      <%=
+        link_to(
+          "Go Down Stairs",
+          go_dungeon_run_path(dungeon_run, direction: :below),
+          class: "Button",
+          data: { "turbo-frame": "_top" }
         )
       %>
     </div>

@@ -14,8 +14,12 @@ module Modifiable
   end
 
   def total(stat)
-    return 0 unless respond_to?(:"base_#{stat}")
+    raise "Invalid stat" unless respond_to?(:"base_#{stat}")
 
     ((send(:"base_#{stat}") + flat_modifier_for(stat)) * percent_modifier_for(stat)).round
+  end
+
+  def poke_total(stat)
+    
   end
 end

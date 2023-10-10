@@ -26,6 +26,11 @@ class Character < ApplicationRecord
     ((0.01 * (2 * (base_attack + flat_modifier_for(:attack))) * level).floor + 5) * percent_modifier_for(:attack)
   end
 
+  def refresh
+    update!(current_hp: max_hp)
+    # TODO: remove any negative debuffs
+  end
+
   private
 
   def check_level_up

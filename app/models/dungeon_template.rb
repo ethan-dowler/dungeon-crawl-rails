@@ -9,33 +9,50 @@ class DungeonTemplate < ApplicationRecord
 
       # first floor - create rooms
       floor_one = dungeon.floors.create!(name: 'Floor 1', level: 1)
-      middle_room = floor_one.rooms.create!(name: 'Middle Room')
-      north_room = floor_one.rooms.create!(name: 'North Room', exit: true)
-      east_room = floor_one.rooms.create!(name: 'East Room')
-      south_room = floor_one.rooms.create!(name: 'South Room', entrance: true)
-      west_room = floor_one.rooms.create!(name: 'West Room')
+      floor_one.floor_encounters.create(monster_template: MonsterTemplate.first)
+      f1_middle_room = floor_one.rooms.create!(name: 'Middle Room')
+      f1_north_room = floor_one.rooms.create!(name: 'North Room')
+      f1_east_room = floor_one.rooms.create!(name: 'East Room')
+      f1_south_room = floor_one.rooms.create!(name: 'South Room')
+      f1_west_room = floor_one.rooms.create!(name: 'West Room')
 
       # first floor - connect rooms
-      middle_room.update!(north_room:, east_room:, south_room:, west_room:)
-      north_room.update!(south_room: middle_room)
-      east_room.update!(west_room: middle_room)
-      south_room.update!(north_room: middle_room)
-      west_room.update!(east_room: middle_room)
+      f1_middle_room.update!(
+        north_room: f1_north_room,
+        east_room: f1_east_room,
+        south_room: f1_south_room,
+        west_room: f1_west_room
+      )
+      f1_north_room.update!(south_room: f1_middle_room)
+      f1_east_room.update!(west_room: f1_middle_room)
+      f1_south_room.update!(north_room: f1_middle_room)
+      f1_west_room.update!(east_room: f1_middle_room)
 
       # second floor - create rooms
       floor_two = dungeon.floors.create!(name: 'Floor 2', level: 2)
-      middle_room = floor_two.rooms.create!(name: 'Middle Room')
-      north_room = floor_two.rooms.create!(name: 'North Room')
-      east_room = floor_two.rooms.create!(name: 'East Room')
-      south_room = floor_two.rooms.create!(name: 'South Room', exit: true)
-      west_room = floor_two.rooms.create!(name: 'West Room', entrance: true)
+      floor_two.floor_encounters.create(monster_template: MonsterTemplate.first)
+      f2_middle_room = floor_two.rooms.create!(name: 'Middle Room')
+      f2_north_room = floor_two.rooms.create!(name: 'North Room')
+      f2_east_room = floor_two.rooms.create!(name: 'East Room')
+      f2_south_room = floor_two.rooms.create!(name: 'South Room')
+      f2_west_room = floor_two.rooms.create!(name: 'West Room')
 
       # second floor - connect rooms
-      middle_room.update!(north_room:, east_room:, south_room:, west_room:)
-      north_room.update!(south_room: middle_room)
-      east_room.update!(west_room: middle_room)
-      south_room.update!(north_room: middle_room)
-      west_room.update!(east_room: middle_room)
+      f2_middle_room.update!(
+        north_room: f2_north_room,
+        east_room: f2_east_room,
+        south_room: f2_south_room,
+        west_room: f2_west_room
+      )
+      f2_north_room.update!(south_room: f2_middle_room)
+      f2_east_room.update!(west_room: f2_middle_room)
+      f2_south_room.update!(north_room: f2_middle_room)
+      f2_west_room.update!(east_room: f2_middle_room, below_room: f1_north_room)
+      # the west room of floor 2 is directly above the north room of floor 1
+      f1_north_room.update!(above_room: f2_west_room)
+
+      # players start in the south room of floor 1
+      dungeon.update!(entrance_room: f1_south_room)
 
       # return a brand new dungeon!
       dungeon

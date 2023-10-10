@@ -1,6 +1,7 @@
 class DungeonRunsController < ApplicationController
   before_action :ensure_required_params, only: :create
   before_action :ensure_no_run_in_progress, only: :create
+  before_action :ensure_run_active, only: :show
 
   helper_method :character, :dungeon, :dungeon_run
 
@@ -12,6 +13,7 @@ class DungeonRunsController < ApplicationController
         character_id: params[:character_id],
         dungeon_id: new_dungeon.id
       )
+    dungeon_run.character.refresh
 
     redirect_to dungeon_run_path(dungeon_run)
   end
@@ -25,7 +27,8 @@ class DungeonRunsController < ApplicationController
   end
 
   def end
-    dungeon_run.end_run
+    EndRun.new(dungeon_run:).execute
+
     redirect_to(
       character_path(dungeon_run.character),
       notice: "You completed the #{dungeon_run.dungeon.name} dungeon!"
@@ -34,21 +37,27 @@ class DungeonRunsController < ApplicationController
 
   private
 
+  def dungeon_run
+    @dungeon_run ||= DungeonRun.find(params[:id])
+  end
+
   def ensure_required_params
     if params[:character_id].blank?
-      redirect_back alert: 'Please choose a character for this run.', fallback_location: root_path
+      redirect_back alert: 'Please choose a character for this run.', fallback_location: characters_path
     elsif params[:dungeon_template_id].blank?
-      redirect_back alert: 'Please choose a dungeon template for this run.', fallback_location: root_path
+      redirect_back alert: 'Please choose a dungeon template for this run.', fallback_location: characters_path
     end
   end
 
   def ensure_no_run_in_progress
     return if DungeonRun.where(character_id: params[:character_id]).active.none?
 
-    redirect_back alert: 'Dungeon run already in progress.', fallback_location: root_path
+    redirect_back alert: 'Dungeon run already in progress.', fallback_location: characters_path
   end
 
-  def dungeon_run
-    @dungeon_run ||= DungeonRun.find(params[:id])
+  def ensure_run_active
+    return if dungeon_run.active?
+
+    redirect_to character_path(dungeon_run.character_id), alert: 'Dungeon run completed.'
   end
 end
