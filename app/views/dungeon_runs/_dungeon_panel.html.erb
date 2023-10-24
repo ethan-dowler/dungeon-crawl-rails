@@ -17,13 +17,6 @@
 
   <hr class="my-4" />
 
-  <%# doors - TODO: improve layout/navigation %>
-  <% if dungeon_run.active? %>
-    <%= render DoorsComponent.new(dungeon_run) %>
-
-    <hr class="my-4" />
-  <% end %>
-
   <% if dungeon_run.active? && dungeon_run.current_room.monsters.any? %>
     <div id="monsters">
       <div class="text-l font-bold mb-2">
@@ -39,4 +32,6 @@
       <%= render "layouts/flash_messages" %>
     </div>
   <% end %>
+
+  <%= render NavigationComponent.new(dungeon_run) if dungeon_run.active? %>
 </div>
