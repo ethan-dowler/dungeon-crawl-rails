@@ -4,6 +4,7 @@ class Dungeon < ApplicationRecord
 
   has_many :floors, dependent: :destroy
   has_many :rooms, through: :floors
+  has_many :monsters, through: :rooms
 
   delegate :name, to: :dungeon_template
 

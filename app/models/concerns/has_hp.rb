@@ -5,7 +5,7 @@ module HasHp
 
   included do
     before_validation :set_current_hp, on: :create
-    before_validation :enforce_hp_boundaries, on: :update
+    before_validation :enforce_hp_boundaries
   end
 
   def max_hp = base_hp

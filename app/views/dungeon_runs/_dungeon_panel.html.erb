@@ -1,0 +1,42 @@
+<div id="dungeon_panel">
+  <%# exit dungeon button %>
+  <%= button_to(
+    end_dungeon_run_path(dungeon_run),
+    class: "Button Button--red Button--icon absolute top-2 right-2",
+    data: { "turbo-confirm": "Are you sure you want to end this run?" }
+  ) do %>
+    <%= render "icons/exit" %>
+  <% end %>
+
+  <%= render CharacterSummaryComponent.new(dungeon_run.character, show_status: dungeon_run.active?) %>
+
+  <hr class="my-4" />
+
+  <%# Dungeon info %>
+  <%= render DungeonRunSummaryComponent.new(dungeon_run) %>
+
+  <hr class="my-4" />
+
+  <%# doors - TODO: improve layout/navigation %>
+  <% if dungeon_run.active? %>
+    <%= render DoorsComponent.new(dungeon_run) %>
+
+    <hr class="my-4" />
+  <% end %>
+
+  <% if dungeon_run.active? && dungeon_run.current_room.monsters.any? %>
+    <div id="monsters">
+      <div class="text-l font-bold mb-2">
+        Monsters
+      </div>
+
+      <% dungeon_run.current_room.monsters.each do |monster| %>
+        <%= turbo_frame_tag "monster-#{monster.id}" do %>
+          <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>
+        <% end %>
+      <% end %>
+
+      <%= render "layouts/flash_messages" %>
+    </div>
+  <% end %>
+</div>

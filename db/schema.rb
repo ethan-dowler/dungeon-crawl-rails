@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_10_160923) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_160923) do
     t.index ["entrance_room_id"], name: "index_dungeons_on_entrance_room_id"
   end
 
+  create_table "event_messages", force: :cascade do |t|
+    t.bigint "dungeon_run_id", null: false
+    t.string "message", null: false
+    t.datetime "created_at", null: false
+    t.index ["dungeon_run_id"], name: "index_event_messages_on_dungeon_run_id"
+  end
+
   create_table "floor_encounters", force: :cascade do |t|
     t.bigint "floor_id", null: false
     t.bigint "monster_template_id", null: false
@@ -78,11 +85,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_160923) do
   end
 
   create_table "inventory_items", force: :cascade do |t|
-    t.bigint "character_id", null: false
+    t.string "owner_type", null: false
+    t.bigint "owner_id", null: false
     t.bigint "item_id", null: false
     t.boolean "equipped", default: false, null: false
-    t.index ["character_id"], name: "index_inventory_items_on_character_id"
     t.index ["item_id"], name: "index_inventory_items_on_item_id"
+    t.index ["owner_type", "owner_id"], name: "index_inventory_items_on_owner"
   end
 
   create_table "item_drops", force: :cascade do |t|

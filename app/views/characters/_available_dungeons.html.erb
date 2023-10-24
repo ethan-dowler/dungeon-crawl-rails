@@ -1,29 +1,18 @@
-<%= render HeadingComponent.new(title: "Dungeons") %>
+<%= render HeadingComponent.new(title: "Dungeons", tag: :h2) %>
 
 <% DungeonTemplate.all.each do |dungeon_template| %>
-  <table class="mb-4">
-    <thead>
-      <tr>
-        <th class="p-2">Name</th>
-        <th class="p-2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="p-2"><%= dungeon_template.name %></td>
-        <td class="p-2">
-        <%=
-          button_to(
-            "Enter",
-            dungeon_runs_path(
-              character_id: character.id,
-              dungeon_template_id: dungeon_template.id
-            ),
-            class: "Button"
-          )
-        %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="mb-2 flex items-center justify-between">
+    <%= dungeon_template.name %>
+
+    <%=
+      button_to(
+        "Enter",
+        dungeon_runs_path(
+          character_id: character.id,
+          dungeon_template_id: dungeon_template.id
+        ),
+        class: "Button"
+      )
+    %>
+  </div>
 <% end %>

@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   resources :characters, only: %i[index show] do
     resources :inventory, only: :index
+
+    scope :attack, as: :attack do
+      resources :monsters, only: :show
+    end
   end
 
   resources :dungeon_runs, only: %i[create show] do
@@ -14,8 +18,13 @@ Rails.application.routes.draw do
 
     resources :monsters, only: [] do
       member do
-        get :fight
         post :attack
+      end
+    end
+
+    resources :inventory_items, only: [] do
+      member do
+        post :loot
       end
     end
   end

@@ -9,7 +9,7 @@ class Character < ApplicationRecord
 
   has_many :dungeon_runs, dependent: :destroy
 
-  has_many :inventory_items, dependent: :destroy
+  has_many :inventory_items, foreign_key: :owner_id, dependent: :destroy
   has_many :items, through: :inventory_items, dependent: :destroy
 
   before_create :set_xp
@@ -25,8 +25,6 @@ class Character < ApplicationRecord
   def xp_for_current_level = (level-1) ** 3
   def xp_between_current_and_next_level = xp_to_next_level - xp_for_current_level  
   def xp_progress_to_next_level = xp - xp_for_current_level
-
-  def poke_attack = poke_total(:attack)
 
   def refresh
     update!(current_hp: max_hp)

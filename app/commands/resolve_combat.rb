@@ -7,8 +7,10 @@ class ResolveCombat
   end
 
   def execute
-    resolve_monster
-    resolve_character
+    DungeonRun.transaction do
+      resolve_monster
+      resolve_character
+    end
   end
 
   private
@@ -16,11 +18,7 @@ class ResolveCombat
   def resolve_monster
     return unless monster.defeated?
 
-    Monster.transaction do
-      GainXp.new(character:, monster:).execute
-      GainLoot.new(character:, monster:).execute
-      monster.destroy
-    end
+    GainXp.new(character:, monster:).execute
   end
 
   def resolve_character

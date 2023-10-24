@@ -1,0 +1,7 @@
+<%= turbo_stream.update :character_summary do %>
+  <%= render CharacterSummaryComponent.new(dungeon_run.character) %>
+<% end %>
+
+<%= turbo_stream.update "monster-#{monster.id}" do %>
+  <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>
+<% end %>

@@ -1,13 +1,18 @@
-<div class="CharacterSummary">
+<div id="character_summary">
   <div class="text-xl font-bold mb-1">
-    <%= name %> Lvl. <%= level %>
+    <%= name %>
+    <% if show_status? %>
+      Lvl. <%= level %>
+    <% end %>
   </div>
 
-  <div>
-    HP: <%= current_hp %> / <%= max_hp %>
-  </div>
+  <% if show_status? %>
+    <div>
+      HP: <%= current_hp %> / <%= max_hp %>
+    </div>
 
-  <div>
-    XP: <%= xp_progress_to_next_level %> / <%= xp_between_current_and_next_level %>
-  </div>
+    <div>
+      XP: <%= xp_progress_to_next_level %> / <%= xp_between_current_and_next_level %>
+    </div>
+  <% end %>
 </div>

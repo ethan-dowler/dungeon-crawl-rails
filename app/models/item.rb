@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  def equippable? = equipment_slot.present?
+
   module EquipmentSlot
     ARMOR = 'ARMOR'.freeze
     PRIMARY_HAND = 'PRIMARY_HAND'.freeze
@@ -7,8 +9,8 @@ class Item < ApplicationRecord
     # TODO
     # HEAD = "HEAD".freeze
     # NECK = "NECK".freeze
-    # CAPE = "CAPE".freeze
-    # BELT = "BELT".freeze
-    # BOOTS = "BOOTS".freeze
+    # BACK = "BACK".freeze
+    # WAIST = "WAIST".freeze
+    # FEET = "FEET".freeze
   end
 end

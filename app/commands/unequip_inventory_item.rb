@@ -1,14 +1,14 @@
 class UnequipInventoryItem
-  attr_reader :character, :inventory_item
+  attr_reader :inventory_item
 
-  def initialize(character:, inventory_item:)
-    @character = character
+  def initialize(inventory_item:)
     @inventory_item = inventory_item
+    @owner = inventory_item.owner
   end
 
   def execute
-    Character.transaction do
-      inventory_item.unequip
+    InventoryItem.transaction do
+      inventory_item.update!(equipped: false)
       remove_modifiers
     end
   end
@@ -16,6 +16,8 @@ class UnequipInventoryItem
   private
 
   def remove_modifiers
-    character.modifiers.where(source: inventory_item).destroy_all
+    return unless owner.respond_to?(:modifiers)
+
+    owner.modifiers.where(source: inventory_item).destroy_all
   end
 end

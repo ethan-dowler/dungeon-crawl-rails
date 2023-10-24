@@ -1,5 +1,5 @@
 class InventoryItem < ApplicationRecord
-  belongs_to :character
+  belongs_to :owner, polymorphic: true
   belongs_to :item
 
   has_many :modifiers, through: :item
@@ -7,6 +7,5 @@ class InventoryItem < ApplicationRecord
   scope :equipped, -> { where(equipped: true) }
   scope :unequipped, -> { where(equipped: false) }
 
-  def equip = update!(equipped: true)
-  def unequip = update!(equipped: false)
+  delegate :equippable?, :name, to: :item
 end

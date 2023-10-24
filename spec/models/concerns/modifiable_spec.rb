@@ -1,71 +1,5 @@
 RSpec.describe Modifiable do
   describe '#total' do
-    subject(:character) do
-      Character.create!(
-        name: 'Hero',
-        base_hp:,
-        base_attack:,
-        base_defense:
-      )
-    end
-
-    let(:base_hp) { 10 }
-    let(:base_attack) { 10 }
-    let(:base_defense) { 10 }
-
-    context 'when the subject has a flat modifier' do
-      before do
-        character.modifiers.create!(
-          source: character,
-          stat: :hp,
-          modifier_type: :flat,
-          value: 10
-        )
-      end
-
-      it 'provides the correct total for the modified stat' do
-        expect(character.max_hp).to eq(20)
-      end
-    end
-
-    context 'when the subject has a percent modifier' do
-      before do
-        character.modifiers.create!(
-          source: character,
-          stat: :hp,
-          modifier_type: :percent,
-          value: 10
-        )
-      end
-
-      it 'provides the correct total for the modified stat' do
-        expect(character.max_hp).to eq(11)
-      end
-    end
-
-    context 'when the subject has both a flat and a percent modifier' do
-      before do
-        character.modifiers.create!(
-          source: character,
-          stat: :hp,
-          modifier_type: :flat,
-          value: 10
-        )
-        character.modifiers.create!(
-          source: character,
-          stat: :hp,
-          modifier_type: :percent,
-          value: 10
-        )
-      end
-
-      it 'applies the flat modifier before the percent modifier' do
-        expect(character.max_hp).to eq(22)
-      end
-    end
-  end
-
-  describe '#poke_total' do
     subject(:garchomp) do
       Character.create!(
         name: 'Garchomp',
@@ -115,10 +49,10 @@ RSpec.describe Modifiable do
       end
 
       it 'calculates the correct total for a given stat' do
-        expect(garchomp.poke_total(:hp)).to eq(289)
-        expect(garchomp.poke_total(:attack)).to eq(278)
-        expect(garchomp.poke_total(:defense)).to eq(193)
-        expect(garchomp.poke_total(:speed)).to eq(171)
+        expect(garchomp.total(:hp)).to eq(289)
+        expect(garchomp.total(:attack)).to eq(278)
+        expect(garchomp.total(:defense)).to eq(193)
+        expect(garchomp.total(:speed)).to eq(171)
       end
     end
   end

@@ -1,0 +1,54 @@
+<div id="doors">
+  <div class="mb-2 font-bold">
+    Doors
+  </div>
+
+  <div class="mb-4">
+    <% CARDINAL_DIRECTIONS.each do |direction| %>
+      <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
+        <div class="mb-1">
+          <%= direction.titleize %>:
+          <%=
+            link_to(
+              dungeon_run.current_room.send(:"#{direction}_room").name,
+              go_dungeon_run_path(dungeon_run, direction:),
+              class: "Link",
+              disabled: true,
+              data: { "turbo-disabled": true }
+            )
+          %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if room_above? %>
+    <div class="mb-2">
+      <div>
+        <i>There's a staircase leading UP...</i>
+      </div>
+      <%=
+        link_to(
+          "Go Up Stairs",
+          go_dungeon_run_path(dungeon_run, direction: :above),
+          class: "Link"
+        )
+      %>
+    </div>
+  <% end %>
+
+  <% if room_below? %>
+    <div>
+      <div>
+        <i>There's a staircase leading DOWN...</i>
+      </div>
+      <%=
+        link_to(
+          "Go Down Stairs",
+          go_dungeon_run_path(dungeon_run, direction: :below),
+          class: "Link"
+        )
+      %>
+    </div>
+  <% end %>
+</div>

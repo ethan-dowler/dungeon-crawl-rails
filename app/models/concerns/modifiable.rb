@@ -15,18 +15,12 @@ module Modifiable
   end
 
   def total(stat)
-    raise 'Invalid stat' unless respond_to?(:"base_#{stat}")
-
-    ((send(:"base_#{stat}") + flat_modifier_for(stat)) * percent_modifier_for(stat)).round
-  end
-
-  def poke_total(stat)
-    return poke_hp_total if stat.to_sym == :hp
+    return hp_total if stat.to_sym == :hp
 
     (((total_base(stat) * level_multiplier).floor + 5.00) * percent_modifier_for(stat)).floor
   end
 
-  def poke_hp_total
+  def hp_total
     (((total_base(:hp) * level_multiplier).floor + level + 10) * percent_modifier_for(:hp)).floor
   end
 

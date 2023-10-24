@@ -1,0 +1,3 @@
+<%= turbo_stream.update "monster-#{inventory_item.owner.id}" do %>
+  <%= render MonsterSummaryComponent.new(monster: inventory_item.owner, dungeon_run:) %>
+<% end %>

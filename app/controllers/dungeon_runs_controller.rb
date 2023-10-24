@@ -1,20 +1,16 @@
 class DungeonRunsController < ApplicationController
   before_action :ensure_required_params, only: :create
   before_action :ensure_no_run_in_progress, only: :create
-  before_action :ensure_run_active, only: :show
-  before_action :ensure_ended, only: :ended
 
   helper_method :character, :dungeon, :dungeon_run
 
   def show; end
 
-  def ended
-
-  end
+  def ended; end
 
   def create
     dungeon_template = DungeonTemplate.find(params[:dungeon_template_id])
-    new_dungeon = dungeon_template.generate_new_dungeon
+    new_dungeon = GenerateDungeon.new(dungeon_template).execute
     dungeon_run =
       DungeonRun.create!(
         character_id: params[:character_id],
@@ -57,17 +53,5 @@ class DungeonRunsController < ApplicationController
     return if DungeonRun.where(character_id: params[:character_id]).active.none?
 
     redirect_back alert: 'Dungeon run already in progress.', fallback_location: characters_path
-  end
-
-  def ensure_run_active
-    return if dungeon_run.active?
-
-    redirect_to ended_dungeon_run_path(dungeon_run)
-  end
-
-  def ensure_ended
-    return if dungeon_run.ended?
-
-    redirect_to dungeon_run_path(dungeon_run)
   end
 end

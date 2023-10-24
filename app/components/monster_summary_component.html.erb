@@ -1,0 +1,29 @@
+<div id="monster_summary" class="mb-4 flex flex-col justify-center">
+  <div class="mb-2">
+    <%= monster.name %> Lvl. <%= monster.level %>
+  </div>
+
+  <div class="mb-2">
+    HP: <%= monster.current_hp %> / <%= monster.max_hp %>
+  </div>
+  
+  <% if monster.defeated? %>
+    <% monster.inventory_items.each do |inventory_item| %>
+      <div class="mb-1 flex items-center justify-between">
+        <%= inventory_item.name %>
+
+        <%= button_to(
+          "Take",
+          loot_dungeon_run_inventory_item_path(dungeon_run, inventory_item),
+          class: "Button Button--compact"
+        ) %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= button_to(
+      "Attack",
+      attack_dungeon_run_monster_path(dungeon_run, monster),
+      class: "Button"
+    ) %>
+  <% end %>
+</div>

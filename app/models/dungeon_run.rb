@@ -3,6 +3,8 @@ class DungeonRun < ApplicationRecord
   belongs_to :dungeon
   belongs_to :current_room, class_name: 'Room'
 
+  has_many :event_messages, dependent: :destroy
+
   scope :active, -> { where(completed_at: nil) }
   scope :ended, -> { where.not(completed_at: nil) }
 

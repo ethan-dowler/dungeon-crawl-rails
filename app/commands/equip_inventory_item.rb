@@ -1,14 +1,17 @@
 class EquipInventoryItem
-  attr_reader :character, :inventory_item
+  attr_reader :owner, :inventory_item
 
-  def initialize(character:, inventory_item:)
-    @character = character
+  def initialize(owner:, inventory_item:)
+    @owner = owner
     @inventory_item = inventory_item
   end
 
   def execute
-    Character.transaction do
-      inventory_item.equip
+    InventoryItem.transaction do
+      equipped_item = owner.inventory_items.equipped.where(equipment_slot: inventory_item.equipment_slot)
+      UnequipInventoryItem.new(inventory_item: equipped_item).execute if equipped_item.present?
+
+      inventory_item.update!(equipped: true)
       add_modifiers
     end
   end
@@ -16,10 +19,12 @@ class EquipInventoryItem
   private
 
   def add_modifiers
+    return unless owner.respond_to?(:modifiers)
+
     inventory_item.modifiers.each do |modifier|
       modifier.dup.update!(
         source: inventory_item,
-        target: character
+        target: owner
       )
     end
   end
