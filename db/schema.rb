@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_160923) do
     t.bigint "current_room_id", null: false
     t.datetime "started_at", null: false
     t.datetime "completed_at"
-    t.string "completed_reason"
+    t.string "ended_reason"
     t.index ["character_id"], name: "index_dungeon_runs_on_character_id"
     t.index ["current_room_id"], name: "index_dungeon_runs_on_current_room_id"
     t.index ["dungeon_id"], name: "index_dungeon_runs_on_dungeon_id"

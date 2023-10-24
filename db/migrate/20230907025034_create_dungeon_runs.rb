@@ -7,7 +7,7 @@ class CreateDungeonRuns < ActiveRecord::Migration[7.0]
 
       t.datetime :started_at, null: false
       t.datetime :completed_at
-      t.string :completed_reason
+      t.string :ended_reason
     end
   end
 end

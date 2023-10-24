@@ -1,54 +1,97 @@
 <%= turbo_frame_tag :dungeon_panel do %>
-  <%# Dungeon name and exit button %>
-  <div class="flex justify-between mb-2">
-    <div>
-      <strong><%= dungeon_run.dungeon.name %></strong>
+  <%# exit dungeon button %>
+  <%= button_to(
+    end_dungeon_run_path(dungeon_run),
+    class: "Button Button--red Button--icon absolute top-2 right-2",
+    data: { "turbo-confirm": "Are you sure you want to end this run?" }
+  ) do %>
+    <%= render "icons/exit" %>
+  <% end %>
+
+  <%= render CharacterSummaryComponent.new(dungeon_run.character) %>
+
+  <hr class="my-4" />
+
+  <%# Dungeon info %>
+  <div class="DungeonInfo">
+    <div class="mb-2 font-bold">
+      Dungeon
     </div>
 
-    <%= button_to(
-      end_dungeon_run_path(dungeon_run),
-      class: "Button Button--red Button--icon",
-      data: { "turbo-confirm": "Are you sure you want to end this run?" }
-    ) do %>
-      <%= render "icons/exit" %>
-    <% end %>
+    <div class="mb-1">
+      <%= dungeon_run.dungeon.name %>
+    </div>
+
+    <div class="mb-1">
+      Floor: <%= dungeon_run.current_room.floor.level %>
+    </div>
+
+    <div>
+      Room: <%= dungeon_run.current_room.name %>
+    </div>
   </div>
 
-  <%# current floor %>
-  <div class="mb-2">
-    <b>Current Floor:</b>
-    <%= dungeon_run.current_room.floor.level %>
-  </div>
-
-  <%# current room %>
-  <div class="mb-2">
-    <b>Current Room:</b>
-    <%= dungeon_run.current_room.name %>
-  </div>
+  <hr class="my-4" />
 
   <%# doors - TODO: improve layout/navigation %>
-  <div class="mb-4">
+  <div class="Doors">
+    <div class="mb-2 font-bold">
+      Doors
+    </div>
+
     <% %w[north east south west].each do |direction| %>
       <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
         <div class="mb-1">
-          <b><%= direction.titleize %>:</b>
+          <%= direction.titleize %>:
           <%=
             link_to(
               dungeon_run.current_room.send(:"#{direction}_room").name,
               go_dungeon_run_path(dungeon_run, direction:),
-              class: "Link"
+              class: "Link",
+              disabled: true,
+              data: { "turbo-disabled": true }
             )
           %>
         </div>
       <% end %>
     <% end %>
+
+    <% if dungeon_run.current_room.above_room.present? %>
+      <div>
+        <div>
+          <i>There's a staircase leading UP...</i>
+        </div>
+        <%=
+          link_to(
+            "Go Up Stairs",
+            go_dungeon_run_path(dungeon_run, direction: :above),
+            class: "Link"
+          )
+        %>
+      </div>
+    <% end %>
+
+    <% if dungeon_run.current_room.below_room.present? %>
+      <div>
+        <div>
+          <i>There's a staircase leading DOWN...</i>
+        </div>
+        <%=
+          link_to(
+            "Go Down Stairs",
+            go_dungeon_run_path(dungeon_run, direction: :below),
+            class: "Link"
+          )
+        %>
+      </div>
+    <% end %>
   </div>
 
-  <%= render CharacterSummaryComponent.new(dungeon_run.character) %>
+  <hr class="my-4" />
 
   <% if dungeon_run.current_room.monsters.any? %>
-    <div class="mb-4">
-      <div class="text-l font-bold mb-1">
+    <div class="Monsters">
+      <div class="text-l font-bold mb-2">
         Monsters
       </div>
 
@@ -64,10 +107,11 @@
           
           <% unless monster.defeated? %>
             <%=
-              button_to(
-                "Attack",
-                attack_dungeon_run_monster_path(dungeon_run, monster),
-                class: "Button"
+              link_to(
+                "Fight",
+                fight_dungeon_run_monster_path(dungeon_run, monster),
+                class: "Button",
+                data: { "turbo-frame": :_top }
               )
             %>
           <% end %>
@@ -75,38 +119,6 @@
       <% end %>
 
       <%= render "layouts/flash_messages" %>
-    </div>
-  <% end %>
-
-  <% if dungeon_run.current_room.above_room.present? %>
-    <div>
-      <div>
-        <i>There's a staircase leading UP...</i>
-      </div>
-      <%=
-        link_to(
-          "Go Up Stairs",
-          go_dungeon_run_path(dungeon_run, direction: :above),
-          class: "Button",
-          data: { "turbo-frame": "_top" }
-        )
-      %>
-    </div>
-  <% end %>
-
-  <% if dungeon_run.current_room.below_room.present? %>
-    <div>
-      <div>
-        <i>There's a staircase leading DOWN...</i>
-      </div>
-      <%=
-        link_to(
-          "Go Down Stairs",
-          go_dungeon_run_path(dungeon_run, direction: :below),
-          class: "Button",
-          data: { "turbo-frame": "_top" }
-        )
-      %>
     </div>
   <% end %>
 <% end %>

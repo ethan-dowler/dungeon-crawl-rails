@@ -1,4 +1,6 @@
 class MonstersController < ApplicationController
+  def fight; end
+
   def attack
     DungeonRun.transaction do
       # TODO: measure speed/initiative to see who goes first

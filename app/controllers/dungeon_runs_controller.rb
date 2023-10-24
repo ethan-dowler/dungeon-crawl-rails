@@ -2,10 +2,15 @@ class DungeonRunsController < ApplicationController
   before_action :ensure_required_params, only: :create
   before_action :ensure_no_run_in_progress, only: :create
   before_action :ensure_run_active, only: :show
+  before_action :ensure_ended, only: :ended
 
   helper_method :character, :dungeon, :dungeon_run
 
   def show; end
+
+  def ended
+
+  end
 
   def create
     dungeon_template = DungeonTemplate.find(params[:dungeon_template_id])
@@ -31,10 +36,7 @@ class DungeonRunsController < ApplicationController
   def end
     EndRun.new(dungeon_run:).execute
 
-    redirect_to(
-      character_path(dungeon_run.character),
-      notice: "You completed the #{dungeon_run.dungeon.name} dungeon!"
-    )
+    redirect_to ended_dungeon_run_path(dungeon_run)
   end
 
   private
@@ -60,6 +62,12 @@ class DungeonRunsController < ApplicationController
   def ensure_run_active
     return if dungeon_run.active?
 
-    redirect_to character_path(dungeon_run.character_id), alert: 'Dungeon run completed.'
+    redirect_to ended_dungeon_run_path(dungeon_run)
+  end
+
+  def ensure_ended
+    return if dungeon_run.ended?
+
+    redirect_to dungeon_run_path(dungeon_run)
   end
 end

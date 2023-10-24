@@ -21,16 +21,20 @@ class Character < ApplicationRecord
   def attack = total(:attack)
   def defense = total(:defense)
 
-  def xp_to_next_level = level**3
-  # TODO: calculate XP between current level and next instead of total XP
+  def xp_to_next_level = level ** 3
+  def xp_for_current_level = (level-1) ** 3
+  def xp_between_current_and_next_level = xp_to_next_level - xp_for_current_level  
+  def xp_progress_to_next_level = xp - xp_for_current_level
 
-  def poke_attack
-    poke_total(:attack)
-  end
+  def poke_attack = poke_total(:attack)
 
   def refresh
     update!(current_hp: max_hp)
     # TODO: remove any negative debuffs
+  end
+
+  def current_run
+    @current_run ||= dungeon_runs.active.first
   end
 
   private

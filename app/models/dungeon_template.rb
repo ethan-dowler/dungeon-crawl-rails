@@ -55,9 +55,11 @@ class DungeonTemplate < ApplicationRecord
       f2_north_room.update!(south_room: f2_middle_room)
       f2_east_room.update!(west_room: f2_middle_room)
       f2_south_room.update!(north_room: f2_middle_room)
-      f2_west_room.update!(east_room: f2_middle_room, below_room: f1_north_room)
-      # the west room of floor 2 is directly above the north room of floor 1
-      f1_north_room.update!(above_room: f2_west_room)
+      f2_west_room.update!(east_room: f2_middle_room)
+
+      # the south room of floor 2 is directly above the north room of floor 1
+      f1_north_room.update!(above_room: f2_south_room)
+      f2_south_room.update!(below_room: f1_north_room)
 
       # players start in the south room of floor 1
       dungeon.update!(entrance_room: f1_south_room)

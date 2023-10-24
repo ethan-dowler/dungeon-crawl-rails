@@ -20,15 +20,17 @@ html { @apply h-full; }
   @apply py-4 px-2;
 }
 .Main {
+  @apply relative;
   @apply h-full;
   @apply bg-white;
   @apply mx-auto max-w-2xl; /* 672px */
-  @apply py-2 px-4 rounded w-auto shadow-md border-gray-100 border-2;
+  @apply py-2 px-2 rounded w-auto shadow-md border-gray-300 border-4;
 }
 
 /* Buttons */
 .Button {
   @apply inline-block;
+  @apply text-center;
   @apply py-2 px-4;
   @apply font-bold rounded;
   @apply bg-blue-500 text-white;
@@ -61,8 +63,8 @@ html { @apply h-full; }
 .Flash-alert {
   @apply bg-rose-500;
 }
-.Flash-damage {
-  @apply bg-orange-400;
+.Flash-warning {
+  @apply bg-yellow-300;
 }
 .Flash-notice {
   @apply bg-lime-400;
