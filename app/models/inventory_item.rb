@@ -7,5 +7,5 @@ class InventoryItem < ApplicationRecord
   scope :equipped, -> { where(equipped: true) }
   scope :unequipped, -> { where(equipped: false) }
 
-  delegate :equippable?, :name, to: :item
+  delegate :name, :equippable?, :handheld?, to: :item
 end

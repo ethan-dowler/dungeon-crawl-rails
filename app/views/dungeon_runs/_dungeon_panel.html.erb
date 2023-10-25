@@ -1,5 +1,6 @@
 <div id="dungeon_panel">
   <%# exit dungeon button %>
+  <%# TODO: convert this into a slide-out menu %>
   <%= button_to(
     end_dungeon_run_path(dungeon_run),
     class: "Button Button--red Button--icon absolute top-2 right-2",
@@ -12,17 +13,12 @@
 
   <hr class="my-4" />
 
-  <%# Dungeon info %>
   <%= render DungeonRunSummaryComponent.new(dungeon_run) %>
 
   <hr class="my-4" />
 
   <% if dungeon_run.active? && dungeon_run.current_room.monsters.any? %>
     <div id="monsters">
-      <div class="text-l font-bold mb-2">
-        Monsters
-      </div>
-
       <% dungeon_run.current_room.monsters.each do |monster| %>
         <%= turbo_frame_tag "monster-#{monster.id}" do %>
           <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>

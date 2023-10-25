@@ -9,7 +9,7 @@ class Character < ApplicationRecord
 
   has_many :dungeon_runs, dependent: :destroy
 
-  has_many :inventory_items, foreign_key: :owner_id, dependent: :destroy
+  has_many :inventory_items, foreign_key: :owner_id, inverse_of: :owner, dependent: :destroy
   has_many :items, through: :inventory_items, dependent: :destroy
 
   before_create :set_xp
@@ -21,9 +21,9 @@ class Character < ApplicationRecord
   def attack = total(:attack)
   def defense = total(:defense)
 
-  def xp_to_next_level = level ** 3
-  def xp_for_current_level = (level-1) ** 3
-  def xp_between_current_and_next_level = xp_to_next_level - xp_for_current_level  
+  def xp_to_next_level = level**3
+  def xp_for_current_level = (level - 1)**3
+  def xp_between_current_and_next_level = xp_to_next_level - xp_for_current_level
   def xp_progress_to_next_level = xp - xp_for_current_level
 
   def refresh
@@ -38,7 +38,7 @@ class Character < ApplicationRecord
   private
 
   def set_xp
-    self.xp = (level - 1) ** 3
+    self.xp = (level - 1)**3
   end
 
   def check_level_up

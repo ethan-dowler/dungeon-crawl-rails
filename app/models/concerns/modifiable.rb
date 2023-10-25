@@ -26,6 +26,9 @@ module Modifiable
 
   private
 
+  # TODO: figure out better use for flat modifiers
+  # OR: rename this flat modifier to "base" modifiers
+  #     and add flat mods after level multiplier
   def total_base(stat) = (2.0 * send(:"base_#{stat}")) + flat_modifier_for(stat)
 
   def level_multiplier = level / 100.0

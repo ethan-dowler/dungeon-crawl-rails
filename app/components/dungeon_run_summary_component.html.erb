@@ -1,20 +1,19 @@
 <div id="dungeon_run_summary">
-  <div class="mb-1 font-bold">
-    <%= dungeon_run.dungeon.name %>
-  </div>
+  <div class="mb-1 flex items-center justify-between">
+    <div>
+      <strong><%= dungeon_run.dungeon.name %></strong>
 
-  <% if dungeon_run.active? %>
-
-    <div class="mb-1">
-      Floor: <%= floor_level %>
+      <i><%= dungeon_run.active? ? floor_level : run_number %></i>
     </div>
 
     <div>
-      Room: <%= room_name %>
+      <% if dungeon_run.active? %>
+        <i><%= room_name %></i>
+      <% end %>
     </div>
+  </div>
 
-  <% else %>
-
+  <% if dungeon_run.ended? %>
     <div class="mb-2">
       This run ended because:
 
@@ -29,6 +28,5 @@
     </div>
 
     <%= link_to "Back to characters", characters_path, class: "Link", data: { "turbo-frame": :_top} %>
-
   <% end %>
 </div>

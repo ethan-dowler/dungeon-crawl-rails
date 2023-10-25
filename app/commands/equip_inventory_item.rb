@@ -8,15 +8,21 @@ class EquipInventoryItem
 
   def execute
     InventoryItem.transaction do
-      equipped_item = owner.inventory_items.equipped.where(equipment_slot: inventory_item.equipment_slot)
-      UnequipInventoryItem.new(inventory_item: equipped_item).execute if equipped_item.present?
-
+      unequip_current_item
       inventory_item.update!(equipped: true)
       add_modifiers
     end
   end
 
   private
+
+  def unequip_current_item
+    equipped_items = owner.inventory_items.equipped.where(equipment_slot: inventory_item.equipment_slot)
+    return unless equipped_items.size == 1 || (equipped_items.size == 2 && inventory_item.handheld?)
+
+    item_to_remove = equipped_items.min_by(&:value)
+    UnequipInventoryItem.new(inventory_item: item_to_remove).execute
+  end
 
   def add_modifiers
     return unless owner.respond_to?(:modifiers)

@@ -1,6 +1,6 @@
 class CharacterSummaryComponent < ViewComponent::Base
   attr_reader :character, :show_status
-  alias_method :show_status?, :show_status
+  alias show_status? show_status
 
   delegate :name, :level, :current_hp, :max_hp, :xp, :xp_to_next_level, to: :character
 
