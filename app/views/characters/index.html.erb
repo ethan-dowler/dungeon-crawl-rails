@@ -1,36 +1,10 @@
 <%= render HeadingComponent.new(title: "Characters") %>
 
-<div class="flex flex-col text-center">
+<div class="flex flex-row text-center justify-around">
   <% characters.each do |character| %>
-    <div class="mb-4 p-4 rounded w-auto shadow-md border-2 border-slate-50">
-      <div class="text-xl font-bold mb-2 ">
+    <div class="m-2 p-8 rounded w-auto shadow-md border-2 border-slate-50">
+      <div class="text-xl font-bold mb-4 ">
         <%= character.name %> - Lvl. <%= character.level %>
-      </div>
-
-      <div class="flex mb-4 justify-center">
-        <div class="mr-2">
-          <div>
-            <b>Max HP</b>
-          </div>
-          <div>
-            <b>Attack</b>
-          </div>
-          <div>
-            <b>Defense</b>
-          </div>
-        </div>
-
-        <div>
-          <div>
-            <%= character.max_hp %>
-          </div>
-          <div>
-            <%= character.attack %>
-          </div>
-          <div>
-            <%= character.defense %>
-          </div>
-        </div>
       </div>
 
       <%= link_to "Select", character_path(character), class: "Button w-full" %>

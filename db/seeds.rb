@@ -61,10 +61,10 @@ weak_leather =
   )
 
 rusty_dagger.modifiers.create!(
-  source: ,
+  source:,
   modifier_type: :flat,
   stat: :attack,
-  value: 3,
+  value: 3
 )
 
 [warrior, rogue].each do |character|

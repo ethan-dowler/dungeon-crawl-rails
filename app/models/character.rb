@@ -23,7 +23,7 @@ class Character < ApplicationRecord
 
   def xp_to_next_level = level**3
   def xp_for_current_level = (level - 1)**3
-  def xp_between_current_and_next_level = xp_to_next_level - xp_for_current_level
+  def xp_needed_from_current_to_next_level = xp_to_next_level - xp_for_current_level
   def xp_progress_to_next_level = xp - xp_for_current_level
 
   def refresh

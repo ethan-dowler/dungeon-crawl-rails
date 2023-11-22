@@ -1,5 +1,5 @@
 <div id="character_summary">
-  <div class="text-xl font-bold mb-1">
+  <div class="text-xl font-bold mb-2">
     <%= name %>
     <% if show_status? %>
       Lvl. <%= level %>
@@ -7,12 +7,32 @@
   </div>
 
   <% if show_status? %>
-    <div>
-      HP: <%= current_hp %> / <%= max_hp %>
-    </div>
+    <%= render(
+      ProgressBarComponent.new(
+        label: "HP",
+        current_value: current_hp,
+        max_value: max_hp,
+        color: :red
+      )
+    ) %>
 
-    <div>
-      XP: <%= xp_progress_to_next_level %> / <%= xp_between_current_and_next_level %>
-    </div>
+    <%= render(
+      ProgressBarComponent.new(
+        label: "MP",
+        current_value: 100,
+        max_value: 100,
+        color: :blue
+      )
+    ) %>
+
+    <%= render(
+      ProgressBarComponent.new(
+        label: "XP",
+        current_value: xp_progress_to_next_level,
+        max_value: xp_needed_from_current_to_next_level,
+        color: :black,
+        width: :thin
+      )
+    ) %>    
   <% end %>
 </div>
