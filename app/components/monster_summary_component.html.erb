@@ -1,11 +1,27 @@
 <div id="monster_summary" class="mb-4 flex flex-col justify-center">
-  <div class="mb-2">
-    <%= monster.name %> Lvl. <%= monster.level %>
+  <div class="mb-2 flex items-center justify-between">
+    <div class="mr-2">
+      <%= monster.name %> Lvl. <%= monster.level %>
+    </div>
+
+    <% if dungeon_run.active? %>
+      <%= button_to(
+        "Attack",
+        attack_dungeon_run_monster_path(dungeon_run, monster),
+        class: "Button Button--compact"
+      ) %>
+    <% end %>
   </div>
 
-  <div class="mb-2">
-    HP: <%= monster.current_hp %> / <%= monster.max_hp %>
-  </div>
+  <%= render(
+    ProgressBarComponent.new(
+      name: "monster_hp-#{monster.id}",
+      label: "HP",
+      current_value: monster.current_hp,
+      max_value: monster.max_hp,
+      color: :red
+    )
+  ) %>
   
   <% if monster.defeated? %>
     <% monster.inventory_items.each do |inventory_item| %>
@@ -19,11 +35,5 @@
         ) %>
       </div>
     <% end %>
-  <% else %>
-    <%= button_to(
-      "Attack",
-      attack_dungeon_run_monster_path(dungeon_run, monster),
-      class: "Button"
-    ) %>
   <% end %>
 </div>

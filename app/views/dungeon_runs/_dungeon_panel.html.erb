@@ -9,7 +9,7 @@
     <%= render "icons/exit" %>
   <% end %>
 
-  <%= render CharacterSummaryComponent.new(dungeon_run.character, show_status: dungeon_run.active?) %>
+  <%= render CharacterSummaryComponent.new(dungeon_run.character) %>
 
   <hr class="my-4" />
 
@@ -17,7 +17,7 @@
 
   <hr class="my-4" />
 
-  <% if dungeon_run.active? && dungeon_run.current_room.monsters.any? %>
+  <% if dungeon_run.current_room.monsters.any? %>
     <div id="monsters">
       <% dungeon_run.current_room.monsters.each do |monster| %>
         <%= turbo_frame_tag "monster-#{monster.id}" do %>
