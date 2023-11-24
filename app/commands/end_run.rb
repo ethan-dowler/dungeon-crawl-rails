@@ -12,7 +12,6 @@ class EndRun
         completed_at: DateTime.current,
         ended_reason:
       )
-      dungeon_run.character.refresh
       # TODO: other post-run activies
     end
   end

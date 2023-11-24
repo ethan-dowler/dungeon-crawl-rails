@@ -14,7 +14,7 @@ class DungeonRun < ApplicationRecord
   def ended? = completed_at.present?
 
   def completed? = ended_reason == EndedReason::COMPLETED
-  def died? = ended_reason == EndedReason::DIED
+  def died? = ended_reason == EndedReason::DEFEATED
 
   private
 
@@ -32,7 +32,7 @@ class DungeonRun < ApplicationRecord
 
   module EndedReason
     COMPLETED = 'COMPLETED'.freeze
-    DIED = 'DIED'.freeze
+    DEFEATED = 'DEFEATED'.freeze
     ELECTIVE = 'ELECTIVE'.freeze
   end
 end

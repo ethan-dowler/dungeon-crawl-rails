@@ -20,8 +20,8 @@
       <% case dungeon_run.ended_reason %>
       <% when DungeonRun::EndedReason::COMPLETED %>
         You completed the dungeon!
-      <% when DungeonRun::EndedReason::DIED %>
-        You died...
+      <% when DungeonRun::EndedReason::DEFEATED %>
+        You were defeated...
       <% when DungeonRun::EndedReason::ELECTIVE %>
         You chose to leave.
       <% end %>

@@ -24,6 +24,6 @@ class ResolveCombat
   def resolve_character
     return unless character.defeated? && character.current_run.present?
 
-    EndRun.new(dungeon_run: character.current_run, ended_reason: DungeonRun::EndedReason::DIED).execute
+    EndRun.new(dungeon_run: character.current_run, ended_reason: DungeonRun::EndedReason::DEFEATED).execute
   end
 end
