@@ -1,3 +1,17 @@
+<style>
+  @keyframes fillBar-<%= name %> {
+    from {
+      width: <%= start_fill_percent %>%;
+    }
+    to {
+      width: <%= end_fill_percent %>%;
+    }
+  }
+  #progressBar-<%= name %> {
+    animation: fillBar-<%= name %> 300ms ease-out forwards;
+  }
+</style>
+
 <div class="flex text-xs items-center p-1">
   <span class="w-5 mr-1">
     <%= label %>
@@ -5,8 +19,8 @@
 
   <div class="w-full rounded-full bg-gray-100">
     <div
+      id="progressBar-<%= name %>"
       class="<%= fill_color_class %> <%= bar_height_class %> rounded-full"
-      style="width: <%= fill_percent %>%"
     >
     </div>
   </div>

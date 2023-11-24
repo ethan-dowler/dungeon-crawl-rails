@@ -1,5 +1,5 @@
 class ProgressBarComponent < ViewComponent::Base
-  attr_reader :label, :current_value, :max_value, :color, :width
+  attr_reader :name, :label, :current_value, :max_value, :previous_value, :color, :width
 
   FILL_COLOR_CLASSES = {
     red: "bg-red-600",
@@ -12,10 +12,12 @@ class ProgressBarComponent < ViewComponent::Base
     thin: "h-1"
   }.freeze
 
-  def initialize(label:, current_value:, max_value:, color: :blue, width: :thick)
+  def initialize(name:, label:, current_value:, max_value:, previous_value: nil, color: :blue, width: :thick)
+    @name = name
     @label = label
     @current_value = current_value
     @max_value = max_value
+    @previous_value = previous_value
     @color = color
     @width = width
   end
@@ -24,9 +26,16 @@ class ProgressBarComponent < ViewComponent::Base
 
   def fill_color_class = FILL_COLOR_CLASSES[color]
 
-  def fill_percent
+  def end_fill_percent
     return 0 if max_value.blank?
 
     (current_value.to_f * 100) / max_value
+  end
+
+  def start_fill_percent
+    return end_fill_percent if previous_value.blank?
+    return 0 if max_value.blank?
+
+    (previous_value.to_f * 100) / max_value
   end
 end

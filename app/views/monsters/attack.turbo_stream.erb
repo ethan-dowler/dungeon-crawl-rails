@@ -1,5 +1,5 @@
 <%= turbo_stream.update :character_summary do %>
-  <%= render CharacterSummaryComponent.new(dungeon_run.character) %>
+  <%= render CharacterSummaryComponent.new(dungeon_run.character, previous_hp: @previous_hp) %>
 <% end %>
 
 <%= turbo_stream.update "monster-#{monster.id}" do %>
