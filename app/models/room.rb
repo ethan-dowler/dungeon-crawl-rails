@@ -28,18 +28,14 @@ class Room < ApplicationRecord
 
   private
 
-  # TODO: allow for chance of multiple monsters
-  # or no monsters at all
-  # currently populates one monster per room
   def populate_monsters
-    random_encounter =
-      floor_encounters.each_with_object([]) do |encounter, pool|
-        encounter.odds.times { pool << encounter }
-      end.sample
+    floor_encounters.each do |encounter|
+      next unless Random.new.rand(100) < encounter.percent_chance
 
-    monsters.create!(
-      monster_template: random_encounter.monster_template,
-      level: random_encounter.level_range.to_a.sample
-    )
+      monsters.create!(
+        monster_template: encounter.monster_template,
+        level: encounter.level_range.to_a.sample
+      )
+    end
   end
 end

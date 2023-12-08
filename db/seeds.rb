@@ -21,7 +21,7 @@ monster_template_rat =
     base_speed: 90,
     base_experience_yield: 50
   )
-monster_template_rat.item_drops.create!(item: coin, odds: 1)
+monster_template_rat.item_drops.create!(item: coin, percent_chance: 50)
 
 # Characters
 warrior =

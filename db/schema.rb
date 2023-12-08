@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
   create_table "floor_encounters", force: :cascade do |t|
     t.bigint "floor_id", null: false
     t.bigint "monster_template_id", null: false
-    t.integer "odds", default: 1, null: false
+    t.integer "percent_chance", default: 0, null: false
     t.integer "level_range_start", default: 1, null: false
     t.integer "level_range_end", default: 1, null: false
     t.index ["floor_id"], name: "index_floor_encounters_on_floor_id"
@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
   create_table "item_drops", force: :cascade do |t|
     t.bigint "monster_template_id", null: false
     t.bigint "item_id", null: false
-    t.integer "odds", default: 1, null: false
+    t.integer "percent_chance", default: 0, null: false
     t.index ["item_id"], name: "index_item_drops_on_item_id"
     t.index ["monster_template_id"], name: "index_item_drops_on_monster_template_id"
   end

@@ -6,15 +6,12 @@ class GainLoot
     @monster = monster
   end
 
+  # For each possible drop, roll to see if that drop appears.
   def execute
-    # TODO: customize odds of dropping an item at all!
-    #       currently dropping an item 100% of the time
+    monster.item_drops.each do |item_drop|
+      next unless Random.new.rand(100) < item_drop.percent_chance
 
-    reward_pool =
-      monster.item_drops.each_with_object([]) do |drop, pool|
-        drop.odds.times { pool << drop.item_id }
-      end
-
-    character.inventory_items.create!(item_id: reward_pool.sample)
+      character.inventory_items.create!(item: item_drop.item)
+    end
   end
 end
