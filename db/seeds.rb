@@ -61,7 +61,7 @@ weak_leather =
   )
 
 rusty_dagger.modifiers.create!(
-  source:,
+  source: rusty_dagger,
   modifier_type: :flat,
   stat: :attack,
   value: 3
