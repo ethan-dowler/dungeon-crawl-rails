@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :characters, only: %i[index show] do
-    resources :inventory, only: :index
+    resources :inventory_items, only: :index
 
     scope :attack, as: :attack do
       resources :monsters, only: :show

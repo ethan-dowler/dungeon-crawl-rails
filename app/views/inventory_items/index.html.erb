@@ -1,0 +1,16 @@
+<%= render HeadingComponent.new(title: "#{character.name}'s Inventory") %>
+
+<%#
+  TODO: build an inventory UI
+  Key Features:
+    - display each item with raw value & basic effect
+    - use/equip/unequip/drop buttons
+    - show character stats and auto-update when equipment changes
+    - add sorting/filtering by item type/slot
+  
+%>
+<% character.inventory_items.each do |inventory_item| %>
+  <div>
+    <%= inventory_item.name %>
+  </div>
+<% end %>
