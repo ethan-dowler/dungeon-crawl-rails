@@ -7,29 +7,26 @@ module Modifiable
   end
 
   def flat_modifier_for(stat)
-    modifiers.flat.where(stat:).sum(&:value)
+    modifiers.flat.where(stat:).sum(:value)
   end
 
   def percent_modifier_for(stat)
-    1.0 + (modifiers.percent.where(stat:).sum(&:value).to_f / 100.0)
+    1.0 + (modifiers.percent.where(stat:).sum(:value).to_f / 100.0)
   end
 
+  # (raw value * percent mod) + flat mod
   def total(stat)
-    return hp_total if stat.to_sym == :hp
-
-    (((total_base(stat) * level_multiplier).floor + 5.00) * percent_modifier_for(stat)).floor
+    ((subtotal(stat) * percent_modifier_for(stat)) + flat_modifier_for(stat)).floor
   end
 
-  def hp_total
-    (((total_base(:hp) * level_multiplier).floor + level + 10) * percent_modifier_for(:hp)).floor
+  def subtotal(stat)
+    raw = (2.0 * send(:"base_#{stat}") * level_multiplier).floor
+    minimum_value = stat == :hp ? level + 10.0 : 5.0
+
+    raw + minimum_value
   end
 
   private
-
-  # TODO: figure out better use for flat modifiers
-  # OR: rename this flat modifier to "base" modifiers
-  #     and add flat mods after level multiplier
-  def total_base(stat) = (2.0 * send(:"base_#{stat}")) + flat_modifier_for(stat)
 
   def level_multiplier = level / 100.0
 end
