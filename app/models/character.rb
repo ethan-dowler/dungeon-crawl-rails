@@ -17,10 +17,18 @@ class Character < ApplicationRecord
 
   validates :level, comparison: { greater_than: 0 }
 
+  # STATS
   def max_hp = total(:hp)
   def attack = total(:attack)
   def defense = total(:defense)
+  def speed = total(:speed)
+  def spirit = total(:spirit)
+  def wisdom = total(:wisdom)
 
+  # CONVENIENCE
+  alias_method :hp, :max_hp
+
+  # XP CALCS
   def xp_to_next_level = level**3
   def xp_for_current_level = (level - 1)**3
   def xp_needed_from_current_to_next_level = xp_to_next_level - xp_for_current_level
@@ -31,9 +39,7 @@ class Character < ApplicationRecord
     # TODO: remove any negative debuffs
   end
 
-  def current_run
-    @current_run ||= dungeon_runs.active.first
-  end
+  def current_run = dungeon_runs.active.first
 
   private
 

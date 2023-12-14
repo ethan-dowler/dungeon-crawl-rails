@@ -1,0 +1,18 @@
+<div class="flex justify-between flex-wrap">
+  <% STATS.each do |stat| %>
+    <div class="
+      w-28 m-1 p-1
+      border-2 border-black rounded-md
+      flex flex-col items-center
+      text-sm
+    ">
+      <div class="uppercase font-semibold">
+        <%= stat %>
+      </div>
+
+      <div class="text-2xl">
+        <%= character.send(stat) %>
+      </div>
+    </div>
+  <% end %>
+</div>

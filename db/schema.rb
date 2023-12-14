@@ -19,10 +19,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.integer "level", default: 0, null: false
     t.integer "xp", default: 0, null: false
     t.integer "current_hp", default: 0, null: false
-    t.integer "base_hp", default: 10, null: false
-    t.integer "base_attack", default: 10, null: false
-    t.integer "base_defense", default: 10, null: false
-    t.integer "base_speed", default: 10, null: false
+    t.integer "base_hp", default: 0, null: false
+    t.integer "base_attack", default: 0, null: false
+    t.integer "base_defense", default: 0, null: false
+    t.integer "base_spirit", default: 0, null: false
+    t.integer "base_wisdom", default: 0, null: false
+    t.integer "base_speed", default: 0, null: false
   end
 
   create_table "conditions", force: :cascade do |t|
