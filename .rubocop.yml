@@ -8,13 +8,17 @@ AllCops:
     - 'bin/**/*'
     - 'db/schema.rb'
 
+Lint/MissingSuper:
+  Exclude:
+    - 'app/components/**/*'
+
 Metrics/BlockLength:
   Exclude:
     - 'db/**/*'
 
-Lint/MissingSuper:
+Metrics/MethodLength:
   Exclude:
-    - 'app/components/**/*'
+    - 'db/**/*'
 
 Rails/CreateTableWithTimestamps:
   Enabled: false
@@ -22,11 +26,14 @@ Rails/CreateTableWithTimestamps:
 Rails/I18nLocaleTexts:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
+RSpec/MultipleExpectations:
   Enabled: false
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
 
 Style/Documentation:
   Enabled: false
 
-RSpec/MultipleExpectations:
+Style/FrozenStringLiteralComment:
   Enabled: false
