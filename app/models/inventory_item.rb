@@ -5,6 +5,8 @@ class InventoryItem < ApplicationRecord
   has_many :modifiers, through: :item
 
   after_create :consolidate_stacks, if: :stackable?
+  after_update :resolve_modifiers, if: :equipped_previously_changed?
+  after_destroy :destroy_modifiers, if: :equipped?
 
   scope :equipped, -> { where(equipped: true) }
   scope :unequipped, -> { where(equipped: false) }
@@ -24,6 +26,15 @@ class InventoryItem < ApplicationRecord
   end
 
   delegate :name, :equipment_slot, :equippable?, :stackable?, :handheld?, to: :item
+
+  def equip
+    EquipInventoryItem.new(inventory_item: self).execute
+  end
+
+  def unequip
+    UnequipInventoryItem.new(inventory_item: self).execute
+  end
+
   private
 
   def consolidate_stacks
@@ -38,5 +49,22 @@ class InventoryItem < ApplicationRecord
       consolidated_stack.update!(quantity: total_quantity)
       InventoryItem.others_like_me(consolidated_stack).destroy_all
     end
+  end
+
+  def resolve_modifiers
+    destroy_modifiers # prevent duplicate modifiers from re-equipping the same item
+    create_modifiers if equipped?
+  end
+
+  def create_modifiers
+    InventoryItem.transaction do
+      modifiers.each do |modifier|
+        modifier.dup.update!(target: owner, source: self)
+      end
+    end
+  end
+
+  def destroy_modifiers
+    Modifier.where(target: owner, source: self).destroy_all
   end
 end

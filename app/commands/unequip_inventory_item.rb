@@ -9,15 +9,10 @@ class UnequipInventoryItem
   def execute
     InventoryItem.transaction do
       inventory_item.update!(equipped: false)
-      remove_modifiers
+      # There used to be more in here related to modifiers,
+      # but that was moved to an after_update hook in InventoryItem.rb
+      # Keeping this to compliment EquipInventoryItem
+      # and in case we need more logic in the future
     end
-  end
-
-  private
-
-  def remove_modifiers
-    return unless owner.respond_to?(:modifiers)
-
-    owner.modifiers.where(source: inventory_item).destroy_all
   end
 end
