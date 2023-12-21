@@ -1,0 +1,7 @@
+<div>
+  <%= inventory_item.name %>
+  <% if inventory_item.stackable? %>
+    <i>x<%= inventory_item.quantity %></i>
+  <% end %>
+  <%# TODO: add actions like "equip" and "drop" and "mark as trash" %>
+</div>

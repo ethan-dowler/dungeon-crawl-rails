@@ -9,7 +9,8 @@ DungeonTemplate.create!(
 coin =
   Item.create!(
     name: 'Coin',
-    description: 'A simple golden disc of unkown value and origin.'
+    description: 'A simple golden disc of unkown value and origin.',
+    stackable: true
   )
 
 monster_template_rat =

@@ -90,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.string "owner_type", null: false
     t.bigint "owner_id", null: false
     t.bigint "item_id", null: false
+    t.integer "quantity", default: 1, null: false
     t.boolean "equipped", default: false, null: false
     t.index ["item_id"], name: "index_inventory_items_on_item_id"
     t.index ["owner_type", "owner_id"], name: "index_inventory_items_on_owner"
@@ -108,6 +109,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.string "description", null: false
     t.integer "value", default: 0, null: false
     t.string "equipment_slot"
+    t.boolean "stackable", default: false, null: false
     t.index ["equipment_slot"], name: "index_items_on_equipment_slot"
     t.index ["name"], name: "index_items_on_name"
   end
