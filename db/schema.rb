@@ -38,6 +38,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.index ["target_type", "target_id"], name: "index_conditions_on_target"
   end
 
+  create_table "drops", force: :cascade do |t|
+    t.bigint "monster_template_id", null: false
+    t.bigint "item_id", null: false
+    t.integer "percent_chance", default: 100, null: false
+    t.integer "quantity", default: 1, null: false
+    t.index ["item_id"], name: "index_drops_on_item_id"
+    t.index ["monster_template_id"], name: "index_drops_on_monster_template_id"
+  end
+
   create_table "dungeon_runs", force: :cascade do |t|
     t.bigint "character_id", null: false
     t.bigint "dungeon_id", null: false
@@ -94,14 +103,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.boolean "equipped", default: false, null: false
     t.index ["item_id"], name: "index_inventory_items_on_item_id"
     t.index ["owner_type", "owner_id"], name: "index_inventory_items_on_owner"
-  end
-
-  create_table "item_drops", force: :cascade do |t|
-    t.bigint "monster_template_id", null: false
-    t.bigint "item_id", null: false
-    t.integer "percent_chance", default: 100, null: false
-    t.index ["item_id"], name: "index_item_drops_on_item_id"
-    t.index ["monster_template_id"], name: "index_item_drops_on_monster_template_id"
   end
 
   create_table "items", force: :cascade do |t|

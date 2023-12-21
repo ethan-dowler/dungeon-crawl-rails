@@ -4,7 +4,7 @@ class Monster < ApplicationRecord
   include HasHp
 
   belongs_to :monster_template
-  has_many :item_drops, through: :monster_template
+  has_many :drops, through: :monster_template
 
   has_many :inventory_items, as: :owner, dependent: :destroy
 
@@ -21,13 +21,14 @@ class Monster < ApplicationRecord
 
   private
 
+  # for each possible drop, roll to see if that drop appears
+  # then equip that item if possible
   def add_inventory
-    item_pool =
-      item_drops.each_with_object([]) do |drop, pool|
-        drop.odds.times { pool << drop.item_id }
-      end
+    drops.each do |drop|
+      next unless Random.new.rand(100) < drop.percent_chance
 
-    inventory_item = inventory_items.create!(item_id: item_pool.sample)
-    EquipInventoryItem.new(owner: self, inventory_item:) if inventory_item.equippable?
+      inventory_item = inventory_items.create!(item: drop.item, quantity: drop.quantity)
+      EquipInventoryItem.new(inventory_item).execute if inventory_item.equippable?
+    end
   end
 end
