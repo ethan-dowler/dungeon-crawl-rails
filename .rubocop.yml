@@ -37,3 +37,6 @@ Style/Documentation:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal

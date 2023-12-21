@@ -23,7 +23,7 @@ html { @apply h-full; }
   @apply relative;
   @apply h-full;
   @apply bg-white;
-  @apply mx-auto max-w-xl; /* 576px */
+  @apply mx-auto max-w-lg; /* 32rem - 512px */
   @apply py-2 px-2 rounded w-auto shadow-md border-gray-300 border-4;
 }
 

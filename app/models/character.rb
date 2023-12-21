@@ -13,6 +13,7 @@ class Character < ApplicationRecord
   has_many :items, through: :inventory_items, dependent: :destroy
 
   before_create :set_xp
+  before_update :set_xp, if: :level_changed?
   after_update :check_level_up, if: :xp_previously_changed?
 
   validates :level, comparison: { greater_than: 0 }

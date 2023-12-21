@@ -1,6 +1,6 @@
 # Browserpg
 
-Working title: **Tairosian Dungeon**
+Working title: **Dungeons of Tairos**
 
 ## Premise
 

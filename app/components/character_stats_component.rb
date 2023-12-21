@@ -1,10 +1,13 @@
 class CharacterStatsComponent < ViewComponent::Base
   attr_reader :character
 
-  STATS = %i[
+  TOP_ROW_STATS = %i[
     hp
     attack
     defense
+  ].freeze
+
+  BOT_ROW_STATS = %i[
     speed
     spirit
     wisdom

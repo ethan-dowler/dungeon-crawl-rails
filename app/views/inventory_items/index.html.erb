@@ -14,7 +14,5 @@
 <hr class="my-4" />
 
 <% character.inventory_items.each do |inventory_item| %>
-  <div>
-    <%= inventory_item.name %>
-  </div>
+  <%= render InventoryItemComponent.new(inventory_item) %>
 <% end %>
