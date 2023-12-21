@@ -25,14 +25,14 @@ class InventoryItem < ApplicationRecord
     joins(:item).where(item: { equipment_slot: inventory_item.equipment_slot })
   end
 
-  delegate :name, :equipment_slot, :equippable?, :stackable?, :handheld?, to: :item
+  delegate_missing_to :item
 
   def equip
-    EquipInventoryItem.new(inventory_item: self).execute
+    EquipInventoryItem.new(self).execute
   end
 
   def unequip
-    UnequipInventoryItem.new(inventory_item: self).execute
+    UnequipInventoryItem.new(self).execute
   end
 
   private

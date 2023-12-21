@@ -10,6 +10,7 @@ class EquipInventoryItem
 
     InventoryItem.transaction do
       unequip_current_item
+      unequip_secondary if inventory_item.restricted?
       inventory_item.update!(equipped: true)
     end
   end
@@ -17,12 +18,20 @@ class EquipInventoryItem
   private
 
   def unequip_current_item
-    equipped_items =
-      InventoryItem.where(owner: inventory_item.owner).with_same_slot(inventory_item).equipped
-    max_quantity = inventory_item.handheld? ? 2 : 1
-    return unless equipped_items.size >= max_quantity
+    current_item =
+      inventory_item.owner.inventory_items.with_same_slot(inventory_item).equipped.first
+    return if current_item.nil?
 
-    item_to_remove = equipped_items.min_by(&:value)
-    UnequipInventoryItem.new(inventory_item: item_to_remove).execute
+    if inventory_item.dual_wield?
+      unequip_secondary
+    else
+      UnequipInventoryItem.new(current_item).execute
+    end
+  end
+
+  def unequip_secondary
+    secondary_item =
+      inventory_item.owner.inventory_items.secondary.equipped.first
+    UnequipInventoryItem.new(secondary_item).execute if secondary_item.present?
   end
 end

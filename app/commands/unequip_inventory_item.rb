@@ -1,9 +1,8 @@
 class UnequipInventoryItem
   attr_reader :inventory_item
 
-  def initialize(inventory_item:)
+  def initialize(inventory_item)
     @inventory_item = inventory_item
-    @owner = inventory_item.owner
   end
 
   def execute
