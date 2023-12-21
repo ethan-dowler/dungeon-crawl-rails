@@ -3,9 +3,7 @@ class Character < ApplicationRecord
   include Modifiable
   include HasHp
 
-  # stat calculation
-  # HP = floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + Level + 10
-  # Other Stats = (floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + 5) x Nature
+  LEVEL_CAP = 100
 
   has_many :dungeon_runs, dependent: :destroy
 
@@ -14,7 +12,7 @@ class Character < ApplicationRecord
 
   before_create :set_xp
   before_update :set_xp, if: :level_changed?
-  after_update :check_level_up, if: :xp_previously_changed?
+  before_update :check_level_up, if: :xp_changed?
 
   validates :level, comparison: { greater_than: 0 }
 
@@ -49,9 +47,10 @@ class Character < ApplicationRecord
   end
 
   def check_level_up
+    return if level == LEVEL_CAP
     return unless xp > xp_to_next_level
 
-    update!(level: level + 1)
+    self.level = level + 1
     check_level_up
   end
 end
