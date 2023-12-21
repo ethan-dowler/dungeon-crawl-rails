@@ -23,6 +23,9 @@ Metrics/MethodLength:
 Rails/CreateTableWithTimestamps:
   Enabled: false
 
+Rails/FilePath:
+  EnforcedStyle: arguments
+
 Rails/I18nLocaleTexts:
   Enabled: false
 
