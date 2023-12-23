@@ -28,4 +28,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :inventory_items, only: [] do
+    member do
+      post :toggle
+    end
+  end
 end

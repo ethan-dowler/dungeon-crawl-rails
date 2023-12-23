@@ -1,0 +1,7 @@
+<%= turbo_stream.update "character_stats-#{inventory_item.owner_id}" do %>
+  <%= render CharacterStatsComponent.new(inventory_item.owner) %>
+<% end %>
+
+<%= turbo_stream.update "inventory_item-#{inventory_item.id}" do %>
+  <%= render InventoryItemComponent.new(inventory_item) %>
+<% end %>

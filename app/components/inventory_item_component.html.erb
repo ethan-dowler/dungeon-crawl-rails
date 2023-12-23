@@ -1,7 +1,22 @@
-<div>
-  <%= inventory_item.name %>
-  <% if inventory_item.stackable? %>
-    <i>x<%= inventory_item.quantity %></i>
-  <% end %>
-  <%# TODO: add actions like "equip" and "drop" and "mark as trash" %>
+<div class="mb-2 flex justify-between items-center">
+  <div>
+    <%= inventory_item.name %>
+
+    <% if inventory_item.stackable? %>
+      <i>(x<%= inventory_item.quantity %>)</i>
+    <% end %>
+
+    <%# TODO: list modifiers on equipment %>
+  </div>
+
+  <div>
+    <% if inventory_item.equippable? %>
+      <%= button_to(
+        inventory_item.equipped? ? "Unequip" : "Equip",
+        toggle_inventory_item_path(inventory_item),
+        class: "Button Button--compact"
+      ) %>
+    <% end %>
+  </div>
+  <%# TODO: add actions like "drop" and "mark as trash" %>
 </div>

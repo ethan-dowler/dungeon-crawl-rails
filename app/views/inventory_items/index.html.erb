@@ -9,10 +9,14 @@
     - add sorting/filtering by item type/slot
 %>
 
-<%= render CharacterStatsComponent.new(character) %>
+<%= turbo_frame_tag "character_stats-#{character.id}" do %>
+  <%= render CharacterStatsComponent.new(character) %>
+<% end %>
 
 <hr class="my-4" />
 
 <% character.inventory_items.each do |inventory_item| %>
-  <%= render InventoryItemComponent.new(inventory_item) %>
+  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
+    <%= render InventoryItemComponent.new(inventory_item) %>
+  <% end %>
 <% end %>

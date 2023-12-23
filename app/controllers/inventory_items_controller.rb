@@ -5,6 +5,14 @@ class InventoryItemsController < ApplicationController
     TransferItem.new(inventory_item:, receiver: dungeon_run.character).execute
   end
 
+  def toggle
+    if inventory_item.equipped?
+      UnequipInventoryItem.new(inventory_item).execute
+    else
+      EquipInventoryItem.new(inventory_item).execute
+    end
+  end
+
   private
 
   def character
