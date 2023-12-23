@@ -14,6 +14,7 @@ Lint/MissingSuper:
 
 Metrics/BlockLength:
   Exclude:
+    - 'config/**/*'
     - 'db/**/*'
 
 Metrics/MethodLength:
