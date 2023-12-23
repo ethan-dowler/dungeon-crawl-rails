@@ -1,5 +1,5 @@
 Character.create!(
-  name: 'Warrior',
+  name: "Warrior",
   level: 5,
   base_hp: 60,
   base_attack: 60,
@@ -10,7 +10,7 @@ Character.create!(
 ) # total 300
 
 Character.create!(
-  name: 'Rogue',
+  name: "Rogue",
   level: 5,
   base_hp: 40,
   base_attack: 70,

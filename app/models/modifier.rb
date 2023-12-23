@@ -11,4 +11,12 @@ class Modifier < ApplicationRecord
   scope :attack, -> { where(stat: :attack) }
   scope :defense, -> { where(stat: :defense) }
   scope :speed, -> { where(stat: :speed) }
+
+  def flat? = modifier_type == Type::FLAT
+  def percent? = modifier_type == Type::PERCENT
+
+  module Type
+    FLAT = "flat".freeze
+    PERCENT = "percent".freeze
+  end
 end

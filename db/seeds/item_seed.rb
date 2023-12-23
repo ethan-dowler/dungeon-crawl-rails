@@ -1,7 +1,7 @@
 # TODO: move starting equipment to individual character/class files
 rusty_dagger =
   Item.primary.create!(
-    name: 'Rusty Dagger',
+    name: "Rusty Dagger",
     description: "A dull dagger that's seen better days.",
     traits: [Item::Trait::DUAL_WIELD]
   )
@@ -14,7 +14,7 @@ rusty_dagger.modifiers.create!(
 
 small_shield =
   Item.secondary.create!(
-    name: 'Small Shield',
+    name: "Small Shield",
     description: "A tiny shield that won't block much."
   )
 small_shield.modifiers.create!(
@@ -26,8 +26,8 @@ small_shield.modifiers.create!(
 
 weak_leather =
   Item.armor.create!(
-    name: 'Weak Leather',
-    description: 'Pitiful armor full of rips and tears.'
+    name: "Weak Leather",
+    description: "Pitiful armor full of rips and tears."
   )
 weak_leather.modifiers.create!(
   source: weak_leather,

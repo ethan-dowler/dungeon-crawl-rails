@@ -1,8 +1,8 @@
 RSpec.describe Modifiable do
-  describe '#total' do
+  describe "#total" do
     subject(:fakemon) do
       Character.create!(
-        name: 'Fakémon',
+        name: "Fakémon",
         level: 50,
         base_hp: 100,
         base_attack: 150,
@@ -13,7 +13,7 @@ RSpec.describe Modifiable do
 
     # Inspired by Pokemon stats: https://bulbapedia.bulbagarden.net/wiki/Stat#Generation_III_onward
     # only difference is that flat mods (analogous to IVs + EVs) are added to the TOTAL instead of the BASE
-    context 'when modifiers are applied' do
+    context "when modifiers are applied" do
       before do
         # Flat mods; added at the END of the equation
         fakemon.modifiers.flat.hp.create!(source: fakemon, value: 50)
@@ -23,7 +23,7 @@ RSpec.describe Modifiable do
         fakemon.modifiers.percent.attack.create!(source: fakemon, value: 50)
       end
 
-      it 'calculates the correct total for a given stat' do
+      it "calculates the correct total for a given stat" do
         expect(fakemon.total(:hp)).to eq(210)
         expect(fakemon.total(:attack)).to eq(282)
         expect(fakemon.total(:defense)).to eq(155)

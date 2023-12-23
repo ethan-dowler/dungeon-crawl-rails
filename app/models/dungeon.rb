@@ -1,6 +1,6 @@
 class Dungeon < ApplicationRecord
   belongs_to :dungeon_template
-  belongs_to :entrance_room, class_name: 'Room', optional: true
+  belongs_to :entrance_room, class_name: "Room", optional: true
 
   has_many :floors, dependent: :destroy
   has_many :rooms, through: :floors

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root "home#index"
 
   resources :characters, only: %i[index show] do
     resources :inventory_items, only: :index

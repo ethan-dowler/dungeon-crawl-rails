@@ -15,16 +15,16 @@ class Item < ApplicationRecord
   def dual_wield? = traits.include?(Trait::DUAL_WIELD)
 
   module EquipmentSlot
-    ARMOR = 'ARMOR'.freeze
-    PRIMARY = 'PRIMARY'.freeze
-    SECONDARY = 'SECONDARY'.freeze
+    ARMOR = "ARMOR".freeze
+    PRIMARY = "PRIMARY".freeze
+    SECONDARY = "SECONDARY".freeze
   end
 
   module Trait
     # if primary is restricted, can't equip a secondary
     # ex. bows, great axes, some staves
-    RESTRICTED = 'RESTRICTED'.freeze
+    RESTRICTED = "RESTRICTED".freeze
     # if primary is dual wield, it can be equipped as a secondary
-    DUAL_WIELD = 'DUAL_WIELD'.freeze
+    DUAL_WIELD = "DUAL_WIELD".freeze
   end
 end

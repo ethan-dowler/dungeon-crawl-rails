@@ -13,17 +13,17 @@ class GenerateDungeon
       dungeon = Dungeon.create!(dungeon_template:)
 
       # first floor - create rooms
-      ground_floor = dungeon.floors.create!(name: 'Floor 1', level: 0)
+      ground_floor = dungeon.floors.create!(name: "Floor 1", level: 0)
       ground_floor.floor_encounters.create(
         monster_template: MonsterTemplate.first,
         level_range_start: 2,
         level_range_end: 3
       )
-      gf_middle_room = ground_floor.rooms.create!(name: 'Middle Room')
-      gf_north_room = ground_floor.rooms.create!(name: 'North Room')
-      gf_east_room = ground_floor.rooms.create!(name: 'East Room')
-      gf_south_room = ground_floor.rooms.create!(name: 'South Room')
-      gf_west_room = ground_floor.rooms.create!(name: 'West Room')
+      gf_middle_room = ground_floor.rooms.create!(name: "Middle Room")
+      gf_north_room = ground_floor.rooms.create!(name: "North Room")
+      gf_east_room = ground_floor.rooms.create!(name: "East Room")
+      gf_south_room = ground_floor.rooms.create!(name: "South Room")
+      gf_west_room = ground_floor.rooms.create!(name: "West Room")
 
       # first floor - connect rooms
       gf_middle_room.update!(
@@ -38,17 +38,17 @@ class GenerateDungeon
       gf_west_room.update!(east_room: gf_middle_room)
 
       # second floor - create rooms
-      floor_one = dungeon.floors.create!(name: 'Floor 2', level: 1)
+      floor_one = dungeon.floors.create!(name: "Floor 2", level: 1)
       floor_one.floor_encounters.create(
         monster_template: MonsterTemplate.first,
         level_range_start: 4,
         level_range_end: 5
       )
-      f1_middle_room = floor_one.rooms.create!(name: 'Middle Room')
-      f1_north_room = floor_one.rooms.create!(name: 'North Room')
-      f1_east_room = floor_one.rooms.create!(name: 'East Room')
-      f1_south_room = floor_one.rooms.create!(name: 'South Room')
-      f1_west_room = floor_one.rooms.create!(name: 'West Room')
+      f1_middle_room = floor_one.rooms.create!(name: "Middle Room")
+      f1_north_room = floor_one.rooms.create!(name: "North Room")
+      f1_east_room = floor_one.rooms.create!(name: "East Room")
+      f1_south_room = floor_one.rooms.create!(name: "South Room")
+      f1_west_room = floor_one.rooms.create!(name: "West Room")
 
       # second floor - connect rooms
       f1_middle_room.update!(

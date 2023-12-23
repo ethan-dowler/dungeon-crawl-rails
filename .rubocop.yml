@@ -44,3 +44,6 @@ Style/FrozenStringLiteralComment:
 
 Style/Lambda:
   EnforcedStyle: literal
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

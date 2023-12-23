@@ -12,7 +12,7 @@ class DungeonRunSummaryComponent < ViewComponent::Base
     elsif level.negative?
       "B#{level}"
     else
-      'G'
+      "G"
     end
   end
 

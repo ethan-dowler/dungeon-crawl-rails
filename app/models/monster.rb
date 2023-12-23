@@ -8,7 +8,7 @@ class Monster < ApplicationRecord
 
   has_many :inventory_items, as: :owner, dependent: :destroy
 
-  belongs_to :current_room, class_name: 'Room'
+  belongs_to :current_room, class_name: "Room"
   has_one :dungeon, through: :current_room
 
   delegate :name, :base_hp, :base_attack, :base_defense, :base_experience_yield, to: :monster_template

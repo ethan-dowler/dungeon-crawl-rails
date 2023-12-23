@@ -1,7 +1,7 @@
 class DungeonRun < ApplicationRecord
   belongs_to :character
   belongs_to :dungeon
-  belongs_to :current_room, class_name: 'Room'
+  belongs_to :current_room, class_name: "Room"
 
   has_many :event_messages, dependent: :destroy
 
@@ -31,8 +31,8 @@ class DungeonRun < ApplicationRecord
   end
 
   module EndedReason
-    COMPLETED = 'COMPLETED'.freeze
-    DEFEATED = 'DEFEATED'.freeze
-    ELECTIVE = 'ELECTIVE'.freeze
+    COMPLETED = "COMPLETED".freeze
+    DEFEATED = "DEFEATED".freeze
+    ELECTIVE = "ELECTIVE".freeze
   end
 end
