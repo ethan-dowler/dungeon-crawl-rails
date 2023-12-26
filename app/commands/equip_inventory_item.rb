@@ -10,7 +10,7 @@ class EquipInventoryItem
 
     InventoryItem.transaction do
       unequip_current_item
-      unequip_secondary if inventory_item.restricted?
+      unequip_secondary if inventory_item.two_handed?
       inventory_item.update!(equipped: true)
     end
   end

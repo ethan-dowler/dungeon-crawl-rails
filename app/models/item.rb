@@ -1,6 +1,9 @@
 class Item < ApplicationRecord
   include Modifiable
 
+  has_many :personality_traits, as: :owner, dependent: :destroy
+  has_many :traits, through: :personality_traits
+
   scope :armor, -> { where(equipment_slot: EquipmentSlot::ARMOR) }
   scope :primary, -> { where(equipment_slot: EquipmentSlot::PRIMARY) }
   scope :secondary, -> { where(equipment_slot: EquipmentSlot::SECONDARY) }
@@ -11,7 +14,7 @@ class Item < ApplicationRecord
   def primary? = equipment_slot == EquipmentSlot::PRIMARY
   def secondary? = equipment_slot == EquipmentSlot::SECONDARY
 
-  def restricted? = traits.include?(Trait::RESTRICTED)
+  def two_handed? = traits.include?(Trait::TWO_HANDED)
   def dual_wield? = traits.include?(Trait::DUAL_WIELD)
 
   module EquipmentSlot
@@ -21,10 +24,10 @@ class Item < ApplicationRecord
   end
 
   module Trait
-    # if primary is restricted, can't equip a secondary
+    # if primary is two-handed, can't equip a secondary
     # ex. bows, great axes, some staves
-    RESTRICTED = "RESTRICTED".freeze
+    TWO_HANDED = "two-handed".freeze
     # if primary is dual wield, it can be equipped as a secondary
-    DUAL_WIELD = "DUAL_WIELD".freeze
+    FLEXIBLE = "flexible".freeze
   end
 end

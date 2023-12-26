@@ -3,11 +3,17 @@ class InventoryItem < ApplicationRecord
   belongs_to :item
 
   has_many :modifiers, through: :item
+  has_many :personality_traits, through: :item
+  has_many :traits, through: :personality_traits
 
   after_create :consolidate_stacks, if: :stackable?
   after_update :resolve_modifiers, if: :equipped_previously_changed?
   after_destroy :destroy_modifiers, if: :equipped?
 
+  scope :alphabetical, -> { joins(:item).order("items.name") }
+
+  scope :equipment, -> { joins(:item).where.not(items: { equipment_slot: nil }) }
+  scope :non_equipment, -> { joins(:item).where(items: { equipment_slot: nil }) }
   scope :equipped, -> { where(equipped: true) }
   scope :unequipped, -> { where(equipped: false) }
 

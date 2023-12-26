@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_23_213307) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -111,7 +111,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.integer "value", default: 0, null: false
     t.boolean "stackable", default: false, null: false
     t.string "equipment_slot"
-    t.string "traits", default: [], null: false, array: true
     t.index ["equipment_slot"], name: "index_items_on_equipment_slot"
     t.index ["name"], name: "index_items_on_name"
   end
@@ -148,6 +147,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.index ["monster_template_id"], name: "index_monsters_on_monster_template_id"
   end
 
+  create_table "personality_traits", force: :cascade do |t|
+    t.string "owner_type", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "trait_id", null: false
+    t.index ["owner_type", "owner_id"], name: "index_personality_traits_on_owner"
+    t.index ["trait_id"], name: "index_personality_traits_on_trait_id"
+  end
+
   create_table "room_items", force: :cascade do |t|
     t.bigint "room_id", null: false
     t.bigint "item_id", null: false
@@ -171,6 +178,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_202421) do
     t.index ["north_room_id"], name: "index_rooms_on_north_room_id"
     t.index ["south_room_id"], name: "index_rooms_on_south_room_id"
     t.index ["west_room_id"], name: "index_rooms_on_west_room_id"
+  end
+
+  create_table "traits", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "explanation", null: false
   end
 
   add_foreign_key "dungeon_runs", "rooms", column: "current_room_id"

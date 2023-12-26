@@ -15,8 +15,21 @@
 
 <hr class="my-4" />
 
-<% character.inventory_items.each do |inventory_item| %>
+<%= render HeadingComponent.new(title: "Equipment", tag: :h2) %>
+
+<% character.inventory_items.equipment.alphabetical.each do |inventory_item| %>
   <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
     <%= render InventoryItemComponent.new(inventory_item) %>
   <% end %>
 <% end %>
+
+<%= render HeadingComponent.new(title: "Other", tag: :h2) %>
+
+<% character.inventory_items.non_equipment.alphabetical.each do |inventory_item| %>
+  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
+    <%= render InventoryItemComponent.new(inventory_item) %>
+  <% end %>
+<% end %>
+
+<%# TODO: make a "junk" flag, so players can mark and sell easily %>
+<%#= render HeadingComponent.new(title: "Junk", tag: :h2) %>

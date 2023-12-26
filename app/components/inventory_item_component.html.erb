@@ -1,18 +1,36 @@
-<div class="mb-2 flex justify-between items-center">
+<div class="mb-2 flex justify-between items-start">
   <div>
-    <%= inventory_item.name %>
+    <div>
+      <%= inventory_item.name %>
 
-    <% if inventory_item.stackable? %>
-      <i>(x<%= inventory_item.quantity %>)</i>
-    <% end %>
+      <% if inventory_item.stackable? %>
+        <i class="text-xs text-slate-400">
+          x<%= inventory_item.quantity %>
+        </i>
+      <% end %>
+    </div>
 
+    <div class=" flex flex-col text-xs text-slate-400">
+      <% inventory_item.traits.sort.each do |trait| %>
+        <div class="pl-1 py-0.5 italic">
+          <%= trait.name %>
+        </div>
+      <% end %>
+
+      <% inventory_item.modifiers.order(:stat).each do |modifier| %>
+        <div class="pl-2 py-0.5">
+          <%= "+" if modifier.value.positive? %><%= modifier.value %><%= "%" if modifier.percent? %>
+          <%= modifier.stat.upcase %>
+        </div>
+      <% end %>
+    </div>
     <%# TODO: list modifiers on equipment %>
   </div>
 
   <div>
     <% if inventory_item.equippable? %>
       <%= button_to(
-        inventory_item.equipped? ? "Unequip" : "Equip",
+        equip_text,
         toggle_inventory_item_path(inventory_item),
         class: "Button Button--compact"
       ) %>

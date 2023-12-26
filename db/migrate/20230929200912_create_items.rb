@@ -6,7 +6,6 @@ class CreateItems < ActiveRecord::Migration[7.0]
       t.integer :value, null: false, default: 0
       t.boolean :stackable, null: false, default: false
       t.string :equipment_slot, index: true
-      t.string :traits, array: true, null: false, default: []
     end
   end
 end
