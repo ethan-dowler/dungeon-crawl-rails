@@ -1,4 +1,8 @@
-<%= render HeadingComponent.new(title: "#{character.name}'s Inventory") %>
+<%= link_to :back, class: "Button Button--icon Button--red" do %>
+  <%= render "icons/back" %>
+<% end %>
+
+<%= render HeadingComponent.new(title: "#{character.name} - Lvl. #{character.level}") %>
 
 <%#
   TODO: build an inventory UI
@@ -17,10 +21,29 @@
 
 <hr class="my-4" />
 
-<%= render HeadingComponent.new(title: "Equipment", tag: :h2) %>
+<%= render HeadingComponent.new(title: "Inventory") %>
+<%# TODO: add sort/filter buttons based on equipment type, martial/magical, alphabetical %>
 
-<%# TODO: break down by Primary/Secondary/Armor (P/S/A) %>
-<% character.inventory_items.equipment.alphabetical.each do |inventory_item| %>
+<%= render HeadingComponent.new(title: "Armor", tag: :h2) %>
+<%# TODO: make each equipment section collapsible %>
+
+<% character.inventory_items.armor.alphabetical.each do |inventory_item| %>
+  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
+    <%= render InventoryItemComponent.new(inventory_item) %>
+  <% end %>
+<% end %>
+
+<%= render HeadingComponent.new(title: "Primary", tag: :h2) %>
+
+<% character.inventory_items.primary.alphabetical.each do |inventory_item| %>
+  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
+    <%= render InventoryItemComponent.new(inventory_item) %>
+  <% end %>
+<% end %>
+
+<%= render HeadingComponent.new(title: "Secondary", tag: :h2) %>
+
+<% character.inventory_items.secondary.alphabetical.each do |inventory_item| %>
   <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
     <%= render InventoryItemComponent.new(inventory_item) %>
   <% end %>

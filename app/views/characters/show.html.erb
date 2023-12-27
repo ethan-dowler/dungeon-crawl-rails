@@ -1,32 +1,13 @@
-<%= render HeadingComponent.new(title: character.name) %>
+<%= link_to characters_path, class: "Button Button--icon Button--red" do %>
+  <%= render "icons/back" %>
+<% end %>
 
-<table class="mb-4">
-  <thead>
-    <tr>
-      <th class="p-2">Level</th>
-      <th class="p-2">XP</th>
-      <th class="p-2">HP</th>
-      <th class="p-2">Attack</th>
-      <th class="p-2">Defense</th>
-      <th class="p-2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="p-2"><%= character.level %></td>
-      <td class="p-2"><%= character.xp %></td>
-      <td class="p-2"><%= character.max_hp %></td>
-      <td class="p-2"><%= character.attack %></td>
-      <td class="p-2"><%= character.defense %></td>
-      <td class="p-2">
-        <%= link_to "Inventory", character_inventory_items_path(character.id), class: "Button" %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<%= render HeadingComponent.new(title: "#{character.name} - Lvl. #{character.level}") %>
 
+<%= link_to "Inventory", character_inventory_items_path(character.id), class: "Button" %>
+<%# TODO: Add other non-dungeon activities like vendors and trainers %>
 
-<hr class="mb-6" />
+<hr class="my-4" />
 
 <% if character.dungeon_runs.active.any? %>
   <%= link_to "Resume Dungeon", dungeon_run_path(character.dungeon_runs.active.first), class: "Button" %>

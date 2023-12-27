@@ -8,7 +8,7 @@ class TransferItem
 
   def execute
     InventoryItem.transaction do
-      AddInventoryItem.new(owner: receiver, inventory_item:).execute
+      AddInventoryItem.new(owner: receiver, item: inventory_item.item).execute
       RemoveInventoryItem.new(inventory_item:).execute
     end
   end

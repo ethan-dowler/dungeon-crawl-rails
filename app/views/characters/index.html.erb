@@ -1,13 +1,11 @@
 <%= render HeadingComponent.new(title: "Characters") %>
 
-<div class="flex flex-row text-center justify-around">
-  <% characters.each do |character| %>
-    <div class="m-2 p-8 rounded w-auto shadow-md border-2 border-slate-50">
-      <div class="text-xl font-bold mb-4 ">
-        <%= character.name %> - Lvl. <%= character.level %>
-      </div>
-
-      <%= link_to "Select", character_path(character), class: "Button w-full" %>
+<% characters.each do |character| %>
+  <div class="m-2 p-8 rounded w-auto shadow-md border-2 border-slate-50">
+    <div class="text-xl font-bold mb-4 ">
+      <%= character.name %> - Lvl. <%= character.level %>
     </div>
-  <% end %>
-</div>
+
+    <%= link_to "Select", character_path(character), class: "Button w-full" %>
+  </div>
+<% end %>

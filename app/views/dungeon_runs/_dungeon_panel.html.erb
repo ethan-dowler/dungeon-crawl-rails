@@ -11,6 +11,10 @@
 
   <%= render CharacterSummaryComponent.new(dungeon_run.character) %>
 
+  <div class="flex justify-end">
+    <%= link_to "Inventory", character_inventory_items_path(dungeon_run.character), class: "Button Button--compact" %>
+  </div>
+
   <hr class="my-4" />
 
   <%= render DungeonRunSummaryComponent.new(dungeon_run) %>
