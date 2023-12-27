@@ -88,6 +88,16 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - improve your experience outside of the dungeon!
   - upgrade buildings like the shop,
 
+## Technical Details
+
+- [Ruby 3.2.X](https://www.ruby-lang.org/en/)
+  - [Rails 7.X](https://guides.rubyonrails.org/)
+    - [Hotwire](https://hotwired.dev/)
+  - [RSpec](https://rspec.info/)
+  - [Rubocop](https://rubocop.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Hero Icons](https://heroicons.com/)
+
 ## Contributing
 
 If you would like to start a conversation about this project, please create [a GitHub issue](https://github.com/ethan-dowler/browserpg/issues) on this repo. Thanks!
