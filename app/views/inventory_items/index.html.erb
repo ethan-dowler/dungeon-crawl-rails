@@ -3,9 +3,11 @@
 <%#
   TODO: build an inventory UI
   Key Features:
-    - display each item with raw value & basic effect
-    - use/equip/unequip/drop buttons
-    - show character stats and auto-update when equipment changes
+    - add buttons
+      - equip/unequip
+      - drop (destroy)
+      - mark as junk
+      - use (for consumables)
     - add sorting/filtering by item type/slot
 %>
 
@@ -17,6 +19,7 @@
 
 <%= render HeadingComponent.new(title: "Equipment", tag: :h2) %>
 
+<%# TODO: break down by Primary/Secondary/Armor (P/S/A) %>
 <% character.inventory_items.equipment.alphabetical.each do |inventory_item| %>
   <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
     <%= render InventoryItemComponent.new(inventory_item) %>

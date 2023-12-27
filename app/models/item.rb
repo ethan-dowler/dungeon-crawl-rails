@@ -4,9 +4,15 @@ class Item < ApplicationRecord
   has_many :personality_traits, as: :owner, dependent: :destroy
   has_many :traits, through: :personality_traits
 
+  scope :equipment, -> { where.not(items: { equipment_slot: nil }) }
+  scope :non_equipment, -> { where(items: { equipment_slot: nil }) }
+
   scope :armor, -> { where(equipment_slot: EquipmentSlot::ARMOR) }
   scope :primary, -> { where(equipment_slot: EquipmentSlot::PRIMARY) }
   scope :secondary, -> { where(equipment_slot: EquipmentSlot::SECONDARY) }
+
+  scope :two_handed, -> { joins(:traits).where(traits: { name: Trait::TWO_HANDED }) }
+  scope :dual_wield, -> { joins(:traits).where(traits: { name: Trait::DUAL_WIELD }) }
 
   def equippable? = equipment_slot.present?
 
@@ -14,20 +20,12 @@ class Item < ApplicationRecord
   def primary? = equipment_slot == EquipmentSlot::PRIMARY
   def secondary? = equipment_slot == EquipmentSlot::SECONDARY
 
-  def two_handed? = traits.include?(Trait::TWO_HANDED)
-  def dual_wield? = traits.include?(Trait::DUAL_WIELD)
+  def two_handed? = traits.exists?(name: Trait::TWO_HANDED)
+  def dual_wield? = traits.exists?(name: Trait::DUAL_WIELD)
 
   module EquipmentSlot
     ARMOR = "ARMOR".freeze
     PRIMARY = "PRIMARY".freeze
     SECONDARY = "SECONDARY".freeze
-  end
-
-  module Trait
-    # if primary is two-handed, can't equip a secondary
-    # ex. bows, great axes, some staves
-    TWO_HANDED = "two-handed".freeze
-    # if primary is dual wield, it can be equipped as a secondary
-    FLEXIBLE = "flexible".freeze
   end
 end

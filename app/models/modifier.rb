@@ -13,6 +13,8 @@ class Modifier < ApplicationRecord
   scope :attack, -> { where(stat: Stat::ATTACK) }
   scope :defense, -> { where(stat: Stat::DEFENSE) }
   scope :speed, -> { where(stat: Stat::SPEED) }
+  scope :spirit, -> { where(stat: Stat::SPIRIT) }
+  scope :wisdom, -> { where(stat: Stat::WISDOM) }
 
   def flat? = modifier_type == Type::FLAT
   def percent? = modifier_type == Type::PERCENT

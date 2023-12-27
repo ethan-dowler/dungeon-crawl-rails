@@ -12,11 +12,19 @@ class InventoryItem < ApplicationRecord
 
   scope :alphabetical, -> { joins(:item).order("items.name") }
 
-  scope :equipment, -> { joins(:item).where.not(items: { equipment_slot: nil }) }
-  scope :non_equipment, -> { joins(:item).where(items: { equipment_slot: nil }) }
+  scope :equipment, -> { joins(:item).merge(Item.equipment) }
+  scope :non_equipment, -> { joins(:item).merge(Item.non_equipment) }
+
+  scope :armor, -> { joins(:item).merge(Item.armor) }
+  scope :primary, -> { joins(:item).merge(Item.primary) }
+  scope :secondary, -> { joins(:item).merge(Item.secondary) }
+
+  scope :two_handed, -> { joins(:item).merge(Item.two_handed) }
+
   scope :equipped, -> { where(equipped: true) }
   scope :unequipped, -> { where(equipped: false) }
 
+  # used for managing "stacks"; i.e. multiple of the same stackable item; e.g. coins
   scope :like_me, ->(inventory_item) do
     where(owner: inventory_item.owner, item: inventory_item.item)
   end

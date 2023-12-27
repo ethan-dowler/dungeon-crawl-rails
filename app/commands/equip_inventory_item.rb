@@ -1,37 +1,45 @@
 class EquipInventoryItem
-  attr_reader :inventory_item
+  attr_reader :new_inventory_item
 
-  def initialize(inventory_item)
-    @inventory_item = inventory_item
+  def initialize(new_inventory_item)
+    @new_inventory_item = new_inventory_item
   end
 
   def execute
-    return if inventory_item.equipped?
+    return if new_inventory_item.equipped?
 
     InventoryItem.transaction do
-      unequip_current_item
-      unequip_secondary if inventory_item.two_handed?
-      inventory_item.update!(equipped: true)
+      unequip_current_items
+      unequip_secondary if new_inventory_item.two_handed?
+      unequip_two_handed_primary if new_inventory_item.secondary?
+      new_inventory_item.update!(equipped: true)
     end
   end
 
   private
 
-  def unequip_current_item
-    current_item =
-      inventory_item.owner.inventory_items.with_same_slot(inventory_item).equipped.first
-    return if current_item.nil?
+  def unequip_current_items
+    # may have multiple primaries equipped if dual-wielding
+    current_items_in_slot = new_inventory_item.owner.inventory_items.with_same_slot(new_inventory_item).equipped
+    return if current_items_in_slot.none?
 
-    if inventory_item.dual_wield?
+    if current_items_in_slot.first.dual_wield? && new_inventory_item.dual_wield?
+      # when equipping a second dual-wield weapon, remove the secondary item to "make room"
       unequip_secondary
     else
-      UnequipInventoryItem.new(current_item).execute
+      current_items_in_slot.each { UnequipInventoryItem.new(_1).execute }
     end
   end
 
   def unequip_secondary
+    # should never have more than one secondary equipped
     secondary_item =
-      inventory_item.owner.inventory_items.secondary.equipped.first
+      new_inventory_item.owner.inventory_items.secondary.equipped.first
     UnequipInventoryItem.new(secondary_item).execute if secondary_item.present?
+  end
+
+  def unequip_two_handed_primary
+    two_handed_primary = new_inventory_item.owner.inventory_items.two_handed.equipped.first
+    UnequipInventoryItem.new(two_handed_primary).execute if two_handed_primary.present?
   end
 end
