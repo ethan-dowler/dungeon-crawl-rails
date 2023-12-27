@@ -18,16 +18,6 @@
 
     <%= render(
       ProgressBarComponent.new(
-        name: :player_mp,
-        label: "MP",
-        current_value: 100,
-        max_value: 100,
-        color: :blue
-      )
-    ) %>
-
-    <%= render(
-      ProgressBarComponent.new(
         name: :player_xp,
         label: "XP",
         current_value: xp_progress_to_next_level,

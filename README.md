@@ -71,6 +71,10 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - allow player to see where they are relative to other rooms they've visited
   - show pips for unopened doors
   - add icons for items, monsters, etc. that are left behind
+- Town
+  - non-dungeon activities
+  - venders - buy/sell/trade items
+  - trainers - unlock skills or improve abilities
 
 ### Nice-to-have Features
 
@@ -81,7 +85,8 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - arcana (identify and use magic items & spells)
   - etc...
 - Town building
-  - use money from
+  - improve your experience outside of the dungeon!
+  - upgrade buildings like the shop,
 
 ## Contributing
 

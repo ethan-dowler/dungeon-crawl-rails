@@ -12,7 +12,7 @@ class ProgressBarComponent < ViewComponent::Base
     thin: "h-1"
   }.freeze
 
-  def initialize(name:, label:, current_value:, max_value:, previous_value: nil, color: :blue, width: :thick)
+  def initialize(name:, label:, current_value:, max_value:, previous_value: nil, color: :blue, width: :thick) # rubocop:disable Metrics/ParameterLists
     @name = name
     @label = label
     @current_value = current_value
