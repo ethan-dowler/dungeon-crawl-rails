@@ -8,7 +8,7 @@ DungeonTemplate.create!(
 Dir[Rails.root.join("db", "seeds", "**", "*.rb")].each { load _1 }
 
 Character.find_each do |character|
-  Item.find_each do |item|
+  Item.equipment.find_each do |item|
     AddInventoryItem.new(owner: character, item:).execute
   end
 end

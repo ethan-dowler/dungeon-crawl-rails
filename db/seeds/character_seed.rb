@@ -1,5 +1,5 @@
 Character.create!(
-  name: "Warrior",
+  name: "Fighter",
   level: 5,
   base_hp: 60,
   base_attack: 60,
