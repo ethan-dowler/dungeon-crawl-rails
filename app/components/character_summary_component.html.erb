@@ -12,7 +12,8 @@
         previous_value: previous_hp,
         current_value: current_hp,
         max_value: max_hp,
-        color: :red
+        color: :red,
+        show_value: true
       )
     ) %>
 
@@ -20,6 +21,7 @@
       ProgressBarComponent.new(
         name: :player_xp,
         label: "XP",
+        previous_value: previous_xp,
         current_value: xp_progress_to_next_level,
         max_value: xp_needed_from_current_to_next_level,
         color: :black,

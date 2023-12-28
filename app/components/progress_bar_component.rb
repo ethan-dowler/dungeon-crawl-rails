@@ -1,5 +1,7 @@
 class ProgressBarComponent < ViewComponent::Base
-  attr_reader :name, :label, :current_value, :max_value, :previous_value, :color, :width
+  attr_reader :name, :label, :current_value, :max_value, :previous_value, :color, :width, :show_value
+
+  alias_method :show_value?, :show_value
 
   FILL_COLOR_CLASSES = {
     red: "bg-red-600",
@@ -12,7 +14,7 @@ class ProgressBarComponent < ViewComponent::Base
     thin: "h-1"
   }.freeze
 
-  def initialize(name:, label:, current_value:, max_value:, previous_value: nil, color: :blue, width: :thick) # rubocop:disable Metrics/ParameterLists
+  def initialize(name:, label:, current_value:, max_value:, previous_value: nil, color: :blue, width: :thick, show_value: false) # rubocop:disable Metrics/ParameterLists, Layout/LineLength
     @name = name
     @label = label
     @current_value = current_value
@@ -20,6 +22,7 @@ class ProgressBarComponent < ViewComponent::Base
     @previous_value = previous_value
     @color = color
     @width = width
+    @show_value = show_value
   end
 
   def bar_height_class = BAR_HEIGHT_CLASSES[width]

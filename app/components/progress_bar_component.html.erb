@@ -12,16 +12,24 @@
   }
 </style>
 
-<div class="flex text-xs items-center p-1">
+<div class="flex text-xs items-center p-1 <%= "mb-1" if show_value? %>">
   <span class="w-5 mr-1">
     <%= label %>
   </span>
 
-  <div class="w-full rounded-full bg-gray-100">
-    <div
-      id="progressBar-<%= name %>"
-      class="<%= fill_color_class %> <%= bar_height_class %> rounded-full"
-    >
+  <div class="flex flex-col w-full relative">
+    <div class="rounded-full bg-gray-100">
+      <div
+        id="progressBar-<%= name %>"
+        class="<%= fill_color_class %> <%= bar_height_class %> rounded-full"
+      >
+      </div>
     </div>
+
+    <% if show_value? %>
+      <div class="text-center absolute top-2 w-full">
+        <%= current_value %> / <%= max_value %>
+      </div>
+    <% end %>
   </div>
 </div>
