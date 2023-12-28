@@ -7,7 +7,7 @@ class Character < ApplicationRecord
 
   has_many :dungeon_runs, dependent: :destroy
 
-  has_many :inventory_items, foreign_key: :owner_id, inverse_of: :owner, dependent: :destroy
+  has_many :inventory_items, as: :owner, dependent: :destroy
   has_many :items, through: :inventory_items, dependent: :destroy
 
   before_create :set_xp
@@ -50,7 +50,13 @@ class Character < ApplicationRecord
     return if level == LEVEL_CAP
     return unless xp > xp_to_next_level
 
+    old_max_hp = max_hp
     self.level = level + 1
+
+    new_max_hp = max_hp
+    hp_gained = new_max_hp - old_max_hp
+    self.current_hp = current_hp + hp_gained
+
     check_level_up
   end
 end

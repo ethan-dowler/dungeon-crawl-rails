@@ -6,8 +6,7 @@ class MonstersController < ApplicationController
   # Or maybe make a controller for each attack type? Might be too much?
   # Maybe the action the user is taking can be a param?
   def attack # rubocop:disable Metrics/AbcSize
-    # TODO: cache the entire character state, so I can animate all the things
-    @previous_hp = dungeon_run.character.current_hp
+    @previous_character = dungeon_run.character.dup
     DungeonRun.transaction do
       # player and monster act in speed order
       combatants = [dungeon_run.character, monster].sort! { |a, b| b.speed - a.speed }

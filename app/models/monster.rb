@@ -11,13 +11,17 @@ class Monster < ApplicationRecord
   belongs_to :current_room, class_name: "Room"
   has_one :dungeon, through: :current_room
 
-  delegate :name, :base_hp, :base_attack, :base_defense, :base_experience_yield, to: :monster_template
+  delegate_missing_to :monster_template
 
   after_create :add_inventory
 
+  # STATS - TODO: DRY this up b/t mosnter & character
   def max_hp = total(:hp)
   def attack = total(:attack)
   def defense = total(:defense)
+  def speed = total(:speed)
+  def spirit = total(:spirit)
+  def wisdom = total(:wisdom)
 
   private
 

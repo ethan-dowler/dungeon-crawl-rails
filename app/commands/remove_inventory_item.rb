@@ -1,5 +1,5 @@
 class RemoveInventoryItem
-  attr_reader :inventory_item, quantity
+  attr_reader :inventory_item, :quantity
 
   def initialize(inventory_item:, quantity: 1)
     @inventory_item = inventory_item
