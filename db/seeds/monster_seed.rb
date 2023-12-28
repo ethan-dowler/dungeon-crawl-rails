@@ -5,10 +5,17 @@ coin =
     description: "A simple golden disc of unkown value and origin.",
     stackable: true
   )
-tooth =
+rat_tooth =
   Item.create!(
-    name: "Rat tooth",
-    description: "Jagged, sharp, and painful!"
+    name: "Rat Tooth",
+    description: "Jagged, sharp, and painful!",
+    stackable: true
+  )
+rat_tail =
+  Item.create!(
+    name: "Rat Tail",
+    description: "A delicacy for those who know how to cook it.",
+    stackable: true
   )
 
 # Yup... the bane of every young adventurer...
@@ -22,5 +29,6 @@ giant_rat =
     base_experience_yield: 50
   )
 
-giant_rat.drops.create!(item: coin, percent_chance: 70)
-giant_rat.drops.create!(item: tooth, percent_chance: 20)
+giant_rat.drops.create!(item: coin, percent_chance: 80)
+giant_rat.drops.create!(item: rat_tooth, percent_chance: 20)
+giant_rat.drops.create!(item: rat_tail, percent_chance: 5)
