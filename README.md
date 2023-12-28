@@ -44,8 +44,6 @@ Aside from the actual gameplay, I've been very interested in building a game wit
 
 ### Minimum Viable Game
 
-- Dungeon UI
-  - switch between "dungeon" tab and "inventory" tab
 - Game log
   - track what happens during the dungeon run
   - display scrollable window of game log
@@ -57,7 +55,7 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - allow the player to do more than a basic attack
 - Dungeon design
   - multiple, hand-crafted dungeons with recommended level ranges
-  - Lower floors have more complicated layouts and tougher enemies
+  - Deeper floors have more complicated layouts and tougher enemies
 - Monster design
   - make something other than a giant rat
 - Skill Point progression system
@@ -67,14 +65,11 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - allow player to "build" a character from scratch
   - set base stats (using a point-buy system?)
   - choose starting equipment (spend a certain amount of money? choose a preset bundle?)
-- Dungeon Map tab
+- Dungeon Map
   - allow player to see where they are relative to other rooms they've visited
   - show pips for unopened doors
   - add icons for items, monsters, etc. that are left behind
-- Town
-  - non-dungeon activities
-  - venders - buy/sell/trade items
-  - trainers - unlock skills or improve abilities
+  - better navigation UI (N/E/S/W)
 
 ### Nice-to-have Features
 
@@ -84,9 +79,11 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - awareness (spot hidden doors, traps, and enemies)
   - arcana (identify and use magic items & spells)
   - etc...
-- Town building
-  - improve your experience outside of the dungeon!
-  - upgrade buildings like the shop,
+- Town
+  - non-dungeon activities
+  - venders - buy/sell/trade items
+  - trainers - unlock skills or improve abilities
+  - unlock and upgrade town buildings!
 
 ## Technical Details
 
