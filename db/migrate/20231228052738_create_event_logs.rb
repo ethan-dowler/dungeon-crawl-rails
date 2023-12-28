@@ -1,6 +1,6 @@
-class CreateEventMessages < ActiveRecord::Migration[7.0]
+class CreateEventLogs < ActiveRecord::Migration[7.0]
   def change
-    create_table :event_messages do |t|
+    create_table :event_logs do |t|
       t.references :dungeon_run, null: false
       t.string :message, null: false
 

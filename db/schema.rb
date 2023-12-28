@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_23_213307) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,11 +71,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_213307) do
     t.index ["entrance_room_id"], name: "index_dungeons_on_entrance_room_id"
   end
 
-  create_table "event_messages", force: :cascade do |t|
+  create_table "event_logs", force: :cascade do |t|
     t.bigint "dungeon_run_id", null: false
     t.string "message", null: false
     t.datetime "created_at", null: false
-    t.index ["dungeon_run_id"], name: "index_event_messages_on_dungeon_run_id"
+    t.index ["dungeon_run_id"], name: "index_event_logs_on_dungeon_run_id"
   end
 
   create_table "floor_encounters", force: :cascade do |t|

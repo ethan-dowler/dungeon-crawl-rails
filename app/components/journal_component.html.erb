@@ -1,0 +1,24 @@
+<div
+  id="dungeon_journal"
+  class="
+    absolute
+    bottom-0 left-0 right-0
+    h-36
+    overflow-y-auto
+    border-t-2 border-gray-300
+  "
+>
+  <% event_logs.order(created_at: :desc).each do |event_log| %>
+    <div class="flex">
+      <span class="mr-2 text-slate-400">
+        <%# create custom time format for logs: https://thoughtbot.com/blog/custom-formats-for-datetime %>
+        <%# display user local time: https://stackoverflow.com/questions/32451112/rails-handling-user-specific-timezone %>
+        <%= event_log.created_at.to_s(:short)  %>
+      </span>
+
+      <span>
+        <%= event_log.message %>
+      </span>
+    </div>
+  <% end %>
+</div>

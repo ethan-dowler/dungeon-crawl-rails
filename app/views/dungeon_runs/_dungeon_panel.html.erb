@@ -34,4 +34,5 @@
   <% end %>
 
   <%= render NavigationComponent.new(dungeon_run) if dungeon_run.active? %>
+  <%= render JournalComponent.new(dungeon_run.event_logs) %>
 </div>
