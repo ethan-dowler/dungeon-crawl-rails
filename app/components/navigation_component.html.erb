@@ -1,11 +1,25 @@
-<div id="navigation" class="absolute bottom-0 left-0 right-0 h-36 border-t-2 border-gray-300">
+<div
+  id="navigation"
+  class="
+    absolute
+    bottom-40 right-4
+    h-32 w-32
+    border border-slate-300 rounded-full
+    bg-white
+  "
+>
   <%# TODO: Add Stimulus controller for collapsing navigation %>
-  <% POSSIBLE_DIRECTIONS.each do |direction| %>
+  <% Dungeon::Direction::ALL.each do |direction| %>
     <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
-      <div class="absolute <%= direction_classes(direction) %>">
+      <div class="
+        absolute
+        <%= direction_classes(direction) %>
+        text-s
+        flex justify-center items-center
+      ">
         <%=
           link_to(
-            direction.to_s.titleize,
+            direction_text(direction),
             go_dungeon_run_path(dungeon_run, direction:),
             class: "Link",
             disabled: true,

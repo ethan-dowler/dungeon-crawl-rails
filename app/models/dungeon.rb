@@ -11,4 +11,15 @@ class Dungeon < ApplicationRecord
   def first_floor
     @first_floor ||= floors.find_by(level: 1)
   end
+
+  module Direction
+    NORTH = "north".freeze
+    EAST = "east".freeze
+    SOUTH = "south".freeze
+    WEST = "west".freeze
+    ABOVE = "above".freeze
+    BELOW = "below".freeze
+
+    ALL = [NORTH, EAST, SOUTH, WEST, ABOVE, BELOW].freeze
+  end
 end

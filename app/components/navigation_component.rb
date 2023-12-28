@@ -1,5 +1,5 @@
 class NavigationComponent < ViewComponent::Base
-  POSSIBLE_DIRECTIONS = %i[north east south west above below].freeze
+  POSSIBLE_DIRECTIONS = %w[north east south west above below].freeze
 
   attr_reader :dungeon_run
 
@@ -9,28 +9,29 @@ class NavigationComponent < ViewComponent::Base
 
   def direction_classes(direction) # rubocop:disable Metrics/MethodLength
     case direction
-    when :north
+    when Dungeon::Direction::NORTH
       "top-1 left-1/2 -translate-x-1/2"
-    when :east
-      "right-2 top-1/2 -translate-y-1/2"
-    when :south
+    when Dungeon::Direction::EAST
+      "right-1 top-1/2 -translate-y-1/2"
+    when Dungeon::Direction::SOUTH
       "bottom-1 left-1/2 -translate-x-1/2"
-    when :west
-      "left-2 top-1/2 -translate-y-1/2"
-    when :above, :below
+    when Dungeon::Direction::WEST
+      "left-1 top-1/2 -translate-y-1/2"
+    when Dungeon::Direction::ABOVE, Dungeon::Direction::BELOW
       "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
     else
       ""
     end
   end
 
-  private
-
-  def room_above?
-    dungeon_run.current_room.above_room.present?
-  end
-
-  def room_below?
-    dungeon_run.current_room.below_room.present?
+  def direction_text(direction)
+    case direction
+    when Dungeon::Direction::ABOVE
+      "Up"
+    when Dungeon::Direction::BELOW
+      "Down"
+    else
+      direction.titleize
+    end
   end
 end

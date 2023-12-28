@@ -16,6 +16,11 @@ class DungeonRunsController < ApplicationController
         character_id: params[:character_id],
         dungeon_id: new_dungeon.id
       )
+
+    # TODO: require character to heal outside of the dungeon, for example:
+    # - resting at an inn
+    # - using items
+    # - paying a healer
     dungeon_run.character.refresh
 
     redirect_to dungeon_run_path(dungeon_run)
