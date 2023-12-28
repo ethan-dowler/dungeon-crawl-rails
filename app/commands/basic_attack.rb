@@ -9,10 +9,10 @@ class BasicAttack
   end
 
   def execute
-    return if attacker.defeated?
+    return if attacker.defeated? || defender.defeated?
 
     defender.update!(current_hp: defender.current_hp - damage)
-    damage.to_i
+    # TODO: add damage done to game log; gotta create a game log first
   end
 
   private

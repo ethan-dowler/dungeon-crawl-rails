@@ -6,10 +6,14 @@ module HasHp
   included do
     before_validation :set_current_hp, on: :create
     before_validation :enforce_hp_boundaries
+
+    scope :alive, -> { where(current_hp: 1..) }
+    scope :defeated, -> { where(current_hp: 0) }
   end
 
   def max_hp = base_hp
 
+  def alive? = current_hp.positive?
   def defeated? = current_hp.zero?
 
   private

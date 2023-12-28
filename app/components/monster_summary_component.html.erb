@@ -4,7 +4,7 @@
       <%= monster.name %> Lvl. <%= monster.level %>
     </div>
 
-    <% if dungeon_run.active? %>
+    <% if dungeon_run.active? && monster.alive? %>
       <%= button_to(
         "Attack",
         attack_dungeon_run_monster_path(dungeon_run, monster),
