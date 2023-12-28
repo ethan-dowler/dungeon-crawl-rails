@@ -9,9 +9,10 @@ class MonstersController < ApplicationController
     # TODO: cache the entire character state, so I can animate all the things
     @previous_hp = dungeon_run.character.current_hp
     DungeonRun.transaction do
-      # TODO: measure speed/initiative to see who goes first
-      BasicAttack.new(attacker: dungeon_run.character, defender: monster).execute
-      BasicAttack.new(attacker: monster, defender: dungeon_run.character).execute
+      # player and monster act in speed order
+      combatants = [dungeon_run.character, monster].sort! { |a, b| b.speed - a.speed }
+      BasicAttack.new(attacker: combatants.first, defender: combatants.second).execute
+      BasicAttack.new(attacker: combatants.second, defender: combatants.first).execute
 
       ResolveCombat.new(character: dungeon_run.character, monster:).execute
     end
