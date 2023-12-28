@@ -42,6 +42,12 @@ html { @apply h-full; }
 .Button--compact {
   @apply py-1 px-2;
 }
+.Button--green {
+  @apply bg-green-600;
+}
+.Button--green:hover {
+  @apply bg-green-700;
+}
 .Button--red {
   @apply bg-red-600;
 }
