@@ -8,22 +8,24 @@ class ResolveCombat
 
   def execute
     DungeonRun.transaction do
-      resolve_monster
-      resolve_character
+      check_monster_death
+      check_player_death
     end
   end
 
   private
 
-  def resolve_monster
+  def check_monster_death
     return unless monster.defeated?
 
-    GainXp.new(character:, monster:).execute
+    character.current_run.log("You defeated #{monster.name}.")
+    GainCombatXp.new(character:, monster:).execute
   end
 
-  def resolve_character
+  def check_player_death
     return unless character.defeated? && character.current_run.present?
 
+    character.current_run.log("#{monster.name} defeated you. Your run is over.")
     EndRun.new(dungeon_run: character.current_run, ended_reason: DungeonRun::EndedReason::DEFEATED).execute
   end
 end

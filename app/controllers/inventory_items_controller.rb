@@ -1,8 +1,10 @@
 class InventoryItemsController < ApplicationController
   helper_method :inventory_item, :dungeon_run, :character
 
+  def index; end
+
   def loot
-    TransferItem.new(inventory_item:, receiver: dungeon_run.character).execute
+    LootItem.new(inventory_item:, character: dungeon_run.character).execute
   end
 
   def toggle

@@ -1,4 +1,4 @@
-class NavigationComponent < ViewComponent::Base
+class NavigationComponent < ApplicationComponent
   POSSIBLE_DIRECTIONS = %w[north east south west above below].freeze
 
   attr_reader :dungeon_run

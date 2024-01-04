@@ -1,4 +1,4 @@
-class JournalComponent < ViewComponent::Base
+class JournalComponent < ApplicationComponent
   attr_reader :event_logs
 
   def initialize(event_logs)

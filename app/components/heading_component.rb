@@ -1,4 +1,4 @@
-class HeadingComponent < ViewComponent::Base
+class HeadingComponent < ApplicationComponent
   attr_reader :title, :tag
 
   def initialize(title:, tag: :h1)

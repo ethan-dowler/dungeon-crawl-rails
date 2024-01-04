@@ -1,4 +1,4 @@
-class MonsterSummaryComponent < ViewComponent::Base
+class MonsterSummaryComponent < ApplicationComponent
   attr_reader :monster, :dungeon_run
 
   def initialize(monster:, dungeon_run:)

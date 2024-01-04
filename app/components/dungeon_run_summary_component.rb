@@ -1,4 +1,4 @@
-class DungeonRunSummaryComponent < ViewComponent::Base
+class DungeonRunSummaryComponent < ApplicationComponent
   attr_reader :dungeon_run
 
   def initialize(dungeon_run)

@@ -1,7 +1,11 @@
-<%= turbo_stream.update :character_summary do %>
+<%= turbo_stream.replace :character_summary do %>
   <%= render CharacterSummaryComponent.new(dungeon_run.character, previous_character: @previous_character) %>
 <% end %>
 
-<%= turbo_stream.update "monster-#{monster.id}" do %>
+<%= turbo_stream.replace "monster_summary-#{monster.id}" do %>
   <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>
+<% end %>
+
+<%= turbo_stream.replace :journal do %>
+  <%= render JournalComponent.new(dungeon_run.event_logs.recent) %>
 <% end %>

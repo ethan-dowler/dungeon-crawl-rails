@@ -1,40 +1,43 @@
-<div id="monster_summary" class="mb-4 flex flex-col justify-center">
-  <div class="mb-2 flex items-center justify-between">
-    <div class="mr-2">
-      <%= monster.name %> Lvl. <%= monster.level %>
-    </div>
+<%= turbo_frame_tag "monster_summary-#{monster.id}" do %>
+  <div class="mb-4 flex flex-col justify-center">
+    <div class="mb-2 flex items-center justify-between">
+      <div class="mr-2">
+        <%= monster.name %> Lvl. <%= monster.level %>
+      </div>
 
-    <% if dungeon_run.active? && monster.alive? %>
-      <%= button_to(
-        "Attack",
-        attack_dungeon_run_monster_path(dungeon_run, monster),
-        class: "Button Button--compact"
-      ) %>
-    <% end %>
-  </div>
-
-  <%# TODO: add previous monster hp %>
-  <%= render(
-    ProgressBarComponent.new(
-      name: "monster_hp-#{monster.id}",
-      label: "HP",
-      current_value: monster.current_hp,
-      max_value: monster.max_hp,
-      color: :red
-    )
-  ) %>
-  
-  <% if monster.defeated? %>
-    <% monster.inventory_items.each do |inventory_item| %>
-      <div class="mb-1 flex items-center justify-between">
-        <%= inventory_item.name %>
-
+      <% if dungeon_run.active? && monster.alive? %>
         <%= button_to(
-          "Take",
-          loot_dungeon_run_inventory_item_path(dungeon_run, inventory_item),
+          "Attack",
+          attack_dungeon_run_monster_path(dungeon_run, monster),
           class: "Button Button--compact"
         ) %>
-      </div>
+      <% end %>
+    </div>
+
+    <%# TODO: add previous monster hp %>
+    <%= render(
+      ProgressBarComponent.new(
+        name: "monster_hp-#{monster.id}",
+        label: "HP",
+        current_value: monster.current_hp,
+        max_value: monster.max_hp,
+        color: :red,
+        show_value: true # TODO: don't show monster exact monster damage here or in log
+      )
+    ) %>
+    
+    <% if monster.defeated? %>
+      <% monster.inventory_items.each do |inventory_item| %>
+        <div class="mb-1 flex items-center justify-between">
+          <%= inventory_item.name %>
+
+          <%= button_to(
+            "Take",
+            loot_dungeon_run_inventory_item_path(dungeon_run, inventory_item),
+            class: "Button Button--compact"
+          ) %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

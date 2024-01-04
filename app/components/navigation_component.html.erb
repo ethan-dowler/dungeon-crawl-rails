@@ -1,3 +1,4 @@
+<%# TODO: use turbo streams to update just this frame and the "room" frame %>
 <div
   id="navigation"
   class="
@@ -8,7 +9,6 @@
     bg-white
   "
 >
-  <%# TODO: Add Stimulus controller for collapsing navigation %>
   <% Dungeon::Direction::ALL.each do |direction| %>
     <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
       <div class="

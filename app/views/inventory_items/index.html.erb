@@ -15,9 +15,7 @@
     - add sorting/filtering by item type/slot
 %>
 
-<%= turbo_frame_tag "character_stats-#{character.id}" do %>
-  <%= render CharacterStatsComponent.new(character) %>
-<% end %>
+<%= render CharacterStatsComponent.new(character) %>
 
 <hr class="my-4" />
 
@@ -28,33 +26,25 @@
 <%# TODO: make each equipment section collapsible %>
 
 <% character.inventory_items.armor.alphabetical.each do |inventory_item| %>
-  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
-    <%= render InventoryItemComponent.new(inventory_item) %>
-  <% end %>
+  <%= render InventoryItemComponent.new(inventory_item) %>
 <% end %>
 
 <%= render HeadingComponent.new(title: "Primary", tag: :h2) %>
 
 <% character.inventory_items.primary.alphabetical.each do |inventory_item| %>
-  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
-    <%= render InventoryItemComponent.new(inventory_item) %>
-  <% end %>
+  <%= render InventoryItemComponent.new(inventory_item) %>
 <% end %>
 
 <%= render HeadingComponent.new(title: "Secondary", tag: :h2) %>
 
 <% character.inventory_items.secondary.alphabetical.each do |inventory_item| %>
-  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
-    <%= render InventoryItemComponent.new(inventory_item) %>
-  <% end %>
+  <%= render InventoryItemComponent.new(inventory_item) %>
 <% end %>
 
 <%= render HeadingComponent.new(title: "Other", tag: :h2) %>
 
 <% character.inventory_items.non_equipment.alphabetical.each do |inventory_item| %>
-  <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
-    <%= render InventoryItemComponent.new(inventory_item) %>
-  <% end %>
+  <%= render InventoryItemComponent.new(inventory_item) %>
 <% end %>
 
 <%# TODO: make a "junk" flag, so players can mark and sell easily %>

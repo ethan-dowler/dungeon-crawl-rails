@@ -10,8 +10,8 @@ class MonstersController < ApplicationController
     DungeonRun.transaction do
       # player and monster act in speed order
       combatants = [dungeon_run.character, monster].sort! { |a, b| b.speed - a.speed }
-      BasicAttack.new(attacker: combatants.first, defender: combatants.second).execute
-      BasicAttack.new(attacker: combatants.second, defender: combatants.first).execute
+      BasicAttack.new(dungeon_run:, attacker: combatants.first, defender: combatants.second).execute
+      BasicAttack.new(dungeon_run:, attacker: combatants.second, defender: combatants.first).execute
 
       ResolveCombat.new(character: dungeon_run.character, monster:).execute
     end

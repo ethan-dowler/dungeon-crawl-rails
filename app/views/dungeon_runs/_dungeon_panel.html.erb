@@ -1,6 +1,6 @@
 <div id="dungeon_panel" class="pt-4">
-  <%# exit dungeon button %>
   <%# TODO: convert this into a slide-out menu %>
+  <%# exit dungeon button %>
   <%= button_to(
     end_dungeon_run_path(dungeon_run),
     class: "Button Button--red Button--icon absolute top-2 right-2",
@@ -34,5 +34,5 @@
   <% end %>
 
   <%= render NavigationComponent.new(dungeon_run) if dungeon_run.active? %>
-  <%= render JournalComponent.new(dungeon_run.event_logs) %>
+  <%= render JournalComponent.new(dungeon_run.event_logs.reload.recent) %>
 </div>

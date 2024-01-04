@@ -1,3 +1,7 @@
-<%= turbo_stream.update "monster-#{inventory_item.owner.id}" do %>
+<%= turbo_stream.replace "monster-#{inventory_item.owner.id}" do %>
   <%= render MonsterSummaryComponent.new(monster: inventory_item.owner, dungeon_run:) %>
+<% end %>
+
+<%= turbo_stream.replace :journal do %>
+  <%= render JournalComponent.new(dungeon_run.event_logs.recent) %>
 <% end %>

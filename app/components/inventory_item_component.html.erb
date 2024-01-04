@@ -1,48 +1,50 @@
-<div class="mb-2 flex justify-between items-start">
-  <div>
+<%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
+  <div class="mb-2 flex justify-between items-start">
     <div>
-      <%= inventory_item.name %>
+      <div>
+        <%= inventory_item.name %>
 
-      <% if inventory_item.stackable? %>
-        <i class="text-xs text-slate-400">
-          x<%= inventory_item.quantity %>
-        </i>
+        <% if inventory_item.stackable? %>
+          <i class="text-xs text-slate-400">
+            x<%= inventory_item.quantity %>
+          </i>
+        <% end %>
+      </div>
+
+      <div class="pl-1 flex flex-col text-xs text-slate-400">
+        <div>
+          <% inventory_item.traits.sort.each do |trait| %>
+            <div class="mb-0.5 italic font-semibold hover:cursor-pointer">
+              <%= trait.name %>
+              <%# TODO: add tooltip with trait description %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="flex">
+          <% inventory_item.modifiers.order(value: :desc, stat: :asc).each do |modifier| %>
+            <div class="
+              py-0.5 px-1 mr-1
+              border border-slate-300 rounded-lg
+            ">
+              <%= "+" if modifier.value.positive? %><%= modifier.value %><%= "%" if modifier.percent? %>
+              <%= modifier.stat.downcase %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <%# TODO: list modifiers on equipment %>
+    </div>
+
+    <div>
+      <% if inventory_item.equippable? %>
+        <%= button_to(
+          equip_text,
+          toggle_inventory_item_path(inventory_item),
+          class: "Button Button--compact"
+        ) %>
       <% end %>
     </div>
-
-    <div class="pl-1 flex flex-col text-xs text-slate-400">
-      <div>
-        <% inventory_item.traits.sort.each do |trait| %>
-          <div class="mb-0.5 italic font-semibold hover:cursor-pointer">
-            <%= trait.name %>
-            <%# TODO: add tooltip with trait description %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="flex">
-        <% inventory_item.modifiers.order(value: :desc, stat: :asc).each do |modifier| %>
-          <div class="
-            py-0.5 px-1 mr-1
-            border border-slate-300 rounded-lg
-          ">
-            <%= "+" if modifier.value.positive? %><%= modifier.value %><%= "%" if modifier.percent? %>
-            <%= modifier.stat.downcase %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <%# TODO: list modifiers on equipment %>
+    <%# TODO: add actions like "drop" and "mark as trash" %>
   </div>
-
-  <div>
-    <% if inventory_item.equippable? %>
-      <%= button_to(
-        equip_text,
-        toggle_inventory_item_path(inventory_item),
-        class: "Button Button--compact"
-      ) %>
-    <% end %>
-  </div>
-  <%# TODO: add actions like "drop" and "mark as trash" %>
-</div>
+<% end %>

@@ -18,7 +18,7 @@ rusty_dagger =
   )
 rusty_dagger.personality_traits.create!(trait: dual_wield_trait)
 rusty_dagger.modifiers.flat.attack.create!(value: 1)
-rusty_dagger.modifiers.flat.speed.create!(value: 4)
+rusty_dagger.modifiers.flat.speed.create!(value: 3)
 
 rusty_short_sword =
   Item.primary.create!(
@@ -26,7 +26,7 @@ rusty_short_sword =
     description: "It's seen better days..."
   )
 rusty_short_sword.personality_traits.create!(trait: dual_wield_trait)
-rusty_short_sword.modifiers.flat.attack.create!(value: 3)
+rusty_short_sword.modifiers.flat.attack.create!(value: 4)
 rusty_short_sword.modifiers.flat.speed.create!(value: 1)
 
 rusty_long_sword =
@@ -34,7 +34,7 @@ rusty_long_sword =
     name: "Rusty Long Sword",
     description: "It's seen better days..."
   )
-rusty_long_sword.modifiers.flat.attack.create!(value: 5)
+rusty_long_sword.modifiers.flat.attack.create!(value: 6)
 
 rusty_great_sword =
   Item.primary.create!(
@@ -42,7 +42,7 @@ rusty_great_sword =
     description: "It's seen better days..."
   )
 rusty_great_sword.personality_traits.create!(trait: two_handed_trait)
-rusty_great_sword.modifiers.flat.attack.create!(value: 9)
+rusty_great_sword.modifiers.flat.attack.create!(value: 11)
 rusty_great_sword.modifiers.flat.speed.create!(value: -2)
 
 # magical
@@ -78,14 +78,14 @@ small_shield =
     name: "Small Shield",
     description: "Won't block much."
   )
-small_shield.modifiers.flat.defense.create!(value: 3)
+small_shield.modifiers.flat.defense.create!(value: 4)
 
 small_candle =
   Item.secondary.create!(
     name: "Small Candle",
     description: "Emits a dim light."
   )
-small_candle.modifiers.flat.wisdom.create!(value: 3)
+small_candle.modifiers.flat.wisdom.create!(value: 4)
 
 ## armor
 weak_leather =

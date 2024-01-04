@@ -7,6 +7,8 @@ DungeonTemplate.create!(
 
 Dir[Rails.root.join("db", "seeds", "**", "*.rb")].each { load _1 }
 
+# TODO: allow player to "buy" starting equipment
+# start each character with one of each equipment item
 Character.find_each do |character|
   Item.equipment.find_each do |item|
     AddInventoryItem.new(owner: character, item:).execute

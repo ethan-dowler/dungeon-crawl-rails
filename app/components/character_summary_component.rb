@@ -1,4 +1,4 @@
-class CharacterSummaryComponent < ViewComponent::Base
+class CharacterSummaryComponent < ApplicationComponent
   attr_reader :character, :previous_character, :show_status
   alias_method :show_status?, :show_status
 

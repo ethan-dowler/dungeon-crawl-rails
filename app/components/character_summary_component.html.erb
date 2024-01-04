@@ -1,4 +1,4 @@
-<div id="character_summary">
+<%= turbo_frame_tag :character_summary do %>
   <div class="text-xl font-bold mb-2">
     <%= name %>
     Lvl. <%= level %>
@@ -29,4 +29,4 @@
       )
     ) %>    
   <% end %>
-</div>
+<% end %>

@@ -18,6 +18,8 @@ class DungeonRun < ApplicationRecord
   def completed? = ended_reason == EndedReason::COMPLETED
   def died? = ended_reason == EndedReason::DEFEATED
 
+  def log(message) = event_logs.create!(message:)
+
   private
 
   def ensure_current_room
@@ -33,7 +35,7 @@ class DungeonRun < ApplicationRecord
   end
 
   def init_event_logs
-    event_logs.create!(message: "#{character.name} entered #{dungeon_template.name}")
+    event_logs.create!(message: "You entered #{dungeon_template.name}")
   end
 
   module EndedReason

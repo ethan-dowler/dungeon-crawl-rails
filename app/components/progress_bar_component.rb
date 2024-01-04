@@ -1,4 +1,4 @@
-class ProgressBarComponent < ViewComponent::Base
+class ProgressBarComponent < ApplicationComponent
   attr_reader :name, :label, :current_value, :max_value, :previous_value, :color, :width, :show_value
 
   alias_method :show_value?, :show_value

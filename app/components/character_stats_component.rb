@@ -1,4 +1,4 @@
-class CharacterStatsComponent < ViewComponent::Base
+class CharacterStatsComponent < ApplicationComponent
   attr_reader :character
 
   TOP_ROW_STATS = %i[
