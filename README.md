@@ -39,25 +39,23 @@ Aside from the actual gameplay, I've been very interested in building a game wit
 - Monsters
   - only current monster is a giant rat!
   - monsters have loot with a percent chance to drop
-
-## Roadmap Features
-
-### Minimum Viable Game
-
 - Game log
   - track what happens during the dungeon run
   - display scrollable window of game log
   - add to game log whenever something of note happens (attack, deal damage, enter a room, pick up an item, etc.)
 
+## Feature Roadmap
+
 ### Planned Features
 
 - More combat actions
   - allow the player to do more than a basic attack
-- Dungeon design
-  - multiple, hand-crafted dungeons with recommended level ranges
-  - Deeper floors have more complicated layouts and tougher enemies
-- Monster design
-  - make something other than a giant rat
+  - martial techniques
+  - spells! (consume MP? turn-based CD? certain times per dungeon? per floor?)
+  - defend/block/dodge
+- Updated combat system
+  - select action THEN select target
+  - turn-based with speed/action determining when next action happens (a la [Doom & Destiny](https://doomanddestiny.fandom.com/wiki/Doom_%26_Destiny?file=DoandDe_Screenshot3_-_Use_Spell.jpg))
 - Skill Point progression system
   - gain skill points by leveling up
   - spend skill points to unlock new abilities and stat bonuses (i.e. "perks")
@@ -65,25 +63,36 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - allow player to "build" a character from scratch
   - set base stats (using a point-buy system?)
   - choose starting equipment (spend a certain amount of money? choose a preset bundle?)
-- Dungeon Map
-  - allow player to see where they are relative to other rooms they've visited
-  - show pips for unopened doors
-  - add icons for items, monsters, etc. that are left behind
-  - better navigation UI (N/E/S/W)
 
-### Nice-to-have Features
+### Expanded Features
 
+- Party mechanics
+  - allow player to control multiple characters in a single run
+- Town
+  - non-dungeon activities
+  - venders - buy/sell/trade items
+  - trainers - unlock skills or improve abilities
+  - unlock and upgrade town buildings!
+- Story/Campaign
+  - track player progress through narrative events
+  - track time spent during campaign (in-game days)
+  - progressive, hand-crafted dungeons
+    - some level of open-worldness with multiple paths for progression
+    - More complicated dungeons with story-trigger mechanics
+    - Deeper floors have more complicated layouts and tougher enemies
 - Skills
   - lock-picking (open locked doors and chests)
   - stealth (remain hidden from enemies)
   - awareness (spot hidden doors, traps, and enemies)
   - arcana (identify and use magic items & spells)
   - etc...
-- Town
-  - non-dungeon activities
-  - venders - buy/sell/trade items
-  - trainers - unlock skills or improve abilities
-  - unlock and upgrade town buildings!
+
+### On-Hold Features
+
+- Dungeon Map
+  - allow player to see where they are relative to other rooms they've visited
+  - show pips for unopened doors
+  - add icons for items, monsters, etc. that are left behind
 
 ## Technical Details
 
@@ -92,7 +101,7 @@ Aside from the actual gameplay, I've been very interested in building a game wit
     - [Hotwire](https://hotwired.dev/)
   - [RSpec](https://rspec.info/)
   - [Rubocop](https://rubocop.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- [Tailwind CSS](https://tailwindcss.com/) (experimental; considering dropping this)
 - [Hero Icons](https://heroicons.com/)
 
 ## Contributing
