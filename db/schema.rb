@@ -61,7 +61,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
 
   create_table "dungeon_templates", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description"
+    t.string "description", null: false
+    t.bigint "entrance_room_template_id"
+    t.index ["entrance_room_template_id"], name: "index_dungeon_templates_on_entrance_room_template_id"
   end
 
   create_table "dungeons", force: :cascade do |t|
@@ -78,21 +80,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.index ["dungeon_run_id"], name: "index_event_logs_on_dungeon_run_id"
   end
 
-  create_table "floor_encounters", force: :cascade do |t|
-    t.bigint "floor_id", null: false
-    t.bigint "monster_template_id", null: false
-    t.integer "percent_chance", default: 100, null: false
-    t.integer "level_range_start", default: 1, null: false
-    t.integer "level_range_end", default: 1, null: false
-    t.index ["floor_id"], name: "index_floor_encounters_on_floor_id"
-    t.index ["monster_template_id"], name: "index_floor_encounters_on_monster_template_id"
+  create_table "floor_templates", force: :cascade do |t|
+    t.bigint "dungeon_template_id", null: false
+    t.string "name", null: false
+    t.integer "level", null: false
+    t.index ["dungeon_template_id"], name: "index_floor_templates_on_dungeon_template_id"
   end
 
   create_table "floors", force: :cascade do |t|
     t.bigint "dungeon_id", null: false
-    t.string "name", null: false
-    t.integer "level", null: false
+    t.bigint "floor_template_id", null: false
     t.index ["dungeon_id"], name: "index_floors_on_dungeon_id"
+    t.index ["floor_template_id"], name: "index_floors_on_floor_template_id"
   end
 
   create_table "inventory_items", force: :cascade do |t|
@@ -155,16 +154,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.index ["trait_id"], name: "index_personality_traits_on_trait_id"
   end
 
-  create_table "room_items", force: :cascade do |t|
-    t.bigint "room_id", null: false
-    t.bigint "item_id", null: false
-    t.index ["item_id"], name: "index_room_items_on_item_id"
-    t.index ["room_id"], name: "index_room_items_on_room_id"
+  create_table "room_encounters", force: :cascade do |t|
+    t.bigint "room_template_id", null: false
+    t.bigint "monster_template_id", null: false
+    t.integer "percent_chance", default: 100, null: false
+    t.integer "level_range_start", default: 1, null: false
+    t.integer "level_range_end", default: 1, null: false
+    t.index ["monster_template_id"], name: "index_room_encounters_on_monster_template_id"
+    t.index ["room_template_id"], name: "index_room_encounters_on_room_template_id"
+  end
+
+  create_table "room_templates", force: :cascade do |t|
+    t.bigint "floor_template_id", null: false
+    t.string "name", null: false
+    t.bigint "north_room_template_id"
+    t.bigint "east_room_template_id"
+    t.bigint "south_room_template_id"
+    t.bigint "west_room_template_id"
+    t.bigint "above_room_template_id"
+    t.bigint "below_room_template_id"
+    t.index ["above_room_template_id"], name: "index_room_templates_on_above_room_template_id"
+    t.index ["below_room_template_id"], name: "index_room_templates_on_below_room_template_id"
+    t.index ["east_room_template_id"], name: "index_room_templates_on_east_room_template_id"
+    t.index ["floor_template_id"], name: "index_room_templates_on_floor_template_id"
+    t.index ["north_room_template_id"], name: "index_room_templates_on_north_room_template_id"
+    t.index ["south_room_template_id"], name: "index_room_templates_on_south_room_template_id"
+    t.index ["west_room_template_id"], name: "index_room_templates_on_west_room_template_id"
   end
 
   create_table "rooms", force: :cascade do |t|
     t.bigint "floor_id", null: false
-    t.string "name", null: false
+    t.bigint "room_template_id", null: false
     t.bigint "north_room_id"
     t.bigint "east_room_id"
     t.bigint "south_room_id"
@@ -176,6 +196,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.index ["east_room_id"], name: "index_rooms_on_east_room_id"
     t.index ["floor_id"], name: "index_rooms_on_floor_id"
     t.index ["north_room_id"], name: "index_rooms_on_north_room_id"
+    t.index ["room_template_id"], name: "index_rooms_on_room_template_id"
     t.index ["south_room_id"], name: "index_rooms_on_south_room_id"
     t.index ["west_room_id"], name: "index_rooms_on_west_room_id"
   end
@@ -186,8 +207,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
   end
 
   add_foreign_key "dungeon_runs", "rooms", column: "current_room_id"
+  add_foreign_key "dungeon_templates", "room_templates", column: "entrance_room_template_id"
   add_foreign_key "dungeons", "rooms", column: "entrance_room_id"
   add_foreign_key "monsters", "rooms", column: "current_room_id"
+  add_foreign_key "room_templates", "room_templates", column: "above_room_template_id"
+  add_foreign_key "room_templates", "room_templates", column: "below_room_template_id"
+  add_foreign_key "room_templates", "room_templates", column: "east_room_template_id"
+  add_foreign_key "room_templates", "room_templates", column: "north_room_template_id"
+  add_foreign_key "room_templates", "room_templates", column: "south_room_template_id"
+  add_foreign_key "room_templates", "room_templates", column: "west_room_template_id"
   add_foreign_key "rooms", "rooms", column: "above_room_id"
   add_foreign_key "rooms", "rooms", column: "below_room_id"
   add_foreign_key "rooms", "rooms", column: "east_room_id"

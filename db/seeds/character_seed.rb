@@ -12,7 +12,7 @@ Character.create!(
 )
 
 Character.create!(
-  name: "Shadow Blade",
+  name: "Blade Dancer",
   level: 5,
   base_hp: 50,
   base_attack: 60,

@@ -6,16 +6,10 @@ class DungeonRunsController < ApplicationController
 
   def show; end
 
-  def ended; end
-
   def create
     dungeon_template = DungeonTemplate.find(params[:dungeon_template_id])
     new_dungeon = GenerateDungeon.new(dungeon_template).execute
-    dungeon_run =
-      DungeonRun.create!(
-        character_id: params[:character_id],
-        dungeon_id: new_dungeon.id
-      )
+    dungeon_run = DungeonRun.create!(dungeon: new_dungeon, character_id: params[:character_id])
 
     # TODO: require character to heal outside of the dungeon, for example:
     # - resting at an inn
@@ -37,7 +31,7 @@ class DungeonRunsController < ApplicationController
   def end
     EndRun.new(dungeon_run:).execute
 
-    redirect_to ended_dungeon_run_path(dungeon_run)
+    redirect_to characters_path(dungeon_run.character)
   end
 
   private

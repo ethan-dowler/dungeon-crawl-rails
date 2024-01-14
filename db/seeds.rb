@@ -1,14 +1,12 @@
-raise "Cannot run seeds more than once. Use db:seed:replant to start over." if DungeonTemplate.exists?
+raise "Cannot run seeds more than once. Use db:seed:replant to start over." if Character.exists?
 
-DungeonTemplate.create!(
-  name: "Dungeon One",
-  description: "The very first dungeon"
-)
+require_relative "seeds/character_seed"
+require_relative "seeds/equipment_seed"
+require_relative "seeds/monster_seed"
+require_relative "seeds/dungeon_one_seed"
 
-Dir[Rails.root.join("db", "seeds", "**", "*.rb")].each { load _1 }
-
-# TODO: allow player to "buy" starting equipment
 # start each character with one of each equipment item
+# TODO: allow player to "buy" starting equipment
 Character.find_each do |character|
   Item.equipment.find_each do |item|
     AddInventoryItem.new(owner: character, item:).execute

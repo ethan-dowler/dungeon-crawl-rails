@@ -1,2 +1,0 @@
-class RoomItem < ApplicationRecord
-end
