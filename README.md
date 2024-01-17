@@ -32,7 +32,7 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - higher base stat = faster progression in that stat
   - math for stat generation was [stolen from Pokémon](https://bulbapedia.bulbagarden.net/wiki/Stat#Determination_of_stats) and modified slightly for my use
     - removed EVs and IVs from Pokémon formula
-    - add "flat" and "percent" modifiers
+    - added "flat" and "percent" modifiers
 - Equipment
   - weapons, armor, shields, etc. can be equipped to improve stats
   - sword-and-board & dual-wielding styles are supported
