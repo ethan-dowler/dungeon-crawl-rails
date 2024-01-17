@@ -93,7 +93,6 @@ weak_leather =
     name: "Dusty Leather",
     description: "Full of rips and tears."
   )
-weak_leather.modifiers.flat.hp.create!(value: 2)
 weak_leather.modifiers.flat.defense.create!(value: 2)
 
 rusty_mail =
@@ -101,8 +100,7 @@ rusty_mail =
     name: "Rusty Mail",
     description: "Full of dents and scratches."
   )
-rusty_mail.modifiers.flat.hp.create!(value: 4)
-rusty_mail.modifiers.flat.defense.create!(value: 5)
+rusty_mail.modifiers.flat.defense.create!(value: 8)
 rusty_mail.modifiers.flat.speed.create!(value: -4)
 
 apprentice_robes =
