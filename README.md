@@ -1,6 +1,6 @@
-# BrowseRPG
+# Dungeon Crawl Rails
 
-Working title: **Dungeons of Tairos**
+An experiment to see if you can build a dungeon-crawler game in Rails! I also wanted to learn Tailwind, so I took this opportunity
 
 ## Premise
 
@@ -22,7 +22,13 @@ So many games have fancy graphics and epic soundtracks, but I don't always have 
 
 Aside from the actual gameplay, I've been very interested in building a game with Ruby and/or Rails for a long time. As a professional RoR developer and avid gaming fan, it's exciting to combine one of my favorite hobbies with my professional skill set.
 
+### Side Note
+
+Also, I've always been skeptical of Tailwind, but I've never given a try, so I thought this would be a good opportunity for me to give it a fair shot. I still don't like it, but now I can firmly say _why_ I don't like it. Mainly because it conflates page structure (HTML) with page style (CSS).
+
 ## Current Features
+
+The current engine is based on Pokemon. The only real difference is the fact that you can equip weapons and armor to change your stats. Also, there's only one "move": Attack.
 
 - Characters
   - Three basic characters with different stats
@@ -43,17 +49,26 @@ Aside from the actual gameplay, I've been very interested in building a game wit
 - Elementary Dungeon Design
   - only available dungeon has same layout and same enemies every time
   - two plus-shaped floors with a boss room on the third floor
+  - every "dungeon run" creates a brand new dungeon instance with brand new monsters
+  - once you leave a dungeon instance, you can't access it again
+  - each room has a chance to spawn a monster
+- Elementary Combat
+  - you and the monster exchange "basic attacks" (the Pokémon equivelant of Pound - 40 base power; 100% accuracy)
+  - higher speed goes first
+  - knocking out the monster first prevents them from hitting you
 - Monsters
   - only current monsters are giant rats and a king rat
-  - monsters have loot with a percent chance to drop
+  - monsters have multiple loot items with different percent chances to drop
 - Game log
   - track what happens during the dungeon run
   - display scrollable window of game log
   - add to game log whenever something of note happens (deal damage, defeat a monster; gain xp, pick up an item, etc.)
 
-## Feature Roadmap
+## Possible Feature Expansions
 
-### Planned Features
+I probably won't build any of these using the "game engine" in this repo, but they are things that _could_ be added to it. I'm going to try building out a new engine in a new repo that fosters the kind of gameplay I want.
+
+### Simple
 
 - More combat actions
   - allow the player to do more than a basic attack
@@ -71,7 +86,7 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - set base stats (using a point-buy system?)
   - choose starting equipment (spend a certain amount of money? choose a preset bundle?)
 
-### Expanded Features
+### Expanded
 
 - Party mechanics
   - allow player to control multiple characters in a single run
@@ -94,7 +109,7 @@ Aside from the actual gameplay, I've been very interested in building a game wit
   - arcana (identify and use magic items & spells)
   - etc...
 
-### On-Hold Features
+### Probably Not...
 
 - Dungeon Map
   - allow player to see where they are relative to other rooms they've visited
