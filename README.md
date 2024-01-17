@@ -128,4 +128,4 @@ I probably won't build any of these using the "game engine" in this repo, but th
 
 ## Contributing
 
-If you would like to start a conversation about this project, please create [a GitHub issue](https://github.com/ethan-dowler/browserpg/issues) on this repo. Thanks!
+If you would like to start a conversation about this project, please create [a GitHub issue](https://github.com/ethan-dowler/dungeon-crawl-rails/issues) on this repo. Thanks!
