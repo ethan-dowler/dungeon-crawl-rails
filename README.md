@@ -25,24 +25,31 @@ Aside from the actual gameplay, I've been very interested in building a game wit
 ## Current Features
 
 - Characters
-  - Warrior and Rogue available with different base stats
+  - Three basic characters with different stats
+    - Guardian - high HP & Defense; low Spirit & Wisdom
+    - Blade Dancer - high Speed & Attack; low Spirit & Wisdom
+    - Arcanist - high Spirit & Wisdom; low Attack & Defense
   - higher base stat = faster progression in that stat
-  - math for stat generation was [stolen from Pokémon](https://bulbapedia.bulbagarden.net/wiki/Stat#Determination_of_stats) and modified for my use
+  - math for stat generation was [stolen from Pokémon](https://bulbapedia.bulbagarden.net/wiki/Stat#Determination_of_stats) and modified slightly for my use
+    - removed EVs and IVs from Pokémon formula
+    - add "flat" and "percent" modifiers
 - Equipment
   - weapons, armor, shields, etc. can be equipped to improve stats
   - sword-and-board & dual-wielding styles are supported
+  - magic-boosting items are included (e.g. wand, spellbook), but there are no actions that use Spirit or Wisdom yet
 - Flat Level Progression
   - start at level 5 and gain XP from defeating monsters
   - math for XP stolen from Pokémon (using _[medium fast](https://bulbapedia.bulbagarden.net/wiki/Experience#Medium_Fast)_ level progression)
 - Elementary Dungeon Design
   - only available dungeon has same layout and same enemies every time
+  - two plus-shaped floors with a boss room on the third floor
 - Monsters
-  - only current monster is a giant rat!
+  - only current monsters are giant rats and a king rat
   - monsters have loot with a percent chance to drop
 - Game log
   - track what happens during the dungeon run
   - display scrollable window of game log
-  - add to game log whenever something of note happens (attack, deal damage, enter a room, pick up an item, etc.)
+  - add to game log whenever something of note happens (deal damage, defeat a monster; gain xp, pick up an item, etc.)
 
 ## Feature Roadmap
 
