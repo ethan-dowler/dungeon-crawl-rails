@@ -1,4 +1,4 @@
-<%= turbo_stream.replace "monster-#{inventory_item.owner.id}" do %>
+<%= turbo_stream.replace "monster_summary-#{inventory_item.owner.id}" do %>
   <%= render MonsterSummaryComponent.new(monster: inventory_item.owner, dungeon_run:) %>
 <% end %>
 

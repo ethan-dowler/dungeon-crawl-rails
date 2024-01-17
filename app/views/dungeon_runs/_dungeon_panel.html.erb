@@ -27,9 +27,7 @@
   <% if dungeon_run.current_room.monsters.any? %>
     <div id="monsters">
       <% dungeon_run.current_room.monsters.each do |monster| %>
-        <%= turbo_frame_tag "monster-#{monster.id}" do %>
-          <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>
-        <% end %>
+        <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>
       <% end %>
 
       <%= render "layouts/flash_messages" %>
