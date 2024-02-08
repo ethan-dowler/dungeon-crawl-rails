@@ -108,5 +108,4 @@ apprentice_robes =
     name: "Apprentice Robes",
     description: "Strips of thin cloth stiched together."
   )
-apprentice_robes.modifiers.flat.hp.create!(value: 1)
 apprentice_robes.modifiers.flat.wisdom.create!(value: 4)
