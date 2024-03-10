@@ -1,0 +1,55 @@
+.ProgressBar {
+  display: flex;
+  align-items: center;
+  padding: spaces(0.5);
+  font-size: 12px;
+
+  &--withValue {
+    margin-bottom: spaces(0.5);
+  }
+
+  &-label {
+    width: 20px;
+    margin-right: spaces(0.5);
+  }
+
+  &-fill {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    &Pool {
+      border-radius: $border-radius-full;
+      background-color: $gray-100;
+    }
+
+    &Color {
+      border-radius: $border-radius-full;
+      background-color: $slate-900;
+
+      // colors
+      &--blue {
+        background-color: $blue-600;
+      }
+      &--red {
+        background-color: $red-600;
+      }
+
+      // sizes
+      &--thick {
+        height: 8px;
+      }
+      &--thin {
+        height: 4px;
+      }
+    }
+  }
+
+  &-value {
+    position: absolute;
+    top: 8px;
+    width: 100%;
+    text-align: center;
+  }
+}

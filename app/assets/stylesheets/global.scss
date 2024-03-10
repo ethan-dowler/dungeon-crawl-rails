@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Inter var', Arial, Helvetica, sans-serif;
+}
+
+body {
+  padding: spaces(2) spaces(1);
+  /* TODO: allow for color themes! */
+  background-color: $slate-500;
+}

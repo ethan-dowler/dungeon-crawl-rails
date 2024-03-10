@@ -1,0 +1,40 @@
+.Button {
+  display: inline-block;
+  border: 0;
+  border-radius: $border-radius-small;
+  padding: spaces(1) spaces(2);
+  text-align: center;
+  font-weight: bold;
+  color: $white;
+  background-color: $blue-500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $blue-700;
+  }
+
+  &--compact {
+    padding: spaces(0.5) spaces(1);
+  }
+
+  &--green {
+    background-color: $green-600;
+
+    &:hover {
+      background-color: $green-700;
+    }
+  }
+
+  &--red {
+    background-color: $red-600;
+    
+    &:hover {
+      background-color: $red-700;
+    }
+  }
+
+  &--icon {
+    padding: spaces(1);
+    line-height: 1;
+  }
+}

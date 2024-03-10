@@ -6,12 +6,5 @@ class HeadingComponent < ApplicationComponent
     @tag = tag
   end
 
-  def tag_classes
-    case tag
-    when :h1
-      "text-3xl mb-4"
-    when :h2
-      "text-xl mb-2"
-    end
-  end
+  def tag_classes = "Heading Heading--#{tag}"
 end

@@ -1,0 +1,10 @@
+.TopBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-title {
+    font-size: $font-size-h3;
+    font-weight: $font-weight-semibold;
+  }
+}

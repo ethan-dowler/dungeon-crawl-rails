@@ -1,0 +1,17 @@
+.Form {
+  &-field {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    margin-bottom: spaces(2);
+  }
+
+  &-label {
+    font-weight: $font-weight-semibold;
+    margin-bottom: spaces(0.5);
+  }
+
+  &-input {
+    padding: spaces(0.25) spaces(0.5)
+  }
+}

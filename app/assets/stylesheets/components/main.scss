@@ -1,0 +1,14 @@
+.Main {
+  position: relative;
+  box-shadow: $shadow-md;
+  margin-right: auto;
+  margin-left: auto;
+  // border: 4px $gray-300;
+  border-radius: $border-radius-small;
+  padding: spaces(1);
+  width: auto;
+  height: 100%;
+  max-width: 1200px;
+  overflow-y: auto;
+  background-color: $white;
+}

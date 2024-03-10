@@ -12,7 +12,7 @@ Players take characters through the dungeon, layer by layer, until they find and
 
 ## Goals
 
-The goal of this project is to build a text-based RPG that's designed **for the browser** with an emphasis on the mobile browser experience.
+The goal of this project is to build a text-based RPG that's designed for the **desktop browser** experience (1200px).
 
 I want to pick up exactly where I left off and play for whatever length of time I have available.
 
@@ -24,7 +24,9 @@ Aside from the actual gameplay, I've been very interested in building a game wit
 
 ### Side Note
 
-Also, I've always been skeptical of Tailwind, but I've never given a try, so I thought this would be a good opportunity for me to give it a fair shot. I still don't like it, but now I can firmly say _why_ I don't like it. Mainly because it conflates page structure (HTML) with page style (CSS).
+Also, I've always been skeptical of Tailwind, but I've never given a try, so I thought this would be a good opportunity for me to give it a fair shot. I still don't like it, but now I can firmly say _why_ I don't like it. Mainly, because it conflates page structure (HTML) with page style (CSS). Secondly, it makes my markup ugly. Related to that, it's hard to tell what the final output will be if you try to add responsive/breakpoint styles.
+
+**Project Update**: Tailwind has been removed in favor of SASS.
 
 ## Current Features
 

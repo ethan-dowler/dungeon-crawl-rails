@@ -1,5 +1,5 @@
-<%= turbo_frame_tag :character_summary do %>
-  <div class="text-xl font-bold mb-2">
+<%= turbo_frame_tag :character_summary, class: "CharacterSummary" do %>
+  <div class="CharacterSummary-name">
     <%= name %>
     Lvl. <%= level %>
   </div>
