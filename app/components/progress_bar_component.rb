@@ -1,33 +1,22 @@
 class ProgressBarComponent < ApplicationComponent
-  attr_reader :name, :label, :current_value, :max_value, :previous_value, :color, :width, :show_value
+  attr_reader :name, :label, :current_value, :max_value, :previous_value, :color, :variant, :show_value
 
   alias_method :show_value?, :show_value
 
-  FILL_COLOR_CLASSES = {
-    red: "bg-red-600",
-    blue: "bg-blue-600",
-    black: "bg-black"
-  }.freeze
-
-  BAR_HEIGHT_CLASSES = {
-    thick: "h-2",
-    thin: "h-1"
-  }.freeze
-
-  def initialize(name:, label:, current_value:, max_value:, previous_value: nil, color: :blue, width: :thick, show_value: false) # rubocop:disable Metrics/ParameterLists, Layout/LineLength
+  def initialize(name:, label:, current_value:, max_value:, previous_value: nil, color: :blue, variant: :thick, show_value: false) # rubocop:disable Metrics/ParameterLists, Layout/LineLength
     @name = name
     @label = label
     @current_value = current_value
     @max_value = max_value
     @previous_value = previous_value
     @color = color
-    @width = width
+    @variant = variant
     @show_value = show_value
   end
 
-  def bar_height_class = BAR_HEIGHT_CLASSES[width]
+  def bar_variant_class = "ProgressBar-fillColor--#{variant}"
 
-  def fill_color_class = FILL_COLOR_CLASSES[color]
+  def fill_color_class = "ProgressBar-fillColor--#{color}"
 
   def end_fill_percent
     return 0 if max_value.blank?
