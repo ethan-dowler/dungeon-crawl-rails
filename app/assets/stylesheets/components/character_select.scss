@@ -1,0 +1,27 @@
+.CharacterSelect {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-tile {
+    margin: spaces(2);
+    padding: spaces(4);
+    border-radius: $border-radius-small;
+    width: 300px;
+    box-shadow: $shadow-md;
+    border: 2px solid $slate-500;
+  }
+
+  &-name {
+    margin-bottom: spaces(2);
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+  }
+  
+  &-level {
+    font-size: $font-size-s;
+    color: $slate-400;
+    font-style: italic;
+  }
+}

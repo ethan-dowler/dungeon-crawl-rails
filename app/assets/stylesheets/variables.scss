@@ -227,11 +227,15 @@ $rose-800: #9f1239;
 $rose-900: #881337;
 
 // font-size
-$font-size-h1: 48px;
-$font-size-h2: 36px;
-$font-size-h3: 24px;
+$font-size-h1: 36px;
+$font-size-h2: 24px;
+$font-size-h3: 18px;
 $font-size-2xl: 24px;
-$font-size-small: 14px;
+$font-size-xl: 20px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
 
 // font-weight
 $font-weight-normal: 400;
@@ -239,8 +243,9 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
 // border-radius
-$border-radius-small: 4px;
 $border-radius-full: 9999px;
+$border-radius-large: 8px;
+$border-radius-small: 4px;
 
 // box-shadow (from Tailwind)
 $shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);

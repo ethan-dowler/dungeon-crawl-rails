@@ -13,6 +13,10 @@
     background-color: $blue-700;
   }
 
+  &--full {
+    width: 100%;
+  }
+
   &--compact {
     padding: spaces(0.5) spaces(1);
   }

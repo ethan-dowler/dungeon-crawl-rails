@@ -1,0 +1,40 @@
+.InventoryItem {
+  margin-bottom: spaces(2);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &-quantity {
+    font-size: $font-size-xs;
+    color: $slate-400;
+  }
+
+  &-traits {
+    padding-left: spaces(1);
+    display: flex;
+    flex-direction: column;
+    font-size: $font-size-xs;
+    color: $slate-400;
+  }
+
+  &-trait {
+    margin-bottom: spaces(0.5);
+    font-style: italic;
+    font-weight: $font-weight-semibold;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-modifiers {
+    display: flex;
+  }
+
+  &-modifier {
+    margin-right: spaces(1);
+    padding: spaces(0.5) spaces(1);
+    border: 1px solid $slate-300;
+    border-radius: $border-radius-large;
+  }
+}

@@ -1,32 +1,29 @@
 <%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
-  <div class="mb-2 flex justify-between items-start">
+  <div class="InventoryItem">
     <div>
       <div>
         <%= inventory_item.name %>
 
         <% if inventory_item.stackable? %>
-          <i class="text-xs text-slate-400">
+          <i class="InventoryItem-quantity">
             x<%= inventory_item.quantity %>
           </i>
         <% end %>
       </div>
 
-      <div class="pl-1 flex flex-col text-xs text-slate-400">
+      <div class="InventoryItem-traits">
         <div>
           <% inventory_item.traits.sort.each do |trait| %>
-            <div class="mb-0.5 italic font-semibold hover:cursor-pointer">
+            <div class="InventoryItem-trait">
               <%= trait.name %>
               <%# TODO: add tooltip with trait description %>
             </div>
           <% end %>
         </div>
 
-        <div class="flex">
+        <div class="InventoryItem-modifiers">
           <% inventory_item.modifiers.order(value: :desc, stat: :asc).each do |modifier| %>
-            <div class="
-              py-0.5 px-1 mr-1
-              border border-slate-300 rounded-lg
-            ">
+            <div class="InventoryItem-modifier">
               <%= "+" if modifier.value.positive? %><%= modifier.value %><%= "%" if modifier.percent? %>
               <%= modifier.stat.downcase %>
             </div>
