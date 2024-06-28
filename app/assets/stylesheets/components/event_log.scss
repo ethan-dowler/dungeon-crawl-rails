@@ -1,0 +1,10 @@
+.EventLog {
+  display: flex;
+  align-items: center;
+
+  &-timestamp {
+    margin-right: spaces(0.5);
+    font-size: $font-size-xs;
+    color: $slate-400;
+  }
+}

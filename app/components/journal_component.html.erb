@@ -1,17 +1,11 @@
 <%= turbo_frame_tag :journal do %>
   <div
-    class="
-      absolute
-      bottom-0 left-0 right-0
-      h-36
-      overflow-y-auto
-      border-t-2 border-gray-300
-    "
+    class="Journal"
   >
     <% event_logs.each do |event_log| %>
       <%= render EventLogComponent.new(event_log) %>
     <% end %>
-    <div class="text-slate-400">
+    <div class="Journal-more">
       ...
     </div>
     <%# TODO: add "see full log" button to see more than just the most recent logs %>

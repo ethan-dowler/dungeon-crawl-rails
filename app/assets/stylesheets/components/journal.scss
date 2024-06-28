@@ -1,0 +1,10 @@
+.Journal {
+  padding: spaces(1);
+  height: 180px;
+  overflow-y: auto;
+  border-top: 2px solid $gray-300;
+
+  &-more {
+    color: $slate-400;
+  }
+}
