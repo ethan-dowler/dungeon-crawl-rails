@@ -7,7 +7,7 @@
 <%= link_to "Inventory", character_inventory_items_path(character.id), class: "Button" %>
 <%# TODO: Add other non-dungeon activities like vendors and trainers %>
 
-<hr class="my-4" />
+<hr class="Break" />
 
 <% if character.dungeon_runs.active.any? %>
   <%= link_to "Resume Dungeon", dungeon_run_path(character.dungeon_runs.active.first), class: "Button" %>

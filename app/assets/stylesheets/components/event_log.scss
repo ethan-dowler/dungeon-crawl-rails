@@ -3,8 +3,13 @@
   align-items: center;
 
   &-timestamp {
-    margin-right: spaces(0.5);
+    font-family: monospace;
+    margin-right: spaces(1);
     font-size: $font-size-xs;
     color: $slate-400;
+  }
+  
+  &-message {
+    font-size: $font-size-s;
   }
 }

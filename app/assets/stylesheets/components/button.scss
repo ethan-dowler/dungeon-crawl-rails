@@ -13,6 +13,12 @@
     background-color: $blue-700;
   }
 
+  &--corner {
+    position: absolute;
+    top: spaces(1);
+    right: spaces(1);
+  }
+
   &--full {
     width: 100%;
   }

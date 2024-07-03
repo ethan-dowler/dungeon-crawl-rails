@@ -1,9 +1,9 @@
-<div id="dungeon_panel" class="pt-4">
+<div id="dungeon_panel" class="DungeonPanel">
   <%# TODO: convert this into a slide-out menu %>
   <%# exit dungeon button %>
   <%= button_to(
     end_dungeon_run_path(dungeon_run),
-    class: "Button Button--red Button--icon absolute top-2 right-2",
+    class: "Button Button--red Button--icon Button--corner",
     data: {
       "turbo-confirm": "Are you sure you want to end this run?",
       "turbo-frame": :_top
@@ -14,15 +14,15 @@
 
   <%= render CharacterSummaryComponent.new(dungeon_run.character) %>
 
-  <div class="flex justify-end">
+  <div class="DungeonPanel-menu">
     <%= link_to "Inventory", character_inventory_items_path(dungeon_run.character), class: "Button Button--green Button--compact" %>
   </div>
 
-  <hr class="my-4" />
+  <hr class="Break" />
 
   <%= render DungeonRunSummaryComponent.new(dungeon_run) %>
 
-  <hr class="my-4" />
+  <hr class="Break" />
 
   <% if dungeon_run.current_room.monsters.any? %>
     <div id="monsters">

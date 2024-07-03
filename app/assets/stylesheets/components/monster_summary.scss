@@ -1,0 +1,33 @@
+.MonsterSummary {
+  margin-bottom: spaces(2);
+  padding: spaces(2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid $slate-300;
+  border-radius: $border-radius-large;
+
+  &-details {
+    margin-bottom: spaces(1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-name {
+    margin-right: spaces(1);
+  }
+
+  &-loot {
+    margin-bottom: spaces(0.5);
+    margin-left: spaces(1);
+    padding: spaces(0.5) spaces(1);
+    display: flex;
+    align-items: center;
+    color: $slate-400;
+
+    &Name {
+      margin-right: spaces(0.5);
+    }
+  }
+}
