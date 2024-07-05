@@ -1,8 +1,13 @@
 <%= turbo_frame_tag "monster_summary-#{monster.id}" do %>
   <div class="MonsterSummary">
-    <div class="MonsterSummary-details">
+    <div class="MonsterSummary-details <%="MonsterSummary-details--defeated" if monster.defeated? %>">
       <div class="MonsterSummary-name">
-        <%= monster.name %> Lvl. <%= monster.level %>
+        <%= name_and_level %>
+        <% if monster.defeated? %>
+          <span class="MonsterSummary-defeatedTag">
+            (defeated)
+          </span>
+        <% end %>
       </div>
 
       <% if dungeon_run.active? && monster.alive? %>
@@ -13,18 +18,6 @@
         ) %>
       <% end %>
     </div>
-
-    <%# TODO: add previous monster hp %>
-    <%= render(
-      ProgressBarComponent.new(
-        name: "monster_hp-#{monster.id}",
-        label: "HP",
-        current_value: monster.current_hp,
-        max_value: monster.max_hp,
-        color: :red,
-        show_value: true # TODO: don't show monster exact monster damage here or in log
-      )
-    ) %>
     
     <% if monster.defeated? %>
       <% monster.inventory_items.each do |inventory_item| %>
@@ -40,6 +33,18 @@
           ) %>
         </div>
       <% end %>
+    <% else %>
+      <%# TODO: add previous_value for monster hp %>
+      <%= render(
+        ProgressBarComponent.new(
+          name: "monster_hp-#{monster.id}",
+          label: "HP",
+          current_value: monster.current_hp,
+          max_value: monster.max_hp,
+          color: :red,
+          show_value: true
+        )
+      ) %>
     <% end %>
   </div>
 <% end %>

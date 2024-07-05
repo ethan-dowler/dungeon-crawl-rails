@@ -12,22 +12,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: $font-size-l;
+
+    &--defeated {
+      margin-bottom: 0;
+    }
   }
 
   &-name {
     margin-right: spaces(1);
   }
 
+  &-defeatedTag {
+    color: $slate-400;
+    font-size: $font-size-xs;
+    font-style: italic;
+  }
+
   &-loot {
     margin-bottom: spaces(0.5);
-    margin-left: spaces(1);
-    padding: spaces(0.5) spaces(1);
     display: flex;
     align-items: center;
     color: $slate-400;
 
     &Name {
-      margin-right: spaces(0.5);
+      margin-right: spaces(1);
     }
   }
 }

@@ -5,4 +5,6 @@ class MonsterSummaryComponent < ApplicationComponent
     @monster = monster
     @dungeon_run = dungeon_run
   end
+
+  def name_and_level = "#{monster.name} Lvl. #{monster.level}"
 end

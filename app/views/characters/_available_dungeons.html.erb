@@ -1,19 +1,25 @@
 <%= render HeadingComponent.new(title: "Dungeons", tag: :h2) %>
 
 <% DungeonTemplate.all.each do |dungeon_template| %>
-  <div class="mb-2 flex items-center justify-between">
-    <%= dungeon_template.name %>
+  <div class="CharacterSelect">
+    <% DungeonTemplate.all.each do |dungeon_template| %>
+      <div class="CharacterSelect-tile">
+        <div class="CharacterSelect-name">
+          <%= dungeon_template.name %>
+        </div>
 
-    <%=
-      button_to(
-        "Enter",
-        dungeon_runs_path(
-          character_id: character.id,
-          dungeon_template_id: dungeon_template.id
-        ),
-        class: "Button",
-        data: { "turbo-disable": "Entering..." }
-      )
-    %>
+        <%=
+          button_to(
+            "Enter",
+            dungeon_runs_path(
+              character_id: character.id,
+              dungeon_template_id: dungeon_template.id
+            ),
+            class: "Button Button--full",
+            data: { "turbo-disable": "Entering..." }
+          )
+        %>
+      </div>
+    <% end %>
   </div>
 <% end %>
