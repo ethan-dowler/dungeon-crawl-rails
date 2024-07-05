@@ -1,5 +1,4 @@
 <div id="dungeon_panel" class="DungeonPanel">
-  <%# TODO: convert this into a slide-out menu %>
   <%# exit dungeon button %>
   <%= button_to(
     end_dungeon_run_path(dungeon_run),
@@ -20,20 +19,25 @@
 
   <hr class="Break" />
 
-  <%= render DungeonRunSummaryComponent.new(dungeon_run) %>
+  <div class="DungeonPanel-nav">
+    <%= render DungeonRunSummaryComponent.new(dungeon_run) %>
+
+    <%= render NavigationComponent.new(dungeon_run) if dungeon_run.active? %>
+  </div>
 
   <hr class="Break" />
 
-  <% if dungeon_run.current_room.monsters.any? %>
-    <div id="monsters">
-      <% dungeon_run.current_room.monsters.each do |monster| %>
-        <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>
-      <% end %>
+  <div class="DungeonPanel-body">
+    <% if dungeon_run.current_room.monsters.any? %>
+      <div id="monsters">
+        <% dungeon_run.current_room.monsters.each do |monster| %>
+          <%= render MonsterSummaryComponent.new(monster:, dungeon_run:) %>
+        <% end %>
 
-      <%= render "layouts/flash_messages" %>
-    </div>
-  <% end %>
+        <%= render "layouts/flash_messages" %>
+      </div>
+    <% end %>
+  </div>
 
-  <%= render NavigationComponent.new(dungeon_run) if dungeon_run.active? %>
   <%= render JournalComponent.new(dungeon_run.event_logs.reload.recent) %>
 </div>

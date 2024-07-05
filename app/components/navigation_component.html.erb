@@ -1,21 +1,10 @@
 <%# TODO: use turbo streams to update just this frame and the "room" frame %>
-<div
-  id="navigation"
-  class="
-    absolute
-    bottom-40 right-4
-    h-32 w-32
-    border border-slate-300 rounded-full
-    bg-white
-  "
->
+<div id="navigation" class="Navigation">
   <% Dungeon::Direction::ALL.each do |direction| %>
     <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
       <div class="
-        absolute
-        <%= direction_classes(direction) %>
-        text-s
-        flex justify-center items-center
+        Navigation-link
+        Navigation-link<%= direction.to_s.titleize %>
       ">
         <%=
           link_to(

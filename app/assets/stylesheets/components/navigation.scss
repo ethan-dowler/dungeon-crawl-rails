@@ -1,0 +1,47 @@
+.Navigation {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border: 1px solid $slate-300;
+  border-radius: $border-radius-full;
+  background-color: $white;
+
+  &-link {
+    position: absolute;
+    font-size: $font-size-s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &North {
+      top: spaces(1);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &East {
+      top: 50%;
+      right: spaces(1);
+      transform: translateY(-50%);
+    }
+
+    &South {
+      bottom: spaces(1);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &West {
+      top: 50%;
+      left: spaces(1);
+      transform: translateY(-50%);
+    }
+
+    // TODO: what happens if a room has both?
+    &Above, &Below {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
