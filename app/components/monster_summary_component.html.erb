@@ -2,13 +2,18 @@
   <div class="MonsterSummary">
     <div class="MonsterSummary-details <%="MonsterSummary-details--defeated" if monster.defeated? %>">
       <div class="MonsterSummary-name">
-        <%= name_and_level %>
-        <% if monster.defeated? %>
-          <span class="MonsterSummary-defeatedTag">
-            (defeated)
-          </span>
-        <% end %>
+        <%= monster.name %>
+
+        <span class="MonsterSummary-level">
+          Lvl. <%= monster.level %>
+        </span>
       </div>
+
+      <% if monster.defeated? %>
+        <div class="MonsterSummary-defeatedTag">
+          (defeated)
+        </div>
+      <% end %>
 
       <% if dungeon_run.active? && monster.alive? %>
         <%= button_to(

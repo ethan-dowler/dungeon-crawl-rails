@@ -15,8 +15,6 @@ class MonstersController < ApplicationController
 
       ResolveCombat.new(character: dungeon_run.character, monster:).execute
     end
-
-    redirect_to ended_dungeon_run_path(dungeon_run) if dungeon_run.reload.ended?
   end
 
   private

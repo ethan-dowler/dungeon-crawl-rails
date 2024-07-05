@@ -23,6 +23,11 @@
     margin-right: spaces(1);
   }
 
+  &-level {
+    color: $slate-400;
+    font-size: $font-size-s;
+  }
+
   &-defeatedTag {
     color: $slate-400;
     font-size: $font-size-xs;
@@ -30,10 +35,13 @@
   }
 
   &-loot {
-    margin-bottom: spaces(0.5);
     display: flex;
     align-items: center;
     color: $slate-400;
+    
+    &:not(:last-child) {
+      margin-bottom: spaces(0.5);
+    }
 
     &Name {
       margin-right: spaces(1);
