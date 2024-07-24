@@ -1,19 +1,25 @@
 class CreateCharacters < ActiveRecord::Migration[7.0]
   def change
     create_table :characters do |t|
-      # high-level info
+      # personal info
       t.string :name, null: false
-      t.integer :level, null: false, default: 0
-      t.integer :xp, null: false, default: 0
-      t.integer :current_hp, null: false, default: 0
 
-      # base stats
-      t.integer :base_hp, null: false, default: 0
-      t.integer :base_attack, null: false, default: 0
-      t.integer :base_defense, null: false, default: 0
-      t.integer :base_spirit, null: false, default: 0
-      t.integer :base_wisdom, null: false, default: 0
-      t.integer :base_speed, null: false, default: 0
+      # attributes
+      t.integer :body, null: false, default: 1
+      t.integer :mind, null: false, default: 1
+      t.integer :spirit, null: false, default: 1
+
+      # trackables
+      t.integer :current_hp, null: false, default: 10
+      t.integer :level, null: false, default: 1
+      t.integer :xp, null: false, default: 0
+      t.integer :bonus_skill_points, null: false, default: 0
+
+      # calculated stats; cached for performance
+      t.integer :max_hp, null: false, default: 10
+      t.integer :speed_factor, null: false, default: 10
+      t.integer :armor_rating, null: false, default: 0
+      t.integer :damage_rating, null: false, default: 0
     end
   end
 end

@@ -9,12 +9,10 @@ class Modifier < ApplicationRecord
   scope :percent, -> { where(modifier_type: Type::PERCENT) }
 
   # specific stats
-  scope :hp, -> { where(stat: Stat::HP) }
-  scope :attack, -> { where(stat: Stat::ATTACK) }
-  scope :defense, -> { where(stat: Stat::DEFENSE) }
-  scope :speed, -> { where(stat: Stat::SPEED) }
-  scope :spirit, -> { where(stat: Stat::SPIRIT) }
-  scope :wisdom, -> { where(stat: Stat::WISDOM) }
+  scope :max_hp, -> { where(stat: :max_hp) }
+  scope :speed_factor, -> { where(stat: :speed_factor) }
+  scope :armor_rating, -> { where(stat: :armor_rating) }
+  scope :damage_rating, -> { where(stat: :damage_rating) }
 
   def flat? = modifier_type == Type::FLAT
   def percent? = modifier_type == Type::PERCENT

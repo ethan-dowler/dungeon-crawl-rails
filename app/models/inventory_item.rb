@@ -73,7 +73,9 @@ class InventoryItem < ApplicationRecord
   def create_modifiers
     InventoryItem.transaction do
       modifiers.each do |modifier|
-        modifier.dup.update!(target: owner, source: self)
+        owner.modifiers.create!(
+          source: modifier, stat: modifier.stat, modifier_type: modifier.modifier_type, value: modifier.value
+        )
       end
     end
   end

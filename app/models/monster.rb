@@ -1,27 +1,19 @@
 class Monster < ApplicationRecord
   include Conditionable
   include Modifiable
-  include HasHp
+  include HasAttributes
 
   belongs_to :monster_template
   has_many :drops, through: :monster_template
 
   has_many :inventory_items, as: :owner, dependent: :destroy
 
-  belongs_to :current_room, class_name: "Room"
+  belongs_to :current_room, class_name: "Room", optional: true
   has_one :dungeon, through: :current_room
 
   delegate_missing_to :monster_template
 
   after_create :add_inventory
-
-  # STATS - TODO: DRY this up b/t mosnter & character
-  def max_hp = total(:hp)
-  def attack = total(:attack)
-  def defense = total(:defense)
-  def speed = total(:speed)
-  def spirit = total(:spirit)
-  def wisdom = total(:wisdom)
 
   private
 

@@ -16,15 +16,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "level", default: 0, null: false
+    t.integer "body", default: 1, null: false
+    t.integer "mind", default: 1, null: false
+    t.integer "spirit", default: 1, null: false
+    t.integer "current_hp", default: 10, null: false
+    t.integer "level", default: 1, null: false
     t.integer "xp", default: 0, null: false
-    t.integer "current_hp", default: 0, null: false
-    t.integer "base_hp", default: 0, null: false
-    t.integer "base_attack", default: 0, null: false
-    t.integer "base_defense", default: 0, null: false
-    t.integer "base_spirit", default: 0, null: false
-    t.integer "base_wisdom", default: 0, null: false
-    t.integer "base_speed", default: 0, null: false
+    t.integer "bonus_skill_points", default: 0, null: false
+    t.integer "max_hp", default: 10, null: false
+    t.integer "speed_factor", default: 10, null: false
+    t.integer "armor_rating", default: 0, null: false
+    t.integer "damage_rating", default: 0, null: false
   end
 
   create_table "conditions", force: :cascade do |t|
@@ -106,7 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
 
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description", null: false
+    t.string "description"
     t.integer "value", default: 0, null: false
     t.boolean "stackable", default: false, null: false
     t.string "equipment_slot"
@@ -119,8 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.bigint "source_id", null: false
     t.string "target_type", null: false
     t.bigint "target_id", null: false
-    t.string "modifier_type", null: false
     t.string "stat", null: false
+    t.string "modifier_type", null: false
     t.integer "value", null: false
     t.index ["modifier_type"], name: "index_modifiers_on_modifier_type"
     t.index ["source_type", "source_id"], name: "index_modifiers_on_source"
@@ -130,18 +132,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
 
   create_table "monster_templates", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "base_experience_yield", null: false
-    t.integer "base_hp", default: 10, null: false
-    t.integer "base_attack", default: 10, null: false
-    t.integer "base_defense", default: 10, null: false
-    t.integer "base_speed", default: 10, null: false
+    t.integer "base_experience_yield", default: 0, null: false
+    t.integer "body", default: 1, null: false
+    t.integer "mind", default: 1, null: false
+    t.integer "spirit", default: 1, null: false
+    t.integer "max_hp", default: 10, null: false
+    t.integer "speed_factor", default: 10, null: false
+    t.integer "armor_rating", default: 0, null: false
+    t.integer "damage_rating", default: 0, null: false
   end
 
   create_table "monsters", force: :cascade do |t|
     t.bigint "monster_template_id", null: false
-    t.integer "level", default: 0, null: false
     t.integer "current_hp", default: 0, null: false
-    t.bigint "current_room_id", null: false
+    t.integer "level", default: 0, null: false
+    t.bigint "current_room_id"
     t.index ["current_room_id"], name: "index_monsters_on_current_room_id"
     t.index ["monster_template_id"], name: "index_monsters_on_monster_template_id"
   end

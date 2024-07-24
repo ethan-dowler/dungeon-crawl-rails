@@ -1,7 +1,7 @@
 class Character < ApplicationRecord
   include Conditionable
   include Modifiable
-  include HasHp
+  include HasAttributes
 
   has_many :dungeon_runs, dependent: :destroy
 
@@ -11,19 +11,6 @@ class Character < ApplicationRecord
   before_create :set_xp_for_current_level
   before_update :set_xp_for_current_level, if: :level_changed?
   before_update :check_level_up, if: :xp_changed?
-
-  validates :level, comparison: { greater_than: 0 }
-
-  # STATS
-  def max_hp = total(:hp)
-  def attack = total(:attack)
-  def defense = total(:defense)
-  def speed = total(:speed)
-  def spirit = total(:spirit)
-  def wisdom = total(:wisdom)
-
-  # CONVENIENCE
-  alias_method :hp, :max_hp
 
   # XP CALCS
   def xp_to_next_level = level**3

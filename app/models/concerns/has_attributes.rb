@@ -1,6 +1,5 @@
-# must implement base_hp and current_hp
-# may implement max_hp
-module HasHp
+# must implement body, mind, spirit
+module HasAttributes
   extend ActiveSupport::Concern
 
   included do
@@ -11,7 +10,8 @@ module HasHp
     scope :defeated, -> { where(current_hp: 0) }
   end
 
-  def max_hp = base_hp
+  def base_hp = (6 * body) + (4 * spirit)
+  def base_speed_factor = (6 * body) + (4 * mind)
 
   def alive? = current_hp.positive?
   def defeated? = current_hp.zero?

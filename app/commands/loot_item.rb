@@ -10,6 +10,8 @@ class LootItem
   def execute
     InventoryItem.transaction do
       TransferItem.new(inventory_item:, receiver: character).execute
+      next if character.current_run.blank?
+
       character.current_run.log("You loot a #{inventory_item.name} from #{previous_owner_name}.")
     end
   end
