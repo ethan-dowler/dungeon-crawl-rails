@@ -20,7 +20,7 @@ module Modifiable
   end
 
   def subtotal(stat)
-    raw = (2.0 * send(:"base_#{stat}") * level_multiplier).floor
+    raw = (send(:"base_#{stat}") * level_multiplier).floor
     static_bonus = stat == :hp ? level + 10.0 : 5.0 # this provides a non-zero minimum value
 
     raw + static_bonus
@@ -28,5 +28,5 @@ module Modifiable
 
   private
 
-  def level_multiplier = level / 100.0
+  def level_multiplier = level / 50.0
 end

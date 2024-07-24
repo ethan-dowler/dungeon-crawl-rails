@@ -3,7 +3,7 @@ dungeon_template =
     name: "Dungeon One",
     description: "The very first dungeon"
   )
-  
+
 ## Ground Floor
 
 ground_floor = dungeon_template.floor_templates.create!(name: "Ground Floor", level: 0)
@@ -54,7 +54,6 @@ f1_west_room.update!(east_room_template: f1_middle_room)
 gf_north_room.update!(above_room_template: f1_south_room)
 f1_south_room.update!(below_room_template: gf_north_room)
 
-
 ## Boss floor
 
 boss_floor = dungeon_template.floor_templates.create!(name: "Boss Floor", level: 2)
@@ -70,12 +69,10 @@ boss_room.update!(below_room_template: f1_north_room)
 gf_north_room.update!(above_room_template: f1_south_room)
 f1_south_room.update!(below_room_template: gf_north_room)
 
-
 ## Set entrance
 
 # player starts in the south room of the ground floor
 dungeon_template.update!(entrance_room_template: gf_south_room)
-
 
 ## Configure monster spawns
 

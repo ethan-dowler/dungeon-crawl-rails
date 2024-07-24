@@ -1,3 +1,4 @@
+# TODO: don't create a brand-new dungeon if one already exists, just re-pop
 class GenerateDungeon
   attr_reader :dungeon_template
 
@@ -7,7 +8,7 @@ class GenerateDungeon
 
   # TODO: add POIs and traits to dungeon/floor/room templates
   def execute # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    DungeonTemplate.transaction do # rubocop:disable Metrics/BlockLength
+    DungeonTemplate.transaction do
       dungeon = Dungeon.create!(dungeon_template:)
 
       # create all rooms in the dungeon

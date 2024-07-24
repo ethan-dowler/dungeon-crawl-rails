@@ -1,8 +1,8 @@
 class RoomTemplate < ApplicationRecord
   belongs_to :floor_template
   has_one :dungeon_template, through: :floor_template
-  has_many :room_encounters
-  has_many :rooms
+  has_many :room_encounters, dependent: :destroy
+  has_many :rooms, dependent: :destroy
 
   # adjoining rooms
   belongs_to :north_room_template, class_name: "RoomTemplate", optional: true

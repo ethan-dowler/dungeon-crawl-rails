@@ -43,7 +43,6 @@ giant_rat.drops.create!(item: coin, percent_chance: 80)
 giant_rat.drops.create!(item: rat_tooth, percent_chance: 20)
 giant_rat.drops.create!(item: rat_tail, percent_chance: 5)
 
-
 rat_king =
   MonsterTemplate.create!(
     name: "Rat King",
