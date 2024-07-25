@@ -38,6 +38,6 @@ class BasicAttack
   end
 
   def defender_name
-    @defender_name ||= dungeon_run.character_id == defender.id ? "you" : defender.name
+    @defender_name ||= dungeon_run.character == defender ? "you" : defender.name
   end
 end
