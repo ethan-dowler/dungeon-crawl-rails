@@ -13,8 +13,8 @@ class Character < ApplicationRecord
   before_update :check_level_up, if: :xp_changed?
 
   # XP CALCS
-  def xp_to_next_level = level**3
-  def xp_for_current_level = (level - 1)**3
+  def xp_to_next_level = 10 + level**3
+  def xp_for_current_level = 10 + (level - 1)**3
   def xp_needed_from_current_to_next_level = xp_to_next_level - xp_for_current_level
   def xp_progress_to_next_level = xp - xp_for_current_level
 
@@ -40,7 +40,7 @@ class Character < ApplicationRecord
 
     # perform the level up
     self.level = level + 1
-    current_run.log("You LEVELED UP to Lvl. #{level}!") if current_run.present?
+    current_run.log("You LEVELED UP to Lvl. #{level}! +1 Skill Point") if current_run.present?
 
     # boost to max_hp also applies to current_hp
     new_max_hp = max_hp

@@ -1,4 +1,4 @@
-# must implement body, mind, spirit
+# must implement body, mind, spirit, max_hp
 module HasAttributes
   extend ActiveSupport::Concern
 
@@ -19,7 +19,7 @@ module HasAttributes
   private
 
   def set_current_hp
-    self.current_hp = base_hp
+    self.current_hp = max_hp
   end
 
   def enforce_hp_boundaries

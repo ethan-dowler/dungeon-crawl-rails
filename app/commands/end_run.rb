@@ -12,7 +12,6 @@ class EndRun
         completed_at: DateTime.current,
         ended_reason:
       )
-      # TODO: other post-run activies
     end
   end
 end

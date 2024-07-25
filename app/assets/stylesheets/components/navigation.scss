@@ -37,9 +37,14 @@
       transform: translateY(-50%);
     }
 
-    // TODO: what happens if a room has both?
+    &Above {
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
     &Above, &Below {
-      top: 50%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
     }

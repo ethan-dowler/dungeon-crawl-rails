@@ -32,24 +32,44 @@ rat_crown =
 giant_rat =
   MonsterTemplate.create!(
     name: "Giant Rat",
-    base_hp: 40,
-    base_attack: 20,
-    base_defense: 20,
-    base_speed: 90,
-    base_experience_yield: 50
+    level: 3,
+    max_hp: 25,
+    damage_rating: 4,
+    armor_rating: 0,
+    speed_factor: 80,
+    base_experience_yield: 10
   )
 
-giant_rat.drops.create!(item: coin, percent_chance: 80)
+giant_rat.drops.create!(item: coin, percent_chance: 70)
 giant_rat.drops.create!(item: rat_tooth, percent_chance: 20)
 giant_rat.drops.create!(item: rat_tail, percent_chance: 5)
+
+festering_rat =
+  MonsterTemplate.create!(
+    name: "Festering Rat",
+    level: 6,
+    max_hp: 60,
+    damage_rating: 8,
+    armor_rating: 10,
+    speed_factor: 90,
+    base_experience_yield: 25
+  )
+
+festering_rat.drops.create!(item: coin, percent_chance: 80)
+festering_rat.drops.create!(item: rat_tooth, percent_chance: 35)
+festering_rat.drops.create!(item: rat_tail, percent_chance: 15)
 
 rat_king =
   MonsterTemplate.create!(
     name: "Rat King",
-    base_hp: 120,
-    base_attack: 40,
-    base_defense: 25,
-    base_speed: 120,
-    base_experience_yield: 250
+    level: 10,
+    max_hp: 100,
+    damage_rating: 15,
+    armor_rating: 25,
+    speed_factor: 100,
+    base_experience_yield: 50
   )
+5.times { rat_king.drops.create!(item: coin, percent_chance: 90) }
+rat_king.drops.create!(item: rat_tooth, percent_chance: 50)
+rat_king.drops.create!(item: rat_tail, percent_chance: 80)
 rat_king.drops.create!(item: rat_crown)

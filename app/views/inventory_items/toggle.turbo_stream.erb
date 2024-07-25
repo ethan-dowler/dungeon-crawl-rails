@@ -1,5 +1,5 @@
 <%= turbo_stream.replace "character_stats-#{inventory_item.owner.id}" do %>
-  <%= render CharacterStatsComponent.new(inventory_item.owner) %>
+  <%= render CharacterStatsComponent.new(inventory_item.owner.reload) %>
 <% end %>
 
 <%# update all equipment in case anything was unequipped as a result of the toggle %>

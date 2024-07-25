@@ -11,6 +11,7 @@ class CreateMonsterTemplates < ActiveRecord::Migration[7.0]
       t.integer :spirit, null: false, default: 1
 
       # combat ratings - monsters don't wear equipment!
+      t.integer :level, null: false, default: 1
       t.integer :max_hp, null: false, default: 10
       t.integer :speed_factor, null: false, default: 10
       t.integer :armor_rating, null: false, default: 0

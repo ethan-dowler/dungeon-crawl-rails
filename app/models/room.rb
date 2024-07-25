@@ -33,10 +33,7 @@ class Room < ApplicationRecord
     room_encounters.each do |encounter|
       next unless Random.new.rand(100) < encounter.percent_chance
 
-      monsters.create!(
-        monster_template: encounter.monster_template,
-        level: encounter.level_range.to_a.sample
-      )
+      monsters.create!(monster_template: encounter.monster_template)
     end
   end
 end

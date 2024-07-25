@@ -1,16 +1,16 @@
 class CharacterStatsComponent < ApplicationComponent
   attr_reader :character
 
+  # use map of stat to visual indicator instead of #titleize
+  # e.g. speed_factor -> SR; armor_rating = AR; damage_rating = DR
   TOP_ROW_STATS = %i[
-    hp
-    attack
-    defense
+    max_hp
+    speed_factor
   ].freeze
 
   BOT_ROW_STATS = %i[
-    speed
-    spirit
-    wisdom
+    damage_rating
+    armor_rating
   ].freeze
 
   def initialize(character)

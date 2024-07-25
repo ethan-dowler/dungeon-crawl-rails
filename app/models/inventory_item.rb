@@ -74,7 +74,7 @@ class InventoryItem < ApplicationRecord
     InventoryItem.transaction do
       modifiers.each do |modifier|
         owner.modifiers.create!(
-          source: modifier, stat: modifier.stat, modifier_type: modifier.modifier_type, value: modifier.value
+          source: self, stat: modifier.stat, modifier_type: modifier.modifier_type, value: modifier.value
         )
       end
     end

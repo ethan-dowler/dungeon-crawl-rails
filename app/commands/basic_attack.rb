@@ -1,8 +1,6 @@
 class BasicAttack
   attr_reader :dungeon_run, :attacker, :defender
 
-  BASIC_ATTACK_BASE_POWER = 40.0
-
   def initialize(attacker:, defender:, dungeon_run: nil)
     @dungeon_run = dungeon_run
     @attacker = attacker

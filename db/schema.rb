@@ -138,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.integer "body", default: 1, null: false
     t.integer "mind", default: 1, null: false
     t.integer "spirit", default: 1, null: false
+    t.integer "level", default: 1, null: false
     t.integer "max_hp", default: 10, null: false
     t.integer "speed_factor", default: 10, null: false
     t.integer "armor_rating", default: 0, null: false
@@ -147,7 +148,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
   create_table "monsters", force: :cascade do |t|
     t.bigint "monster_template_id", null: false
     t.integer "current_hp", default: 0, null: false
-    t.integer "level", default: 0, null: false
     t.bigint "current_room_id"
     t.index ["current_room_id"], name: "index_monsters_on_current_room_id"
     t.index ["monster_template_id"], name: "index_monsters_on_monster_template_id"
@@ -165,8 +165,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.bigint "room_template_id", null: false
     t.bigint "monster_template_id", null: false
     t.integer "percent_chance", default: 100, null: false
-    t.integer "level_range_start", default: 1, null: false
-    t.integer "level_range_end", default: 1, null: false
     t.index ["monster_template_id"], name: "index_room_encounters_on_monster_template_id"
     t.index ["room_template_id"], name: "index_room_encounters_on_room_template_id"
   end

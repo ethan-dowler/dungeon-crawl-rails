@@ -1,11 +1,10 @@
-# must implement level and any number of base_* stats
 module Modifiable
   extend ActiveSupport::Concern
 
   included do
     has_many :modifiers, as: :target, dependent: :destroy
+
     after_save :recalc, if: :core_attribute_changed?
-    # TODO: add update hook that triggers a recalculation whenever body/mind/spirit changes
   end
 
   def flat_modifier_for(stat)

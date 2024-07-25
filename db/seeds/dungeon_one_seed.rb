@@ -78,23 +78,19 @@ dungeon_template.update!(entrance_room_template: gf_south_room)
 
 # ground floor has weak monsters
 giant_rat_template = MonsterTemplate.find_by!(name: "Giant Rat")
-
 ground_floor.room_templates.reload.each do |room_template|
   room_template.room_encounters.create!(
     monster_template: giant_rat_template,
     percent_chance: 90,
-    level_range_start: 2,
-    level_range_end: 3
   )
 end
 
 # first floor has stronger monsters
+festering_rat_template = MonsterTemplate.find_by!(name: "Festering Rat")
 floor_one.room_templates.reload.each do |room_template|
   room_template.room_encounters.create!(
-    monster_template: giant_rat_template,
+    monster_template: festering_rat_template,
     percent_chance: 90,
-    level_range_start: 4,
-    level_range_end: 5
   )
 end
 
@@ -102,6 +98,4 @@ end
 boss_template = MonsterTemplate.find_by!(name: "Rat King")
 boss_room.room_encounters.create!(
   monster_template: boss_template,
-  level_range_start: 9,
-  level_range_end: 9
 )

@@ -3,7 +3,7 @@
     <% TOP_ROW_STATS.each do |stat| %>
       <div class="CharacterStats-attribute">
         <div class="CharacterStats-attributeValue">
-          <%= stat %>
+          <%= stat.to_s.titleize %>
           <%# TODO: add tooltip with description of each stat %>
         </div>
 
@@ -18,7 +18,7 @@
     <% BOT_ROW_STATS.each do |stat| %>
       <div class="CharacterStats-attribute">
         <div class="CharacterStats-attributeValue">
-          <%= stat %>
+          <%= stat.to_s.titleize %>
           <%# TODO: see above^ %>
         </div>
 
