@@ -3,7 +3,9 @@ module Modifiable
   extend ActiveSupport::Concern
 
   included do
-    has_many :modifiers, as: :target, dependent: :destroy, after_add: :recalc, after_remove: :recalc
+    has_many :modifiers, as: :target, dependent: :destroy
+    after_save :recalc, if: :core_attribute_changed?
+    # TODO: add update hook that triggers a recalculation whenever body/mind/spirit changes
   end
 
   def flat_modifier_for(stat)
@@ -14,46 +16,48 @@ module Modifiable
     1.0 + (modifiers.percent.where(stat:).sum(:value).to_f / 100.0)
   end
 
-  def recalc(modifier)
-    return unless %w[Character Monster].include?(modifier.target_type)
-
-    recalc_max_hp(modifier.target)
-    recalc_speed_factor(modifier.target)
-    recalc_armor_rating(modifier.target)
-    recalc_damage_rating(modifier.target)
+  def recalc
+    recalc_max_hp
+    recalc_speed_factor
+    recalc_armor_rating
+    recalc_damage_rating
   end
 
   private
 
-  def level_multiplier = level / 50.0
+  def core_attribute_changed?
+    (respond_to?(:body) && body_previously_changed?) ||
+      (respond_to?(:mind) && mind_previously_changed?) ||
+      (respond_to?(:spirit) && spirit_previously_changed?)
+  end
 
-  def recalc_max_hp(target)
-    return unless target.respond_to?(:max_hp)
+  def recalc_max_hp
+    return unless respond_to?(:max_hp)
 
-    target.update!(
-      max_hp: ((target.base_hp + flat_modifier_for(:max_hp)) * percent_modifier_for(:max_hp)).floor
+    update!(
+      max_hp: ((base_hp + flat_modifier_for(:max_hp)) * percent_modifier_for(:max_hp)).floor
     )
   end
 
-  def recalc_speed_factor(target)
-    return unless target.respond_to?(:speed_factor)
+  def recalc_speed_factor
+    return unless respond_to?(:speed_factor)
 
-    target.update!(
+    update!(
       speed_factor: (
-        (target.base_speed_factor + flat_modifier_for(:speed_factor)) * percent_modifier_for(:speed_factor)
+        (base_speed_factor + flat_modifier_for(:speed_factor)) * percent_modifier_for(:speed_factor)
       ).floor
     )
   end
 
-  def recalc_armor_rating(target)
-    return unless target.respond_to?(:armor_rating)
+  def recalc_armor_rating
+    return unless respond_to?(:armor_rating)
 
-    target.update!(armor_rating: flat_modifier_for(:armor_rating) * percent_modifier_for(:armor_rating))
+    update!(armor_rating: flat_modifier_for(:armor_rating) * percent_modifier_for(:armor_rating))
   end
 
-  def recalc_damage_rating(target)
-    return unless target.respond_to?(:damage_rating)
+  def recalc_damage_rating
+    return unless respond_to?(:damage_rating)
 
-    target.update!(damage_rating: flat_modifier_for(:damage_rating) * percent_modifier_for(:damage_rating))
+    update!(damage_rating: flat_modifier_for(:damage_rating) * percent_modifier_for(:damage_rating))
   end
 end

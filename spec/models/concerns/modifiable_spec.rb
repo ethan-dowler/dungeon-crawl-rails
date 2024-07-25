@@ -1,34 +1,38 @@
 RSpec.describe Modifiable do
-  # TODO: fix these tests!
-  xdescribe "#total" do
-    subject(:fakemon) do
-      Character.create!(
-        name: "Fakémon",
-        level: 50,
-        base_hp: 100,
-        base_attack: 150,
-        base_defense: 100,
-        base_speed: 100
-      )
+  include_context "with seed data"
+
+  describe "#flat_modifier_for" do
+    before do
+      2.times { character.modifiers.flat.max_hp.create!(value: 10) }
     end
 
-    # Inspired by Pokemon stats: https://bulbapedia.bulbagarden.net/wiki/Stat#Generation_III_onward
-    # only difference is that flat mods (analogous to IVs + EVs) are added to the TOTAL instead of the BASE
-    context "when modifiers are applied" do
-      before do
-        # Flat mods; added at the END of the equation
-        fakemon.modifiers.flat.hp.create!(source: fakemon, value: 50)
-        fakemon.modifiers.flat.attack.create!(source: fakemon, value: 50)
-        fakemon.modifiers.flat.defense.create!(source: fakemon, value: 50)
-        # Percent mods; only applies to base
-        fakemon.modifiers.percent.attack.create!(source: fakemon, value: 50)
-      end
+    it "returns the sum of flat mods for a given stat" do
+      expect(character.flat_modifier_for(:max_hp)).to eq(20)
+    end
+  end
 
-      it "calculates the correct total for a given stat" do
-        expect(fakemon.total(:hp)).to eq(210)
-        expect(fakemon.total(:attack)).to eq(282)
-        expect(fakemon.total(:defense)).to eq(155)
-        expect(fakemon.total(:speed)).to eq(105)
+  describe "#percent_modifier_for" do
+    before do
+      2.times { character.modifiers.percent.max_hp.create!(value: 10) }
+    end
+
+    it "returns a multiplier based on the total percentage points" do
+      expect(character.percent_modifier_for(:max_hp)).to eq(1.2)
+    end
+  end
+
+  describe "after_save hook" do
+    describe "when a core attribute is changed" do
+      it "recalculates calculated fields" do
+        character.update!(body: 2)
+
+        expect(character.max_hp).to eq(16)
+      end
+    end
+
+    describe "when the target has no core attributes" do
+      it "ignores the callback" do
+        expect { sword.update!(name: "Longsword") }.to_not raise_error
       end
     end
   end

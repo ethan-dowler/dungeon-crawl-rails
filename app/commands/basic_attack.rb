@@ -14,7 +14,7 @@ class BasicAttack
 
     # TODO: incorporate dodging and critical hits
     defender.update!(current_hp: defender.current_hp - damage)
-    return unless dungeon_run.present?
+    return if dungeon_run.blank?
 
     dungeon_run.log("#{attacker_name} attacked #{defender_name} and dealt #{damage} damage.")
   end

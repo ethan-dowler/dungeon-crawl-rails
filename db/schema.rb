@@ -112,6 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.integer "value", default: 0, null: false
     t.boolean "stackable", default: false, null: false
     t.string "equipment_slot"
+    t.integer "armor_rating", default: 0, null: false
+    t.integer "damage_rating", default: 0, null: false
     t.index ["equipment_slot"], name: "index_items_on_equipment_slot"
     t.index ["name"], name: "index_items_on_name"
   end

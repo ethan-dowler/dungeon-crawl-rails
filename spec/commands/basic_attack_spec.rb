@@ -4,13 +4,14 @@ RSpec.describe BasicAttack do
   include_context "with seed data"
 
   describe "#execute" do
-    before do
-      character_equip_sword
-    end
+    before { character_equip_sword }
 
     it "applies the correct amount of damage" do
       basic_attack.execute
 
+      # character damage rating = 10
+      # monster armor rating = 20%
+      # the attack deals 8 damage
       expect(monster.reload.current_hp).to eq(2)
     end
   end
