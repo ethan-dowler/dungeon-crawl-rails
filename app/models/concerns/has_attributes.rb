@@ -11,7 +11,7 @@ module HasAttributes
   end
 
   def base_hp = (6 * body) + (4 * spirit)
-  def base_speed_factor = (6 * body) + (4 * mind)
+  def base_speed_rating = (6 * body) + (4 * mind)
 
   def alive? = current_hp.positive?
   def defeated? = current_hp.zero?

@@ -36,7 +36,7 @@ giant_rat =
     max_hp: 25,
     damage_rating: 4,
     armor_rating: 0,
-    speed_factor: 80,
+    speed_rating: 80,
     base_experience_yield: 10
   )
 
@@ -51,7 +51,7 @@ festering_rat =
     max_hp: 60,
     damage_rating: 8,
     armor_rating: 10,
-    speed_factor: 90,
+    speed_rating: 90,
     base_experience_yield: 25
   )
 
@@ -66,7 +66,7 @@ rat_king =
     max_hp: 100,
     damage_rating: 15,
     armor_rating: 25,
-    speed_factor: 100,
+    speed_rating: 100,
     base_experience_yield: 50
   )
 5.times { rat_king.drops.create!(item: coin, percent_chance: 90) }

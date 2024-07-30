@@ -51,7 +51,7 @@ rusty_great_sword.modifiers.flat.damage_rating.create!(value: 12)
 #   )
 # apprentice_wand.personality_traits.create!(trait: dual_wield_trait)
 # apprentice_wand.modifiers.flat.spirit.create!(value: 2)
-# apprentice_wand.modifiers.flat.speed_factor.create!(value: 1)
+# apprentice_wand.modifiers.flat.speed_rating.create!(value: 1)
 
 # apprentice_spellbook =
 #   Item.primary.create!(
@@ -68,7 +68,7 @@ rusty_great_sword.modifiers.flat.damage_rating.create!(value: 12)
 # apprentice_staff.personality_traits.create!(trait: two_handed_trait)
 # apprentice_staff.modifiers.flat.spirit.create!(value: 8)
 # apprentice_staff.modifiers.flat.damage_rating.create!(value: 2)
-# apprentice_staff.modifiers.flat.speed_factor.create!(value: -2)
+# apprentice_staff.modifiers.flat.speed_rating.create!(value: -2)
 
 ## secondaries
 small_shield =
@@ -93,7 +93,7 @@ weak_leather =
     description: "Full of rips and tears."
   )
 weak_leather.modifiers.flat.armor_rating.create!(value: 10)
-weak_leather.modifiers.flat.speed_factor.create!(value: -10)
+weak_leather.modifiers.flat.speed_rating.create!(value: -10)
 
 rusty_mail =
   Item.armor.create!(
@@ -101,7 +101,7 @@ rusty_mail =
     description: "Full of dents and scratches."
   )
 rusty_mail.modifiers.flat.armor_rating.create!(value: 20)
-rusty_mail.modifiers.flat.speed_factor.create!(value: -20)
+rusty_mail.modifiers.flat.speed_rating.create!(value: -20)
 
 # TODO: add flowcasting
 # apprentice_robes =

@@ -13,7 +13,7 @@ class Modifier < ApplicationRecord
 
   # specific stats
   scope :max_hp, -> { where(stat: :max_hp) }
-  scope :speed_factor, -> { where(stat: :speed_factor) }
+  scope :speed_rating, -> { where(stat: :speed_rating) }
   scope :armor_rating, -> { where(stat: :armor_rating) }
   scope :damage_rating, -> { where(stat: :damage_rating) }
 

@@ -24,9 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.integer "xp", default: 0, null: false
     t.integer "bonus_skill_points", default: 0, null: false
     t.integer "max_hp", default: 10, null: false
-    t.integer "speed_factor", default: 10, null: false
-    t.integer "armor_rating", default: 0, null: false
     t.integer "damage_rating", default: 0, null: false
+    t.integer "armor_rating", default: 0, null: false
+    t.integer "speed_rating", default: 10, null: false
   end
 
   create_table "conditions", force: :cascade do |t|
@@ -140,9 +140,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_052738) do
     t.integer "spirit", default: 1, null: false
     t.integer "level", default: 1, null: false
     t.integer "max_hp", default: 10, null: false
-    t.integer "speed_factor", default: 10, null: false
-    t.integer "armor_rating", default: 0, null: false
     t.integer "damage_rating", default: 0, null: false
+    t.integer "armor_rating", default: 0, null: false
+    t.integer "speed_rating", default: 10, null: false
   end
 
   create_table "monsters", force: :cascade do |t|

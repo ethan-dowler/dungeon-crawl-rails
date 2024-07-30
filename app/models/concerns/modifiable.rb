@@ -17,7 +17,7 @@ module Modifiable
 
   def recalc
     recalc_max_hp
-    recalc_speed_factor
+    recalc_speed_rating
     recalc_armor_rating
     recalc_damage_rating
   end
@@ -38,12 +38,12 @@ module Modifiable
     )
   end
 
-  def recalc_speed_factor
-    return unless respond_to?(:speed_factor)
+  def recalc_speed_rating
+    return unless respond_to?(:speed_rating)
 
     update!(
-      speed_factor: (
-        (base_speed_factor + flat_modifier_for(:speed_factor)) * percent_modifier_for(:speed_factor)
+      speed_rating: (
+        (base_speed_rating + flat_modifier_for(:speed_rating)) * percent_modifier_for(:speed_rating)
       ).floor
     )
   end

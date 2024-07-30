@@ -9,7 +9,7 @@ class MonstersController < ApplicationController
     @previous_character = dungeon_run.character.dup
     DungeonRun.transaction do
       # player and monster act in speed order
-      combatants = [dungeon_run.character, monster].sort! { |a, b| b.speed_factor - a.speed_factor }
+      combatants = [dungeon_run.character, monster].sort! { |a, b| b.speed_rating - a.speed_rating }
       BasicAttack.new(dungeon_run:, attacker: combatants.first, defender: combatants.second).execute
       BasicAttack.new(dungeon_run:, attacker: combatants.second, defender: combatants.first).execute
 
