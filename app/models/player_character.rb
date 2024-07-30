@@ -1,20 +1,20 @@
-class Character < ApplicationRecord
+class PlayerCharacter < ApplicationRecord
   include Conditionable
   include Modifiable
   include HasAttributes
 
-  has_many :dungeon_runs, dependent: :destroy
+  belongs_to :save_file
 
-  has_many :inventory_items, as: :owner, dependent: :destroy
-  has_many :items, through: :inventory_items, dependent: :destroy
+  has_many :items, as: :owner, dependent: :destroy
+  has_many :item_template, through: :items, dependent: :destroy
 
   before_create :set_xp_for_current_level
   before_update :set_xp_for_current_level, if: :level_changed?
   before_update :check_level_up, if: :xp_changed?
 
   # XP CALCS
-  def xp_to_next_level = 10 + level**3
-  def xp_for_current_level = 10 + (level - 1)**3
+  def xp_to_next_level = (level * 5)**2
+  def xp_for_current_level = ((level-1) * 5)**2
   def xp_needed_from_current_to_next_level = xp_to_next_level - xp_for_current_level
   def xp_progress_to_next_level = xp - xp_for_current_level
 
@@ -23,12 +23,10 @@ class Character < ApplicationRecord
     # TODO: remove any negative debuffs
   end
 
-  def current_run = dungeon_runs.active.first
-
   private
 
   def set_xp_for_current_level
-    self.xp = (level - 1)**3
+    self.xp = xp_for_current_level
   end
 
   def check_level_up # rubocop:disable Metrics/AbcSize

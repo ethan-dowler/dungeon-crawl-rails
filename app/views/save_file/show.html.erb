@@ -1,0 +1,15 @@
+<div id="game_panel" class="GamePanel">
+  <%= render HeadingComponent.new(title: save_file.name) %>
+
+  <% if save_file.location.present? %>
+    <div class="GamePanel-location">
+      Location: <%= save_file.location.name %>
+    </div>
+  <% end %>
+
+  <div class="GamePanel-characters">
+    <% save_file.player_characters.each do |pc| %>
+      <%= render PlayerCharacterSummaryComponent.new(pc) %>
+    <% end %>
+  </div>
+</div>

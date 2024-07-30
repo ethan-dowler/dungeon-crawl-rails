@@ -13,7 +13,7 @@
   }
 </style>
 
-<div class="ProgressBar <%= "ProgressBar--withValue" if show_value? %>">
+<div class="ProgressBar <%= "ProgressBar--#{variant}" %><%= " ProgressBar--withValue" if show_value? %>">
   <span class="ProgressBar-label">
     <%= label %>
   </span>
@@ -22,13 +22,22 @@
     <div class="ProgressBar-fillPool">
       <div
         id="progressBar-<%= name %>"
-        class="ProgressBar-fillColor <%= fill_color_class %> <%= bar_variant_class %>"
+        class="
+          ProgressBar-fillColor
+          ProgressBar-fillColor--<%= variant %>
+          ProgressBar-fillColor--<%= color %>
+        "
       >
       </div>
     </div>
 
     <% if show_value? %>
-      <div class="ProgressBar-value">
+      <div
+        class="
+          ProgressBar-value
+          ProgressBar-value--<%= variant %>
+        "
+      >
         <%= current_value %> / <%= max_value %>
       </div>
     <% end %>

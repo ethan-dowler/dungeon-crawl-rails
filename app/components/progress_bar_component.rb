@@ -14,10 +14,6 @@ class ProgressBarComponent < ApplicationComponent
     @show_value = show_value
   end
 
-  def bar_variant_class = "ProgressBar-fillColor--#{variant}"
-
-  def fill_color_class = "ProgressBar-fillColor--#{color}"
-
   def end_fill_percent
     return 0 if max_value.blank?
 

@@ -12,40 +12,40 @@ two_handed_trait = Trait.create!(
 
 # martial
 rusty_dagger =
-  Item.primary.create!(
+  ItemTemplate.primary.create!(
     name: "Rusty Dagger",
     description: "It's seen better days..."
   )
 rusty_dagger.personality_traits.create!(trait: dual_wield_trait)
-rusty_dagger.modifiers.flat.damage_rating.create!(value: 3)
+rusty_dagger.modifiers.flat.damage_rating.create!(value: 4)
 
 rusty_short_sword =
-  Item.primary.create!(
+  ItemTemplate.primary.create!(
     name: "Rusty Short Sword",
     description: "It's seen better days..."
   )
 rusty_short_sword.personality_traits.create!(trait: dual_wield_trait)
-rusty_short_sword.modifiers.flat.damage_rating.create!(value: 5)
+rusty_short_sword.modifiers.flat.damage_rating.create!(value: 6)
 
 rusty_long_sword =
-  Item.primary.create!(
+  ItemTemplate.primary.create!(
     name: "Rusty Long Sword",
     description: "It's seen better days..."
   )
-rusty_long_sword.modifiers.flat.damage_rating.create!(value: 7)
+rusty_long_sword.modifiers.flat.damage_rating.create!(value: 8)
 
 rusty_great_sword =
-  Item.primary.create!(
+  ItemTemplate.primary.create!(
     name: "Rusty Greatsword",
     description: "It's seen better days..."
   )
 rusty_great_sword.personality_traits.create!(trait: two_handed_trait)
-rusty_great_sword.modifiers.flat.damage_rating.create!(value: 12)
+rusty_great_sword.modifiers.flat.damage_rating.create!(value: 14)
 
 # TODO: add flowcasting
 # # magical
 # apprentice_wand =
-#   Item.primary.create!(
+#   ItemTemplate.primary.create!(
 #     name: "Apprentice Wand",
 #     description: "Flimsy wand for beginners."
 #   )
@@ -54,14 +54,14 @@ rusty_great_sword.modifiers.flat.damage_rating.create!(value: 12)
 # apprentice_wand.modifiers.flat.speed_rating.create!(value: 1)
 
 # apprentice_spellbook =
-#   Item.primary.create!(
+#   ItemTemplate.primary.create!(
 #     name: "Apprentice Spellbook",
 #     description: "Magic energy ripples from its pages."
 #   )
 # apprentice_spellbook.modifiers.flat.spirit.create!(value: 5)
 
 # apprentice_staff =
-#   Item.primary.create!(
+#   ItemTemplate.primary.create!(
 #     name: "Apprentice Staff",
 #     description: "Rugged staff for beginners"
 #   )
@@ -72,15 +72,17 @@ rusty_great_sword.modifiers.flat.damage_rating.create!(value: 12)
 
 ## secondaries
 small_shield =
-  Item.secondary.create!(
+  ItemTemplate.secondary.create!(
     name: "Small Shield",
-    description: "Won't block much."
+    description: "Won't block much but might save your life."
   )
 small_shield.modifiers.flat.armor_rating.create!(value: 10)
+# TODO: add small chance (5%-10%) to block all damage
+# small_shield.modifiers.flat.evade_rating.create!(value: 10)
 
 # TODO: add flowcasting
 # small_candle =
-#   Item.secondary.create!(
+#   ItemTemplate.secondary.create!(
 #     name: "Small Candle",
 #     description: "Emits a dim light."
 #   )
@@ -88,7 +90,7 @@ small_shield.modifiers.flat.armor_rating.create!(value: 10)
 
 ## armor
 weak_leather =
-  Item.armor.create!(
+  ItemTemplate.armor.create!(
     name: "Dusty Leather",
     description: "Full of rips and tears."
   )
@@ -96,7 +98,7 @@ weak_leather.modifiers.flat.armor_rating.create!(value: 10)
 weak_leather.modifiers.flat.speed_rating.create!(value: -10)
 
 rusty_mail =
-  Item.armor.create!(
+  ItemTemplate.armor.create!(
     name: "Rusty Mail",
     description: "Full of dents and scratches."
   )
@@ -105,7 +107,7 @@ rusty_mail.modifiers.flat.speed_rating.create!(value: -20)
 
 # TODO: add flowcasting
 # apprentice_robes =
-#   Item.armor.create!(
+#   ItemTemplate.armor.create!(
 #     name: "Apprentice Robes",
 #     description: "Strips of thin cloth stiched together."
 #   )

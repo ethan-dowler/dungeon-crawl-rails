@@ -1,10 +1,12 @@
-<%= turbo_frame_tag :character_summary, class: "CharacterSummary" do %>
-  <div class="CharacterSummary-name">
-    <%= name %>
-    Lvl. <%= level %>
-  </div>
+<%= turbo_frame_tag :player_character_summary do %>
+  <div class="PlayerCharacterSummary">
+    <div class="PlayerCharacterSummary-name">
+      <%= name %>
+      <span class="PlayerCharacterSummary-level">
+        Lvl. <%= level %>
+      </span>
+    </div>
 
-  <% if show_status? %>
     <%= render(
       ProgressBarComponent.new(
         name: :player_hp,
@@ -13,11 +15,12 @@
         current_value: current_hp,
         max_value: max_hp,
         color: :red,
+        variant: :thin,
         show_value: true
       )
     ) %>
 
-    <%= render(
+    <%#= render(
       ProgressBarComponent.new(
         name: :player_xp,
         label: "XP",
@@ -25,8 +28,9 @@
         current_value: xp_progress_to_next_level,
         max_value: xp_needed_from_current_to_next_level,
         color: :black,
-        variant: :thin
+        variant: :thin,
+        show_value: true
       )
     ) %>    
-  <% end %>
+  </div>
 <% end %>

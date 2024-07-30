@@ -32,7 +32,7 @@ RSpec.describe Modifiable do
 
     describe "when the target has no core attributes" do
       it "ignores the callback" do
-        expect { sword.update!(name: "Longsword") }.to_not raise_error
+        expect { sword.update!(name: "Longsword") }.not_to raise_error
       end
     end
   end

@@ -8,6 +8,10 @@
     margin-bottom: spaces(0.5);
   }
 
+  &--thin {
+    padding: 0;
+  }
+
   &-label {
     width: 20px;
     margin-right: spaces(0.5);
@@ -51,5 +55,9 @@
     top: 8px;
     width: 100%;
     text-align: center;
+
+    &--thin {
+      top: 4px;
+    }
   }
 }

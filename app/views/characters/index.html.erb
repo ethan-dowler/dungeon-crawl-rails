@@ -1,12 +1,12 @@
 <%= render HeadingComponent.new(title: "Characters") %>
 
-<div class="CharacterSelect">
+<div class="TileSelect">
   <% characters.each do |character| %>
-    <div class="CharacterSelect-tile">
-      <div class="CharacterSelect-level">
+    <div class="TileSelect-tile">
+      <div class="TileSelect-level">
         Lvl. <%= character.level %>
       </div>
-      <div class="CharacterSelect-name">
+      <div class="TileSelect-name">
         <%= character.name %>
       </div>
 

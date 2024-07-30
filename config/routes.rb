@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root "home#index"
 
+  # NEW
+  resources :save_file, only: :show
+
+  # LEGACY
+
   resources :characters, only: %i[index show] do
     resources :inventory_items, only: :index
 

@@ -1,0 +1,16 @@
+.PlayerCharacterSummary {
+  border: 1px solid $slate-900;
+  padding: spaces(0.5) spaces(1) spaces(1);
+  border-radius: $border-radius-small;
+
+  &-name {
+    font-size: $font-size-s;
+    font-weight: $font-weight-semibold;
+  }
+
+  &-level {
+    font-size: $font-size-xs;
+    font-style: italic;
+    color: $slate-400;
+  }
+}

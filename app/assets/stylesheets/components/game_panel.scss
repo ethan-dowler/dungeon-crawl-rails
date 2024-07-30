@@ -1,0 +1,21 @@
+.GamePanel {
+  &-characters {
+    display: flex;
+    justify-content: flex-start;
+
+    & > :not(:last-child) {
+      margin-right: spaces(1);
+    }
+  }
+
+  // &-nav {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: flex-start;
+  // }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -25,7 +25,7 @@
     </div>
     
     <% if monster.defeated? %>
-      <% monster.inventory_items.each do |inventory_item| %>
+      <% monster.items.each do |inventory_item| %>
         <div class="MonsterSummary-loot">
           <span class="MonsterSummary-lootName">
             <%= inventory_item.name %>

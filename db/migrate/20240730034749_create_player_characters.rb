@@ -1,17 +1,24 @@
-class CreateMonsterTemplates < ActiveRecord::Migration[7.0]
+class CreatePlayerCharacters < ActiveRecord::Migration[7.0]
   def change
-    create_table :monster_templates do |t|
-      # high-level info
+    create_table :player_characters do |t|
+      t.references :save_file, null: false
+
+      # personal info
       t.string :name, null: false
-      t.integer :base_experience_yield, null: false, default: 0
 
       # attributes
       t.integer :body, null: false, default: 1
       t.integer :mind, null: false, default: 1
       t.integer :spirit, null: false, default: 1
 
-      # combat ratings - monsters don't wear equipment!
+      # trackables
+      t.integer :current_hp, null: false, default: 10
       t.integer :level, null: false, default: 1
+      t.integer :xp, null: false, default: 0
+      t.integer :bonus_skill_points, null: false, default: 0
+      # TODO: track active party members vs inactive roster members
+
+      # calculated stats; cached for performance
       t.integer :max_hp, null: false, default: 10
       t.integer :damage_rating, null: false, default: 0
       t.integer :armor_rating, null: false, default: 0

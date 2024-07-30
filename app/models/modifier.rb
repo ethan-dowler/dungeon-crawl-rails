@@ -4,8 +4,8 @@ class Modifier < ApplicationRecord
 
   before_validation :set_default_source, only: :create
 
-  after_save -> { target.recalc }
   after_destroy -> { target.recalc }
+  after_save -> { target.recalc }
 
   # specific modifier types
   scope :flat, -> { where(modifier_type: Type::FLAT) }

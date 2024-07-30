@@ -1,8 +1,8 @@
-class CreateInventoryItems < ActiveRecord::Migration[7.0]
+class CreateItems < ActiveRecord::Migration[7.0]
   def change
-    create_table :inventory_items do |t|
+    create_table :items do |t|
       t.references :owner, null: false, polymorphic: true
-      t.references :item, null: false
+      t.references :item_template, null: false
       t.integer :quantity, null: false, default: 1
       t.boolean :equipped, null: false, default: false
     end

@@ -1,10 +1,10 @@
 <%= render HeadingComponent.new(title: "Dungeons", tag: :h2) %>
 
 <% DungeonTemplate.all.each do |dungeon_template| %>
-  <div class="CharacterSelect">
+  <div class="TileSelect">
     <% DungeonTemplate.all.each do |dungeon_template| %>
-      <div class="CharacterSelect-tile">
-        <div class="CharacterSelect-name">
+      <div class="TileSelect-tile">
+        <div class="TileSelect-name">
           <%= dungeon_template.name %>
         </div>
 

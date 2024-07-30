@@ -17,9 +17,9 @@ module Modifiable
 
   def recalc
     recalc_max_hp
-    recalc_speed_rating
-    recalc_armor_rating
     recalc_damage_rating
+    recalc_armor_rating
+    recalc_speed_rating
   end
 
   private
@@ -31,11 +31,23 @@ module Modifiable
   end
 
   def recalc_max_hp
-    return unless respond_to?(:max_hp)
+    return unless respond_to?(:max_hp) && respond_to?(:base_hp)
 
     update!(
       max_hp: ((base_hp + flat_modifier_for(:max_hp)) * percent_modifier_for(:max_hp)).floor
     )
+  end
+
+  def recalc_damage_rating
+    return unless respond_to?(:damage_rating)
+
+    update!(damage_rating: flat_modifier_for(:damage_rating) * percent_modifier_for(:damage_rating))
+  end
+
+  def recalc_armor_rating
+    return unless respond_to?(:armor_rating)
+
+    update!(armor_rating: flat_modifier_for(:armor_rating) * percent_modifier_for(:armor_rating))
   end
 
   def recalc_speed_rating
@@ -46,17 +58,5 @@ module Modifiable
         (base_speed_rating + flat_modifier_for(:speed_rating)) * percent_modifier_for(:speed_rating)
       ).floor
     )
-  end
-
-  def recalc_armor_rating
-    return unless respond_to?(:armor_rating)
-
-    update!(armor_rating: flat_modifier_for(:armor_rating) * percent_modifier_for(:armor_rating))
-  end
-
-  def recalc_damage_rating
-    return unless respond_to?(:damage_rating)
-
-    update!(damage_rating: flat_modifier_for(:damage_rating) * percent_modifier_for(:damage_rating))
   end
 end

@@ -11,11 +11,9 @@
 // TODO: add missing components (character select, etc.)
 @import 'components/break';
 @import 'components/button';
-@import 'components/character_select';
 @import 'components/character_stats';
-@import 'components/character_summary';
-@import 'components/dungeon_panel';
 @import 'components/event_log';
+@import 'components/game_panel';
 @import 'components/icon';
 @import 'components/inventory_item';
 @import 'components/journal';
@@ -26,5 +24,7 @@
 @import 'components/main';
 @import 'components/monster_summary';
 @import 'components/navigation';
+@import 'components/player_character_summary';
 @import 'components/progress_bar';
+@import 'components/tile_select';
 @import 'components/top_bar';

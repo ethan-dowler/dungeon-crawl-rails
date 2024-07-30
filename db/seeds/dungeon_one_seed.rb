@@ -1,101 +1,50 @@
-dungeon_template =
-  DungeonTemplate.create!(
-    name: "Dungeon One",
-    description: "The very first dungeon"
+map =
+  MapTemplate.create!(
+    name: "Stone Ruins",
+    description: "Ruins of an old stone building infested with rats!",
+    start_y: -1
   )
 
-## Ground Floor
-
-ground_floor = dungeon_template.floor_templates.create!(name: "Ground Floor", level: 0)
-
-# create rooms
-gf_middle_room = ground_floor.room_templates.create!(name: "Middle Room")
-gf_north_room = ground_floor.room_templates.create!(name: "North Room")
-gf_east_room = ground_floor.room_templates.create!(name: "East Room")
-gf_south_room = ground_floor.room_templates.create!(name: "South Room")
-gf_west_room = ground_floor.room_templates.create!(name: "West Room")
-
-# connect rooms
-gf_middle_room.update!(
-  north_room_template: gf_north_room,
-  east_room_template: gf_east_room,
-  south_room_template: gf_south_room,
-  west_room_template: gf_west_room
-)
-gf_north_room.update!(south_room_template: gf_middle_room)
-gf_east_room.update!(west_room_template: gf_middle_room)
-gf_south_room.update!(north_room_template: gf_middle_room)
-gf_west_room.update!(east_room_template: gf_middle_room)
+# Ground floor
+map.tile_templates.create!(name: "Center Room - Ground Floor", x: 0, y: 0, z: 0)
+map.tile_templates.create!(name: "North Room - Ground Floor", x: 0, y: 1, z: 0)
+map.tile_templates.create!(name: "East Room - Ground Floor", x: 1, y: 0, z: 0)
+map.tile_templates.create!(name: "South Room - Ground Floor", x: 0, y: -1, z: 0)
+map.tile_templates.create!(name: "West Room - Ground Floor", x: -1, y: 0, z: 0)
 
 ## First Floor
-
-floor_one = dungeon_template.floor_templates.create!(name: "First Floor", level: 1)
-
-# create rooms
-f1_middle_room = floor_one.room_templates.create!(name: "Middle Room")
-f1_north_room = floor_one.room_templates.create!(name: "North Room")
-f1_east_room = floor_one.room_templates.create!(name: "East Room")
-f1_south_room = floor_one.room_templates.create!(name: "South Room")
-f1_west_room = floor_one.room_templates.create!(name: "West Room")
-
-# connect rooms
-f1_middle_room.update!(
-  north_room_template: f1_north_room,
-  east_room_template: f1_east_room,
-  south_room_template: f1_south_room,
-  west_room_template: f1_west_room
-)
-f1_north_room.update!(south_room_template: f1_middle_room)
-f1_east_room.update!(west_room_template: f1_middle_room)
-f1_south_room.update!(north_room_template: f1_middle_room)
-f1_west_room.update!(east_room_template: f1_middle_room)
-
-## connect Ground Floor to Floor 1
-gf_north_room.update!(above_room_template: f1_south_room)
-f1_south_room.update!(below_room_template: gf_north_room)
+map.tile_templates.create!(name: "Center Room - First Floor", x: 0, y: 0, z: 1)
+map.tile_templates.create!(name: "North Room - First Floor", x: 0, y: 1, z: 1)
+map.tile_templates.create!(name: "East Room - First Floor", x: 1, y: 0, z: 1)
+map.tile_templates.create!(name: "South Room - First Floor", x: 0, y: -1, z: 1)
+map.tile_templates.create!(name: "West Room - First Floor", x: -1, y: 0, z: 1)
 
 ## Boss floor
-
-boss_floor = dungeon_template.floor_templates.create!(name: "Boss Floor", level: 2)
-
-# create rooms
-boss_room = boss_floor.room_templates.create!(name: "Boss Room")
-
-## connect the Floor 1 to Boss Floor
-f1_north_room.update!(above_room_template: boss_room)
-boss_room.update!(below_room_template: f1_north_room)
-
-# the south room of floor 2 is directly above the north room of floor 1
-gf_north_room.update!(above_room_template: f1_south_room)
-f1_south_room.update!(below_room_template: gf_north_room)
-
-## Set entrance
-
-# player starts in the south room of the ground floor
-dungeon_template.update!(entrance_room_template: gf_south_room)
+map.tile_templates.create!(name: "South Room - First Floor", x: 0, y: -1, z: 2)
+map.tile_templates.create!(name: "Boss Room", x: 0, y: 0, z: 2)
 
 ## Configure monster spawns
 
 # ground floor has weak monsters
-giant_rat_template = MonsterTemplate.find_by!(name: "Giant Rat")
-ground_floor.room_templates.reload.each do |room_template|
-  room_template.room_encounters.create!(
-    monster_template: giant_rat_template,
-    percent_chance: 90,
+giant_rat_template = NpcTemplate.find_by!(name: "Giant Rat")
+map.tile_templates.where(z: 0).find_each do |tile_template|
+  tile_template.encounters.create!(
+    npc_template: giant_rat_template,
+    percent_chance: 90
   )
 end
 
 # first floor has stronger monsters
-festering_rat_template = MonsterTemplate.find_by!(name: "Festering Rat")
-floor_one.room_templates.reload.each do |room_template|
-  room_template.room_encounters.create!(
-    monster_template: festering_rat_template,
-    percent_chance: 90,
+festering_rat_template = NpcTemplate.find_by!(name: "Festering Rat")
+map.tile_templates.where(z: 1).find_each do |tile_template|
+  tile_template.encounters.create!(
+    npc_template: festering_rat_template,
+    percent_chance: 90
   )
 end
 
 # boss room has boss monster
-boss_template = MonsterTemplate.find_by!(name: "Rat King")
-boss_room.room_encounters.create!(
-  monster_template: boss_template,
-)
+boss_template = NpcTemplate.find_by!(name: "Rat King")
+map.tile_templates.find_by(name: "Boss Room")
+   .encounters
+   .create!(npc_template: boss_template)

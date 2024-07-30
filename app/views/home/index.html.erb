@@ -1,3 +1,21 @@
 <%= render HeadingComponent.new(title: "Dungeons of Tairos") %>
 
-<%= link_to "Start", characters_path, class: "Button" %>
+<div class="TileSelect">
+  <% SaveFile.all.each do |save_file| %>
+    <div class="TileSelect-tile">
+      <div class="TileSelect-name">
+        <%= save_file.name %>
+      </div>
+
+      <%=
+        link_to(
+          "Start",
+          save_file_path(save_file.id),
+          class: "Button Button--full",
+          data: { "turbo-disable": "Starting..." }
+        )
+      %>
+    </div>
+  <% end %>
+</div>
+
