@@ -1,4 +1,4 @@
-class EquipInventoryItem
+class EquipItem
   attr_reader :new_inventory_item, :owner
 
   def initialize(new_inventory_item)
@@ -9,10 +9,10 @@ class EquipInventoryItem
   def execute
     return if new_inventory_item.equipped?
 
-    InventoryItem.transaction do
+    Item.transaction do
       unequip_current_items
       unequip_secondary if new_inventory_item.two_handed?
-      unequip_two_handed_primary if new_inventory_item.secondary?
+      unequip_two_handed_primary if new_inventory_item.secondary? # TODO: need to check for ANY type. can't add a dual wield if already holding a 2H weapon either
       new_inventory_item.update!(equipped: true)
     end
   end
@@ -28,7 +28,7 @@ class EquipInventoryItem
       # when equipping a second dual-wield weapon, remove the secondary item to "make room"
       unequip_secondary
     else
-      current_items_in_slot.each { UnequipInventoryItem.new(_1).execute }
+      current_items_in_slot.each { UnequipItem.new(_1).execute }
     end
   end
 
@@ -36,11 +36,11 @@ class EquipInventoryItem
     # should never have more than one secondary equipped
     secondary_item =
       owner.items.secondary.equipped.first
-    UnequipInventoryItem.new(secondary_item).execute if secondary_item.present?
+    UnequipItem.new(secondary_item).execute if secondary_item.present?
   end
 
   def unequip_two_handed_primary
     two_handed_primary = owner.items.two_handed.equipped.first
-    UnequipInventoryItem.new(two_handed_primary).execute if two_handed_primary.present?
+    UnequipItem.new(two_handed_primary).execute if two_handed_primary.present?
   end
 end

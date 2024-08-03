@@ -1,4 +1,4 @@
-class SaveFileController < ApplicationController
+class SaveFilesController < ApplicationController
   helper_method :save_file
 
   def show; end

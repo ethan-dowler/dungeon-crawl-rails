@@ -1,7 +1,11 @@
 class NonPlayerCharacter < ApplicationRecord
+  include Conditionable
+  include HasHp
+  include Modifiable
+
   belongs_to :save_file
   belongs_to :npc_template
-  belongs_to :location, optional: true
+  belongs_to :location, class_name: "Tile", optional: true
 
   has_many :drops, through: :npc_template
 

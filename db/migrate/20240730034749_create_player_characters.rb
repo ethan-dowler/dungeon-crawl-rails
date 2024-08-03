@@ -22,7 +22,6 @@ class CreatePlayerCharacters < ActiveRecord::Migration[7.0]
       t.integer :max_hp, null: false, default: 10
       t.integer :damage_rating, null: false, default: 0
       t.integer :armor_rating, null: false, default: 0
-      t.integer :speed_rating, null: false, default: 10
     end
   end
 end

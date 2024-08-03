@@ -1,0 +1,35 @@
+.NpcSummary {
+  margin-bottom: spaces(2);
+  border: 1px solid $slate-300;
+  border-radius: $border-radius-large;
+  padding: spaces(2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &-label {
+    margin-bottom: spaces(1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $font-size-l;
+  }
+
+  &-name {
+    margin-right: spaces(1);
+  }
+
+  &-level {
+    color: $slate-400;
+    font-size: $font-size-s;
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    & > :not(:last-child) {
+      margin-right: spaces(0.5);
+    }
+  }
+}

@@ -36,17 +36,17 @@ class Item < ApplicationRecord
   end
 
   scope :with_same_slot, ->(item) do
-    joins(:item).where(item: { equipment_slot: item.equipment_slot })
+    joins(:item_template).where(item_templates: { equipment_slot: item.equipment_slot })
   end
 
   delegate_missing_to :item_template
 
   def equip
-    EquipInventoryItem.new(self).execute
+    EquipItem.new(self).execute
   end
 
   def unequip
-    UnequipInventoryItem.new(self).execute
+    UnequipItem.new(self).execute
   end
 
   private

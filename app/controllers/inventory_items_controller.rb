@@ -9,9 +9,9 @@ class InventoryItemsController < ApplicationController
 
   def toggle
     if inventory_item.equipped?
-      UnequipInventoryItem.new(inventory_item).execute
+      UnequipItem.new(inventory_item).execute
     else
-      EquipInventoryItem.new(inventory_item).execute
+      EquipItem.new(inventory_item).execute
     end
   end
 

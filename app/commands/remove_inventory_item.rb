@@ -8,7 +8,7 @@ class RemoveInventoryItem
 
   def execute
     InventoryItem.transaction do
-      UnequipInventoryItem.new(inventory_item).execute if inventory_item.equipped?
+      UnequipItem.new(inventory_item).execute if inventory_item.equipped?
 
       reduce_quantity
     end

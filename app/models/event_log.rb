@@ -1,5 +1,5 @@
 class EventLog < ApplicationRecord
-  belongs_to :dungeon_run
+  belongs_to :save_file
 
   def self.recent
     order(created_at: :desc).first(10)

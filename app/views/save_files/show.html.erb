@@ -1,0 +1,32 @@
+<div id="game_panel" class="GamePanel">
+  <%= render HeadingComponent.new(tag: :h2, title: save_file.name) %>
+
+  <div class="GamePanel-characters">
+    <% save_file.player_characters.each do |pc| %>
+      <%= render PlayerCharacterSummaryComponent.new(pc) %>
+    <% end %>
+  </div>
+
+  <hr />
+
+  <%= render HeadingComponent.new(tag: :h2, title: save_file.location.map.name) %>
+
+  <div class="GamePanel-location">
+    <%= save_file.location.name %>
+    <span class="GamePanel-locationCoords">
+      (<%= save_file.location.x %>, <%= save_file.location.y %>, <%= save_file.location.z %>)
+    </span>
+  </div>
+
+  <hr />
+
+  <div class="GamePanel-encounters">
+    <% if save_file.location.non_player_characters.any? %>
+      <div id="monsters">
+        <% save_file.location.non_player_characters.each do |npc| %>
+          <%= render NpcSummaryComponent.new(npc) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 RSpec.describe BasicAttack do
-  subject(:basic_attack) { described_class.new(attacker: character, defender: monster) }
+  subject(:basic_attack) { described_class.new(attacker: player_character, defender: monster) }
 
   include_context "with seed data"
 

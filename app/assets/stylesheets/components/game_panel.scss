@@ -4,18 +4,30 @@
     justify-content: flex-start;
 
     & > :not(:last-child) {
-      margin-right: spaces(1);
+      margin-bottom: spaces(1);
+
+      @media (min-width: $breakpoint-medium) {
+        margin-right: spaces(1);
+        margin-bottom: 0;
+      }
     }
   }
 
-  // &-nav {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: flex-start;
-  // }
-
-  &-body {
+  &-characters {
     display: flex;
     flex-direction: column;
+    
+    @media (min-width: $breakpoint-medium) {
+      flex-direction: row;
+    }
+  }
+
+  &-location {
+
+    &Coords {
+      font-size: $font-size-xs;
+      color: $slate-400;
+      font-style: italic;
+    }
   }
 }

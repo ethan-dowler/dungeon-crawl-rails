@@ -37,16 +37,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_040733) do
   create_table "encounters", force: :cascade do |t|
     t.bigint "tile_template_id", null: false
     t.bigint "npc_template_id", null: false
+    t.integer "base_hostility_rating", default: 0, null: false
     t.integer "percent_chance", default: 100, null: false
     t.index ["npc_template_id"], name: "index_encounters_on_npc_template_id"
     t.index ["tile_template_id"], name: "index_encounters_on_tile_template_id"
   end
 
   create_table "event_logs", force: :cascade do |t|
-    t.bigint "dungeon_run_id", null: false
+    t.bigint "save_file_id", null: false
     t.string "message", null: false
     t.datetime "created_at", null: false
-    t.index ["dungeon_run_id"], name: "index_event_logs_on_dungeon_run_id"
+    t.index ["save_file_id"], name: "index_event_logs_on_save_file_id"
   end
 
   create_table "item_templates", force: :cascade do |t|
@@ -80,8 +81,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_040733) do
   end
 
   create_table "maps", force: :cascade do |t|
-    t.bigint "map_templates_id", null: false
-    t.index ["map_templates_id"], name: "index_maps_on_map_templates_id"
+    t.bigint "save_file_id", null: false
+    t.bigint "map_template_id", null: false
+    t.index ["map_template_id"], name: "index_maps_on_map_template_id"
+    t.index ["save_file_id"], name: "index_maps_on_save_file_id"
   end
 
   create_table "modifiers", force: :cascade do |t|
@@ -101,19 +104,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_040733) do
   create_table "non_player_characters", force: :cascade do |t|
     t.bigint "save_file_id", null: false
     t.bigint "npc_template_id", null: false
-    t.bigint "tile_id"
+    t.bigint "location_id"
     t.integer "current_hp", default: 10, null: false
+    t.integer "hostility_rating", default: 0, null: false
+    t.index ["location_id"], name: "index_non_player_characters_on_location_id"
     t.index ["npc_template_id"], name: "index_non_player_characters_on_npc_template_id"
     t.index ["save_file_id"], name: "index_non_player_characters_on_save_file_id"
-    t.index ["tile_id"], name: "index_non_player_characters_on_tile_id"
   end
 
   create_table "npc_templates", force: :cascade do |t|
     t.string "name", null: false
     t.integer "base_experience_yield", default: 0, null: false
-    t.integer "body", default: 1, null: false
-    t.integer "mind", default: 1, null: false
-    t.integer "spirit", default: 1, null: false
     t.integer "level", default: 1, null: false
     t.integer "max_hp", default: 10, null: false
     t.integer "damage_rating", default: 0, null: false

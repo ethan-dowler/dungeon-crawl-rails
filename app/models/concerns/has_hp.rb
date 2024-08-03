@@ -1,17 +1,14 @@
-# must implement body, mind, spirit, max_hp
-module HasAttributes
+# must implement current_hp, max_hp
+module HasHp
   extend ActiveSupport::Concern
 
   included do
-    before_validation :set_current_hp, on: :create
+    before_create :set_current_hp
     before_validation :enforce_hp_boundaries
 
     scope :alive, -> { where(current_hp: 1..) }
     scope :defeated, -> { where(current_hp: 0) }
   end
-
-  def base_hp = (6 * body) + (4 * spirit)
-  def base_speed_rating = (6 * body) + (4 * mind)
 
   def alive? = current_hp.positive?
   def defeated? = current_hp.zero?

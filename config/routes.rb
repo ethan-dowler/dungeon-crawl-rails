@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   # NEW
-  resources :save_file, only: :show
+  resources :save_files, only: :show
 
   # LEGACY
 
