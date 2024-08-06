@@ -1,7 +1,13 @@
 .GamePanel {
   &-characters {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+
+    @media (min-width: $breakpoint-medium) {
+      flex-direction: row;
+      justify-content: center;
+    }
 
     & > :not(:last-child) {
       margin-bottom: spaces(1);
@@ -13,21 +19,50 @@
     }
   }
 
-  &-characters {
+  &-nav {
     display: flex;
-    flex-direction: column;
-    
-    @media (min-width: $breakpoint-medium) {
-      flex-direction: row;
-    }
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: spaces(2);
   }
 
   &-location {
+    display: flex;
+    flex-direction: column;
+
+    &Title {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: spaces(1);
+    }
+
+    &Map {
+      margin-right: spaces(1);
+      margin-bottom: 0;
+    }
+
+    &Tile {
+      font-style: italic;
+    }
 
     &Coords {
       font-size: $font-size-xs;
       color: $slate-400;
       font-style: italic;
+    }
+
+    &Description {
+      margin-bottom: spaces(2);
+    }
+  }
+
+  &-actions {
+    display: flex;
+    flex-direction: column;
+
+    > :not(:last-child) {
+      margin-bottom: spaces(1);
     }
   }
 }

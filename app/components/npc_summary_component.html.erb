@@ -12,33 +12,16 @@
       <%# TODO: dynamically generate list of actions based on hostility, creature type, etc. %>
       <div class="NpcSummary-actions">
         <%= link_to(
-          "Talk",
-          "#",
-          class: "Button Button--compact"
-        ) %>
-        <%= link_to(
           "Trade",
           "#",
           class: "Button Button--compact"
         ) %>
         <%= link_to(
-          "Battle",
+          "Talk",
           "#",
           class: "Button Button--compact"
         ) %>
       </div>
     </div>
-
-    <%# TODO: add previous_value for non_player_character hp %>
-    <%= render(
-      ProgressBarComponent.new(
-        name: "npc_hp-#{non_player_character.id}",
-        label: "HP",
-        current_value: non_player_character.current_hp,
-        max_value: non_player_character.max_hp,
-        color: :red,
-        show_value: true
-      )
-    ) %>
   </div>
 <% end %>

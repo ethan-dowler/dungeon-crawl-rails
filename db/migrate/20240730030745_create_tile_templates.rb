@@ -9,5 +9,9 @@ class CreateTileTemplates < ActiveRecord::Migration[7.0]
       t.integer :y, null: false
       t.integer :z, null: false
     end
+
+    # TODO: may need to add an index here to improve tile look-up,
+    #       but need to do more testing to see if this will help
+    # add_index :tile_templates, %w[x y z]
   end
 end

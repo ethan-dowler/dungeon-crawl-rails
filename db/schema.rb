@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_30_040733) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_06_180547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "battles", force: :cascade do |t|
+    t.bigint "save_file_id", null: false
+    t.integer "initiative", default: 0, null: false
+    t.index ["save_file_id"], name: "index_battles_on_save_file_id"
+  end
 
   create_table "conditions", force: :cascade do |t|
     t.string "source_type", null: false

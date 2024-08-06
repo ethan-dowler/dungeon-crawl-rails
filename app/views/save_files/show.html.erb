@@ -9,18 +9,46 @@
 
   <hr />
 
-  <%= render HeadingComponent.new(tag: :h2, title: save_file.location.map.name) %>
+  <div class="GamePanel-nav">
+    <div class="GamePanel-location">
+      <div class="GamePanel-locationTitle">
+        <%= render HeadingComponent.new(tag: :h3, title: save_file.location.map.name, classes: "GamePanel-locationMap") %>
 
-  <div class="GamePanel-location">
-    <%= save_file.location.name %>
-    <span class="GamePanel-locationCoords">
-      (<%= save_file.location.x %>, <%= save_file.location.y %>, <%= save_file.location.z %>)
-    </span>
+        <div class="GamePanel-locationTile">
+          <%= save_file.location.name %>
+
+          <span class="GamePanel-locationCoords">
+            (<%= save_file.location.x %>, <%= save_file.location.y %>, <%= save_file.location.z %>)
+          </span>
+        </div>
+      </div>
+
+      <div class="GamePanel-locationDescription">
+        <%= save_file.location.description.presence || "Nothing of note..." %>
+      </div>
+    </div>
+
+    <%# TODO: dynamically generate list of actions based on location, enemies, etc. %>
+    <div class="GamePanel-actions">
+      <%= link_to(
+        "Initiate Fight",
+        "#",
+        class: "Button Button--compact"
+      ) %>
+      <%= link_to(
+        "Search Room",
+        "#",
+        class: "Button Button--compact"
+      ) %>
+      <%= link_to(
+        "Other",
+        "#",
+        class: "Button Button--compact",
+      ) %>
+    </div>
+
+    <%= render NavigationComponent.new(save_file.location) %>
   </div>
-
-  <%= render NavigationComponent.new(save_file.location) %>
-
-  <hr />
 
   <div class="GamePanel-encounters">
     <% if save_file.location.non_player_characters.any? %>

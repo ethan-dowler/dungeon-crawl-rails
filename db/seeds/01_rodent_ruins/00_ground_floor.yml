@@ -1,0 +1,25 @@
+- name: "Center Room - Ground Floor"
+  description: "Dozens of small bones litter the room. A broken table lies in pieces in the corner."
+  x: 0
+  y: 0
+  z: 0
+- name: "North Room - Ground Floor"
+  description: ""
+  x: 0
+  y: 1
+  z: 0
+- name: "East Room - Ground Floor"
+  description: ""
+  x: 1
+  y: 0
+  z: 0
+- name: "South Room - Ground Floor"
+  description: ""
+  x: 0
+  y: -1
+  z: 0
+- name: "West Room - Ground Floor"
+  description: ""
+  x: -1
+  y: 0
+  z: 0
