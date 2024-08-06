@@ -1,21 +1,16 @@
-<%# TODO: use turbo streams to update just this frame and the "room" frame %>
 <div id="navigation" class="Navigation">
-  <% Dungeon::Direction::ALL.each do |direction| %>
-    <% if dungeon_run.current_room.send(:"#{direction}_room").present? %>
-      <div class="
-        Navigation-link
-        Navigation-link<%= direction.to_s.titleize %>
-      ">
-        <%=
-          link_to(
-            direction_text(direction),
-            go_dungeon_run_path(dungeon_run, direction:),
-            class: "Link",
-            disabled: true,
-            data: { "turbo-disabled": true }
-          )
-        %>
-      </div>
-    <% end %>
+  <% adjacent_tiles.each do |direction, tile| %>
+    <div class="
+      Navigation-link
+      Navigation-link<%= direction.to_s.titleize %>
+    ">
+      <%=
+        link_to(
+          link_text(direction),
+          "#go_to",
+          class: "Link"
+        )
+      %>
+    </div>
   <% end %>
 </div>

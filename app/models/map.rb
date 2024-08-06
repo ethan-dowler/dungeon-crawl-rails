@@ -9,6 +9,3 @@ class Map < ApplicationRecord
     tiles.joins(:tile_template).find_by(tile_templates: { x:, y:, z: })
   end
 end
-
-# TODO: continue migrating everything from a dungeon-centric approach to a map-centric approach
-# in preparation for moving to a full RPG instead of just a dungeon crawler.

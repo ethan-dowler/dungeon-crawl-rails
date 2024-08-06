@@ -4,4 +4,12 @@
   &:hover {
     color: $blue-700;
   }
+
+  &--white {
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+  }
 }

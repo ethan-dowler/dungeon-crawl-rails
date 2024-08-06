@@ -12,7 +12,6 @@ class Tile < ApplicationRecord
 
       NonPlayerCharacter.new(
         npc_template: encounter.npc_template,
-        hostility_rating: encounter.npc_template.base_hostility_rating,
         save_file: map.save_file,
         location: self
       )

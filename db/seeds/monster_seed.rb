@@ -35,10 +35,10 @@ giant_rat =
   NpcTemplate.create!(
     name: "Giant Rat",
     level: 3,
-    max_hp: 25,
-    damage_rating: 4,
-    armor_rating: 0,
-    speed_rating: 80,
+    base_hp: 25,
+    base_damage_rating: 4,
+    base_armor_rating: 0,
+    base_speed_rating: 80,
     base_experience_yield: 10
   )
 
@@ -50,10 +50,10 @@ festering_rat =
   NpcTemplate.create!(
     name: "Festering Rat",
     level: 6,
-    max_hp: 60,
-    damage_rating: 8,
-    armor_rating: 10,
-    speed_rating: 90,
+    base_hp: 60,
+    base_damage_rating: 8,
+    base_armor_rating: 10,
+    base_speed_rating: 90,
     base_experience_yield: 25
   )
 
@@ -65,10 +65,10 @@ rat_king =
   NpcTemplate.create!(
     name: "Rat King",
     level: 10,
-    max_hp: 100,
-    damage_rating: 15,
-    armor_rating: 25,
-    speed_rating: 100,
+    base_hp: 100,
+    base_damage_rating: 15,
+    base_armor_rating: 25,
+    base_speed_rating: 100,
     base_experience_yield: 50
   )
 5.times { rat_king.drops.create!(item_template: coin, percent_chance: 90) }
