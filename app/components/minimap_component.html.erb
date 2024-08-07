@@ -1,0 +1,18 @@
+<div class="Minimap">
+  <% x_coords.each do |x| %>
+    <div class="Minimap-column">
+      <% y_coords.each do |y| %>
+        <% room = tiles.find { |t| t.x == x && t.y == y } %>
+
+        <div class="Minimap-tile">
+          <% if room.present? %>
+            <div class="
+              Minimap-tileRoom
+              <%= "Minimap-tileRoom--current" if room == current_tile %>
+            "></div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

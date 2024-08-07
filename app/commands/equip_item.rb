@@ -12,7 +12,8 @@ class EquipItem
     Item.transaction do
       unequip_current_items
       unequip_secondary if new_inventory_item.two_handed?
-      unequip_two_handed_primary if new_inventory_item.secondary? # TODO: need to check for ANY type. can't add a dual wield if already holding a 2H weapon either
+      # TODO: need to check for ANY type. can't add a dual wield if already holding a 2H weapon either
+      unequip_two_handed_primary if new_inventory_item.secondary?
       new_inventory_item.update!(equipped: true)
     end
   end

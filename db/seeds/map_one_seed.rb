@@ -7,14 +7,12 @@ map_template =
     start_y: -1
   )
 
-
 ## Create individual tiles
-Dir[Rails.root.join('db', 'seeds', '01_rodent_ruins', '*')].each do |file|
-  YAML::load_file(file).each do |tile|
+Dir[Rails.root.join("db", "seeds", "01_rodent_ruins", "*")].each do |file|
+  YAML.load_file(file).each do |tile|
     map_template.tile_templates.create!(**tile)
   end
 end
-
 
 ## Configure monster spawns
 

@@ -1,0 +1,30 @@
+.Minimap {
+  display: flex;
+  border: 1px solid $slate-900;
+  border-radius: $border-radius-s;
+
+  &-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-tile {
+    width: 20px;
+    height: 20px;
+    border: 1px solid $white;
+    background-color: $slate-400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &Room {
+      width: 16px;
+      height: 16px;
+      background-color: $white;
+
+      &--current {
+        background-color: $emerald-600;
+      }
+    }
+  }
+}
