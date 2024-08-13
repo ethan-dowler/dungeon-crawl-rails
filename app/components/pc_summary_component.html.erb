@@ -1,8 +1,9 @@
 <%= turbo_frame_tag :player_character_summary do %>
-  <div class="PlayerCharacterSummary">
-    <div class="PlayerCharacterSummary-name">
+  <%# TODO: turn this panel into a link that goes to a character management page (tabs for inventory, perks, stat details, etc.) %>
+  <div class="PcSummary">
+    <div class="PcSummary-name">
       <%= name %>
-      <span class="PlayerCharacterSummary-level">
+      <span class="PcSummary-level">
         Lvl. <%= level %>
       </span>
     </div>
@@ -31,6 +32,6 @@
         variant: :thin,
         show_value: true
       )
-    ) %>    
+    ) %>
   </div>
 <% end %>

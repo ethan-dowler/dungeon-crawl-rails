@@ -1,8 +1,4 @@
-<%= link_to :back, class: "Button Button--icon Button--red" do %>
-  <%= render "icons/back" %>
-<% end %>
-
-<%= render HeadingComponent.new(title: "#{character.name} - Lvl. #{character.level}") %>
+<%= render HeadingComponent.new(title: "#{player_character.name} - Lvl. #{player_character.level}") %>
 
 <%#
   TODO: build an inventory UI
@@ -15,7 +11,7 @@
     - add sorting/filtering by item type/slot
 %>
 
-<%= render CharacterStatsComponent.new(character) %>
+<%= render CharacterStatsComponent.new(player_character) %>
 
 <hr class="Break" />
 
@@ -25,26 +21,26 @@
 <%= render HeadingComponent.new(title: "Armor", tag: :h2) %>
 <%# TODO: make each equipment section collapsible %>
 
-<% character.items.armor.alphabetical.each do |inventory_item| %>
-  <%= render InventoryItemComponent.new(inventory_item) %>
+<% player_character.items.armor.alphabetical.each do |item| %>
+  <%= render PcItemComponent.new(item) %>
 <% end %>
 
 <%= render HeadingComponent.new(title: "Primary", tag: :h2) %>
 
-<% character.items.primary.alphabetical.each do |inventory_item| %>
-  <%= render InventoryItemComponent.new(inventory_item) %>
+<% player_character.items.primary.alphabetical.each do |item| %>
+  <%= render PcItemComponent.new(item) %>
 <% end %>
 
 <%= render HeadingComponent.new(title: "Secondary", tag: :h2) %>
 
-<% character.items.secondary.alphabetical.each do |inventory_item| %>
-  <%= render InventoryItemComponent.new(inventory_item) %>
+<% player_character.items.secondary.alphabetical.each do |item| %>
+  <%= render PcItemComponent.new(item) %>
 <% end %>
 
 <%= render HeadingComponent.new(title: "Other", tag: :h2) %>
 
-<% character.items.non_equipment.alphabetical.each do |inventory_item| %>
-  <%= render InventoryItemComponent.new(inventory_item) %>
+<% player_character.items.non_equipment.alphabetical.each do |item| %>
+  <%= render PcItemComponent.new(item) %>
 <% end %>
 
 <%# TODO: make a "junk" flag, so players can mark and sell easily %>

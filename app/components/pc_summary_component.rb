@@ -1,4 +1,4 @@
-class PlayerCharacterSummaryComponent < ApplicationComponent
+class PcSummaryComponent < ApplicationComponent
   attr_reader :player_character, :previous_player_character
 
   delegate :name, :level, :current_hp, :max_hp, :xp, :xp_to_next_level, to: :player_character

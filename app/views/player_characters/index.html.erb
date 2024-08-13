@@ -1,0 +1,7 @@
+<div class="PcIndex">
+  <% save_file.player_characters.each do |pc| %>
+    <div class="PcIndex-character">
+      <%= render PcStatsComponent.new(pc) %>
+    </div>
+  <% end %>
+</div>

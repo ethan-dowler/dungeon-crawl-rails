@@ -11,8 +11,8 @@ class ItemTemplate < ApplicationRecord
   scope :primary, -> { where(equipment_slot: EquipmentSlot::PRIMARY) }
   scope :secondary, -> { where(equipment_slot: EquipmentSlot::SECONDARY) }
 
-  scope :two_handed, -> { joins(:traits).where(traits: { name: Trait::TWO_HANDED }) }
-  scope :dual_wield, -> { joins(:traits).where(traits: { name: Trait::DUAL_WIELD }) }
+  scope :two_handed, -> { joins(:traits).where(traits: { name: Trait::Weapon::TWO_HANDED }) }
+  scope :dual_wield, -> { joins(:traits).where(traits: { name: Trait::Weapon::DUAL_WIELD }) }
 
   def equippable? = equipment_slot.present?
 
@@ -20,8 +20,8 @@ class ItemTemplate < ApplicationRecord
   def primary? = equipment_slot == EquipmentSlot::PRIMARY
   def secondary? = equipment_slot == EquipmentSlot::SECONDARY
 
-  def two_handed? = traits.exists?(name: Trait::TWO_HANDED)
-  def dual_wield? = traits.exists?(name: Trait::DUAL_WIELD)
+  def two_handed? = traits.exists?(name: Trait::Weapon::TWO_HANDED)
+  def dual_wield? = traits.exists?(name: Trait::Weapon::DUAL_WIELD)
 
   module EquipmentSlot
     ARMOR = "ARMOR".freeze

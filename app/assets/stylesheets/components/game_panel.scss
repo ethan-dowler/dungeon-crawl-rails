@@ -1,4 +1,14 @@
 .GamePanel {
+  &-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &-links {
+    // TODO
+  }
+
   &-characters {
     display: flex;
     flex-direction: column;

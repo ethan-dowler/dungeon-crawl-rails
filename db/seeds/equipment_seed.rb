@@ -1,10 +1,10 @@
 ## item traits
 dual_wield_trait = Trait.create!(
-  name: Trait::DUAL_WIELD,
+  name: Trait::Weapon::DUAL_WIELD,
   explanation: "May equip two primaries with dual-wield."
 )
 two_handed_trait = Trait.create!(
-  name: Trait::TWO_HANDED,
+  name: Trait::Weapon::TWO_HANDED,
   explanation: "May not equip a secondary."
 )
 

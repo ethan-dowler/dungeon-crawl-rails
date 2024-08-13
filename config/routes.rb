@@ -2,10 +2,16 @@ Rails.application.routes.draw do
   root "home#index"
 
   # NEW
-  resources :save_files, only: :show
+  resources :save_files, only: :show do
+    resources :player_characters, only: :index
+  end
+  
+  resources :player_characters, only: :show do
+    resources :items, only: %i[index toggle] # might move this
+  end
+
 
   # LEGACY
-
   resources :characters, only: %i[index show] do
     resources :inventory_items, only: :index
 

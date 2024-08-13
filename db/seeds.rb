@@ -1,22 +1,22 @@
 raise "Cannot run seeds more than once. Use db:seed:replant to start over." if SaveFile.exists?
 
+save_file = SaveFile.create!(name: "Omega Squad")
+
 require_relative "seeds/character_seed"
 require_relative "seeds/equipment_seed"
 require_relative "seeds/monster_seed"
 require_relative "seeds/map_one_seed"
 
-# start each character with one of each equipment item
+# add a few of each item to starting stock
 # TODO: allow player to "buy" starting equipment
-PlayerCharacter.find_each do |pc|
-  ItemTemplate.equipment.find_each do |item_template|
-    AddInventoryItem.new(owner: pc, item_template:).execute
-  end
+ItemTemplate.equipment.find_each do |item_template|
+  AddInventoryItem.new(owner: save_file, item_template:).execute
 end
 
-# populate map for first day
-MapTemplate.first.generate_instance(save_file: SaveFile.first)
+# create game world
+MapTemplate.first.generate_instance(save_file: save_file)
 
 # start game in south room of ground floor
-SaveFile.first.update!(
+save_file.update!(
   location: Map.first.find_tile(x: 0, y: -1, z: 0)
 )

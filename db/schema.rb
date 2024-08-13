@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_06_180547) do
     t.integer "max_hp", default: 10, null: false
     t.integer "damage_rating", default: 0, null: false
     t.integer "armor_rating", default: 0, null: false
+    t.integer "speed_rating", default: 0, null: false
     t.index ["save_file_id"], name: "index_player_characters_on_save_file_id"
   end
 

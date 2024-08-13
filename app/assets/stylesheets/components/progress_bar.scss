@@ -13,7 +13,7 @@
   }
 
   &-label {
-    width: 20px;
+    width: 35px;
     margin-right: spaces(0.5);
   }
 
@@ -38,6 +38,9 @@
       }
       &--red {
         background-color: $red-600;
+      }
+      &--green {
+        background-color: $emerald-600;
       }
 
       // sizes

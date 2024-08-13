@@ -4,7 +4,7 @@
 
 <%# update all equipment in case anything was unequipped as a result of the toggle %>
 <% inventory_item.owner.items.equipment.each do |inventory_item| %>
-  <%= turbo_stream.replace "inventory_item-#{inventory_item.id}" do %>
+  <%= turbo_stream.replace "pc_item-#{inventory_item.id}" do %>
     <%= render InventoryItemComponent.new(inventory_item) %>
   <% end %>
 <% end %>

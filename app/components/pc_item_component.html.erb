@@ -1,29 +1,29 @@
-<%= turbo_frame_tag "inventory_item-#{inventory_item.id}" do %>
-  <div class="InventoryItem">
+<%= turbo_frame_tag "pc_item-#{inventory_item.id}" do %>
+  <div class="PcItem">
     <div>
       <div>
         <%= inventory_item.name %>
 
         <% if inventory_item.stackable? %>
-          <i class="InventoryItem-quantity">
+          <i class="PcItem-quantity">
             x<%= inventory_item.quantity %>
           </i>
         <% end %>
       </div>
 
-      <div class="InventoryItem-traits">
+      <div class="PcItem-traits">
         <div>
           <% inventory_item.traits.sort.each do |trait| %>
-            <div class="InventoryItem-trait">
+            <div class="PcItem-trait">
               <%= trait.name %>
               <%# TODO: add tooltip with trait description %>
             </div>
           <% end %>
         </div>
 
-        <div class="InventoryItem-modifiers">
+        <div class="PcItem-modifiers">
           <% inventory_item.modifiers.order(value: :desc, stat: :asc).each do |modifier| %>
-            <div class="InventoryItem-modifier">
+            <div class="PcItem-modifier">
               <%= "+" if modifier.value.positive? %><%= modifier.value %><%= "%" if modifier.percent? %>
               <%= modifier.stat.downcase %>
             </div>

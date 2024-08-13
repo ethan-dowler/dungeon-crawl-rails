@@ -1,0 +1,9 @@
+.PcStats {
+  display: flex;
+  flex-direction: column;
+
+  &-stat {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -1,4 +1,4 @@
-class InventoryItemComponent < ApplicationComponent
+class PcItemComponent < ApplicationComponent
   attr_reader :inventory_item
 
   def initialize(inventory_item)

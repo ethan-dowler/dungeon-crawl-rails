@@ -19,14 +19,15 @@
 @import 'components/progress_bar';
 
 // complex components - may compose other components
-@import 'components/character_stats';
 @import 'components/event_log';
 @import 'components/game_panel';
-@import 'components/inventory_item';
 @import 'components/journal';
 @import 'components/minimap';
 @import 'components/navigation';
 @import 'components/npc_summary';
-@import 'components/player_character_summary';
+@import 'components/pc_index';
+@import 'components/pc_item';
+@import 'components/pc_stats';
+@import 'components/pc_summary';
 @import 'components/tile_select';
 @import 'components/top_bar';

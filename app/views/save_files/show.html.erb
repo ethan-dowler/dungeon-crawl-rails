@@ -1,9 +1,18 @@
 <div id="game_panel" class="GamePanel">
-  <%= render HeadingComponent.new(tag: :h2, title: save_file.name) %>
+  <div class="GamePanel-heading">
+    <%= render HeadingComponent.new(tag: :h2, title: save_file.name) %>
+
+    <div class="GamePanel-links">
+      <%# TODO: add settings page %>
+      <%= link_to save_file_player_characters_path(save_file), class: "Button Button--blue Button--icon" do %>
+        <%= render "icons/cube" %>
+      <% end %>
+    </div>
+  </div>
 
   <div class="GamePanel-characters">
     <% save_file.player_characters.each do |pc| %>
-      <%= render PlayerCharacterSummaryComponent.new(pc) %>
+      <%= render PcSummaryComponent.new(pc) %>
     <% end %>
   </div>
 
@@ -31,12 +40,12 @@
     <%# TODO: dynamically generate list of actions based on location, enemies, etc. %>
     <div class="GamePanel-actions">
       <%= link_to(
-        "Initiate Fight",
+        "Search",
         "#",
         class: "Button Button--compact"
       ) %>
       <%= link_to(
-        "Search Room",
+        "Fight",
         "#",
         class: "Button Button--compact"
       ) %>

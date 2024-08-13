@@ -1,0 +1,38 @@
+<%= turbo_frame_tag "player_character_stats-#{player_character.id}" do %>
+  <div class="PcStats">
+    <%= render(
+      ProgressBarComponent.new(
+        name: :"hp_#{player_character.id}",
+        label: "HP",
+        current_value: player_character.current_hp,
+        max_value: player_character.max_hp,
+        color: :red,
+        variant: :thin,
+        show_value: true
+      )
+    ) %>
+
+    <%= render(
+      ProgressBarComponent.new(
+        name: :"stamina_#{player_character.id}",
+        label: "STM",
+        current_value: 100,
+        max_value: 100,
+        color: :green,
+        variant: :thin,
+        show_value: true
+      )
+    ) %>
+
+    <% STATS.each do |stat| %>      
+      <div class="PcStats-stat">
+        <div class="PcStats-label">
+          <%= stat[:label] %>
+        </div>
+        <div class="PcStats-value">
+          <%= player_character.send(stat[:stat]) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+.PcIndex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  &-character {
+    padding: spaces(1);
+    width: 25%;
+
+    &:not(:last-child) {
+      border-right: 1px solid $slate-900;
+    }
+  }
+}
