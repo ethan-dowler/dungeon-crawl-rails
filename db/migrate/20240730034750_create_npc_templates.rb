@@ -3,6 +3,7 @@ class CreateNpcTemplates < ActiveRecord::Migration[7.0]
     create_table :npc_templates do |t|
       # high-level info
       t.string :name, null: false
+      t.string :description
       t.integer :base_experience_yield, null: false, default: 0
 
       # combat ratings - monsters don't wear equipment!

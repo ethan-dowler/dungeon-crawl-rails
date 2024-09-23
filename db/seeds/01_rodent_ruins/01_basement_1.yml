@@ -1,0 +1,27 @@
+- name: "Entrance"
+  description: "Rocks, mud, and straw cover a hole that leads deeper into the nest."
+  x: 0
+  y: 0
+  z: -1
+
+- name: "Hall"
+  description: "Bloody straw, broken sticks, and dry mud form a tunnel wide enough to stand in."
+  x: 1
+  y: 0
+  z: -1
+- name: "Hall"
+  description: "Bloody straw, broken sticks, and dry mud form a tunnel wide enough to stand in."
+  x: 1
+  y: -1
+  z: -1
+- name: "Hall"
+  description: "Bloody straw, broken sticks, and dry mud form a tunnel wide enough to stand in."
+  x: 1
+  y: -2
+  z: -1
+
+- name: "Bedding"
+  description: "Straw covers the ground. Dried scat lies in several piles around the room. Two flattened and smooth sections of straw suggest this may be where some of the beasts sleep."
+  x: 0
+  y: 0
+  z: -1

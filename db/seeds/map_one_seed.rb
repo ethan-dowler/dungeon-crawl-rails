@@ -3,7 +3,7 @@
 map_template =
   MapTemplate.create!(
     name: "Rodent Ruins",
-    description: "Ruins of an old stone building infested with rats!",
+    description: "A sophisticated network of tunnels discovered beneath the town.",
     start_y: -1
   )
 

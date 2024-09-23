@@ -8,6 +8,10 @@ AllCops:
     - 'bin/**/*'
     - 'db/schema.rb'
 
+Layout/LineLength:
+  Exclude:
+    - 'db/**/*'
+
 Lint/MissingSuper:
   Exclude:
     - 'app/components/**/*'
