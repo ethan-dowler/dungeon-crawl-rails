@@ -13,9 +13,24 @@ module Modifiable
     1.0 + (modifiers.percent.where(stat:).sum(:value).to_f / 100.0)
   end
 
-  def base_damage_rating = 0
-  def base_armor_rating = 0
-  def base_speed_rating = 0
+  def base_damage_rating
+    super
+  rescue NoMethodError
+    0
+  end
+
+  def base_armor_rating
+    super
+  rescue NoMethodError
+    0
+  end
+
+  def base_speed_rating
+    super
+  rescue NoMethodError
+    0
+  end
+
 
   def recalc
     recalc_max_hp

@@ -40,6 +40,6 @@ end
 
 # boss room has boss monster
 boss_template = NpcTemplate.find_by!(name: "Rat King")
-map_template.tile_templates.find_by(name: "Boss Room")
+map_template.tile_templates.find_by(name: "Rat King's Room")
             .encounters
             .create!(npc_template: boss_template)

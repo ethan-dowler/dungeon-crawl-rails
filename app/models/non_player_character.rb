@@ -11,6 +11,8 @@ class NonPlayerCharacter < ApplicationRecord
 
   delegate_missing_to :npc_template
 
+  before_create :recalc
+
   # for each possible drop, roll to see if that drop appears
   # return an array of potential loot (not yet saved)
   def roll_for_drops

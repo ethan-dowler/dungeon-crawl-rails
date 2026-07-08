@@ -3,12 +3,13 @@ RSpec.shared_context "with seed data" do
 
   let(:player_character) { save_file.player_characters.create!(name: "Player Character 1") }
 
-  let(:monster_template) { NpcTemplate.create!(name: "Monster 1", armor_rating: 20) }
+  let(:monster_template) { NpcTemplate.create!(name: "Monster 1", base_armor_rating: 20) }
   let(:monster) do
     NonPlayerCharacter.create!(
       save_file:,
       npc_template: monster_template,
       current_hp: 10
+      # FIX: base stat ratings are not applied automatically when given a template
     )
   end
 

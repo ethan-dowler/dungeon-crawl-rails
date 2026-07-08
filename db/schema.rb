@@ -122,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_06_180547) do
 
   create_table "npc_templates", force: :cascade do |t|
     t.string "name", null: false
+    t.string "description"
     t.integer "base_experience_yield", default: 0, null: false
     t.integer "level", default: 1, null: false
     t.integer "base_hp", default: 10, null: false
